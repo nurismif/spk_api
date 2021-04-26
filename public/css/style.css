@@ -1,0 +1,59 @@
+html {
+	position: relative;
+	overflow-x: hidden;
+}
+body {
+	min-height: 100vh;
+	margin-bottom: 70px;
+}
+h2{
+	border-bottom: 1px solid #0000;
+}
+#footer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background-color: #f5f5f5;
+	font-size: 0.9em;
+	height: 50px;
+	text-align: center;
+	padding-top: 20px;
+}
+.box-button{
+	display: inline-block;
+}
+.table-nav, .tombol-nav {
+	display: block;
+	clear: both;
+	float: left;
+	width: 100%;
+}
+.tombol-nav {
+	margin-top: 10px;
+}
+.table-nav {
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+	padding-top: 1px;
+}
+.jumlah-data, .paging {
+	width: 50%;
+	height: 50px;
+	display: block;
+}
+.jumlah-data {
+	float: left;
+	padding-top: 10px;
+}
+.paging {
+	float: right;
+	padding-left: 230px;
+	text-align: right;
+}
+.paging ul.paper, .paging ul.pagination {
+	text-align: right;
+}
+ul.pagination, ul.pager {
+	margin-top: 5px;
+}
