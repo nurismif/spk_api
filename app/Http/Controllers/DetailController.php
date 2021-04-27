@@ -14,7 +14,7 @@ class DetailController extends Controller
     public function insert_detail(Request $request){
         $insert_detail = new DetailKriteria();
         $insert_detail->kompetensi= $request->kompetensi;
-        $insert_detail->kriteria_id= $request->kriteriaID;
+        $insert_detail->kriteria_ahp_id= $request->kriteriaID;
         $insert_detail->range_nilai= $request->rangeNilai;
         $insert_detail->save();
         return response([
@@ -29,7 +29,7 @@ class DetailController extends Controller
         if($check_detail){
             $data_detail = DetailKriteria::find($id);
             $data_detail->kompetensi = $check_detail->kompetensi;
-            $data_detail->kriteria_id = $check_detail->kriteria_id;
+            $data_detail->kriteria_ahp_id = $check_detail->kriteria_id;
             $data_detail->range_nilai = $request->rangeNilai;
             $data_detail->save();
             return response([
