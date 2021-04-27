@@ -14,6 +14,30 @@ class UserController extends Controller
 		return view('auth.login');
 	}
 
+    public function postApiLogin(Request $request){
+        $data = User::firstWhere([
+            'username' => $request->input('username'),
+            'password' => $request->input('password')
+        ]);
+        
+        if($data){
+            return response([
+                'status' => 200,
+                'success' => true,
+                'message' => 'Login berhasil',
+                'data' => $data
+            ]);
+        }
+        else{
+            return response([
+                'status' => 200,
+                'success' => false,
+                'message' => 'Username atau password salah',
+                'data' => null
+            ]);
+        }
+    }
+
 	public function postlogin(Request $request){
 		
         $data = User::firstWhere([
@@ -128,6 +152,7 @@ class UserController extends Controller
         $user = DB::table('users')->get();
         //mengirim data ke view user
         return view('user/index', ['user' => $user, 'no' => 1]);
+
     }
 
 }

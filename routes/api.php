@@ -17,6 +17,7 @@ Route::get('/users', 'UserController@get_all_user');
 Route::post('/user/guru', 'UserController@insert_guru');
 Route::post('/user/kepsek', 'UserController@insert_kepsek');
 Route::post('/user/tim_pkg', 'UserController@insert_tim_pkg');
+Route::post('/users/postapilogin', 'UserController@postApiLogin');
 Route::put('/user/update/{id}', 'UserController@update_user');
 Route::delete('/user/delete/{id}', 'UserController@delete_user');
 
@@ -32,11 +33,10 @@ Route::post('/kri_ahp/tambah_kri_ahp', 'KriteriaAHPController@insert_kri_ahp');
 Route::put('/kri_ahp/update/{id_kr_ahp}', 'KriteriaAHPController@update_kri_ahp');
 Route::delete('/kri_ahp/delete/{id_kr_ahp}', 'KriteriaAHPController@delete_kri_ahp');
 
-
-// Route::get('/teacher', 'TeacherController@get_all_teacher');
-// Route::post('/teacher/tambah_teacher', 'TeacherController@insert_data_teacher');
-// Route::put('/teacher/update/{id}', 'TeacherController@update_data_teacher');
-// Route::delete('/teacher/delete/{id_kr_ahp}', 'TeacherController@delete_data_teacher');
+Route::get('/detail_kri', 'DetailController@get_all_detailpen');
+Route::post('/detail_kri/tambah_detail', 'DetailController@insert_detail');
+Route::put('/detail_kri/update/{id}', 'DetailController@update_detail');
+Route::delete('/detail_kri/delete/{id_kr_ahp}', 'DetailController@delete_detail');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

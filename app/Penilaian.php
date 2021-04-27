@@ -8,9 +8,7 @@ class Penilaian extends Model
 {
     //
     protected $table = 'penilaian';
-
-    protected $primaryKey = 'id';
-
+    
     protected $with = ['user', 'kriteria_ahp'];
 
     public function user()
@@ -23,9 +21,5 @@ class Penilaian extends Model
         return $this->belongsTo('App\KriteriaAHP');
     }
 
-    // public function kriteria()
-    // {
-    //     return $this->hasOne('App\KriteriaWP');
-    // }
 
 }

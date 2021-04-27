@@ -8,7 +8,7 @@ use App\Penilaian;
 class PenilaianController extends Controller
 {
     public function get_all_penilaian(){
-        return response()->json(Penilaian::all(), 200);
+        return response()->json(Penilaian::with('kriteria_ahp', 'user')->get(), 200);
     }
 
     public function insert_nilai_ahp(Request $request){
