@@ -24,12 +24,27 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <!-- /.card-header -->      
+          <!-- /.card-header -->    
+          
+        <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+          <div class="row">
+          <div class="col-sm-12 col-md-6">
+          <div class="dt-buttons btn-group flex-wrap">               
+          <div class="box">
+                <div class="pull-right" style="padding-bottom: 20px;">
+                    <a href="/admin/kriteria/create" class="btn btn-primary btn-flat" style="border-radius: 10px;">
+                        <i class="fa fa-user-plus"></i> Create
+                      </a>
+                </div>
+          </div>
+          </div>
+          </div>
+          </div>
+        </div>
+          
           <div class="card">
           <!-- /.card-body -->
             <div class="card-body">
-              <!-- <div class="row"><div class="col-sm-12 col-md-6"><div class="dt-buttons btn-group flex-wrap">               -->
-
               <div class="container-table100">
 		        	<div class="wrap-table100">
 				        <div class="table100 ver1 m-b-110">
@@ -56,13 +71,17 @@
                       <td class="cell100 column2">{{$data->nama}}</td>
                       <td class="cell100 column3">{{$data->bobot}}</td>
                       <td class="cell100 column4">{{$data->tipe}}</td>
-                      <td class="cell100 column5" width="60px">
-                        <a class="btn btn-primary btn-xs">
-                          <i class="fa fa-pencil"></i>
-                        </a>
-                        <a class="btn btn-danger btn-xs">
-                          <i class="fas fa-trash-alt"></i>
-                        </a>
+                      <td class="cell100 column5">
+                        <form action="{{ url('admin/kriteria') }}/{{ $data->id }}" method="POST">
+                        @csrf @method('DELETE') 
+                          <a href="{{ url('admin/kriteria') }}/{{ $data->id.'/detail' }}" class="btn btn-primary btn-sm mr-1">
+                            <i class="fa fa-eye"></i>
+                          </a>
+                          <a href="{{ url('admin/kriteria') }}/{{ $data->id.'/edit' }}" class="btn btn-warning btn-sm mr-1">
+                            <i class="fa fa-pencil"></i>
+                          </a>
+                          <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>                      
+                          </form>
                       </td>
                     </tr>
                     @endforeach

@@ -1,10 +1,11 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background:#242A61">
     <!-- Brand Logo  -->
-    <a href="../../index3.html" class="brand-link">
+    <a href="#" class="brand-link">
       <img src="{{asset('adminlte/img/kemendikbud.png')}}" class="brand-image img-circle" style="opacity: .8">
       <span class="brand-text font-weight-light">SMK JAKSEL 2</span>
     </a>
     <nav class="mt-2">
+
         <ul class="nav nav-pills nav-sidebar flex-column"  data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
@@ -33,7 +34,7 @@
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview" style="display: block;">
+            <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="/admin/kriteria/index" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -41,7 +42,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/kriteria/matriks_kriteria" class="nav-link">
+                <a href="/admin/kriteria/matriks" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Matriks Kriteria</p>
                 </a>
@@ -60,6 +61,14 @@
               <p>AHP Method</p>
             </a>
           </li>
+        </ul>
+    </nav>
       <!-- /.sidebar-menu -->
     <!-- /.sidebar -->
   </aside> 
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->

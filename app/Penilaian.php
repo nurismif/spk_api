@@ -9,7 +9,9 @@ class Penilaian extends Model
     //
     protected $table = 'penilaian';
     
-    protected $with = ['user', 'kriteria_ahp'];
+    protected $fillable = ['user_id', 'kriteria_ahp_id', 'nilai']; 
+
+    // protected $with = ['user', 'kriteria_ahp'];
 
     public function user()
     {

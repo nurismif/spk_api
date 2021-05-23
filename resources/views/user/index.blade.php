@@ -26,22 +26,29 @@
       <!-- /.card-header -->
       
         <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-          <!-- <div class="row">
+          <div class="row">
           <div class="col-sm-12 col-md-6">
           <div class="dt-buttons btn-group flex-wrap">               
-          <button class="btn btn-secondary buttons-copy buttons-html5" tabindex="0" aria-controls="example1" type="button"><span>Copy</span></button> 
-          <button class="btn btn-secondary buttons-csv buttons-html5" tabindex="0" aria-controls="example1" type="button"><span>CSV</span></button> 
-          <button class="btn btn-secondary buttons-excel buttons-html5" tabindex="0" aria-controls="example1" type="button"><span>Excel</span></button> 
-          <button class="btn btn-secondary buttons-pdf buttons-html5" tabindex="0" aria-controls="example1" type="button"><span>PDF</span></button> 
-          <button class="btn btn-secondary buttons-print" tabindex="0" aria-controls="example1" type="button"><span>Print</span></button> 
-          <div class="btn-group"><button class="btn btn-secondary buttons-collection dropdown-toggle buttons-colvis" tabindex="0" aria-controls="example1" type="button" aria-haspopup="true" aria-expanded="false"><span>Column visibility</span></button>
-          </div> 
-          </div></div></div> -->
-
-          <div class="col-sm-12 col-md-6">
-          <div id="example1_filter" class="dataTables_filter">
-            <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example1"></label>
-            </div></div>
+          <div class="panel-heading">        
+            <form class="form-inline">
+                <input type="hidden" name="m" value="kriteria">
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="Pencarian. . ." name="q" value="">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success"><span class="glyphicon glyphicon-refresh"></span> Refresh
+                </button></div>
+                <div class="form-group">
+                    <a class="btn btn-primary" href="?m=kriteria_tambah"><span class="glyphicon glyphicon-plus"></span> Tambah</a>
+                </div>
+                <div class="form-group">
+                    <a class="btn btn-default" href="cetak.php?m=kriteria&amp;a=" target="_blank"><span class="glyphicon glyphicon-print"></span> Cetak</a>
+                </div>
+            </form>
+          </div>
+          </div>
+          </div>
+          </div>
         </div>
 
            <div class="card">
@@ -56,8 +63,8 @@
 							    <thead>
 								    <tr class="row100 head">
 									    <th class="cell100 column1">No</th>
-									    <th class="cell100 column2">NIP</th>
-									    <th class="cell100 column3">Nama</th>
+									    <th class="cell100 column2">Nama</th>
+									    <th class="cell100 column3">NIP</th>
                       <th class="cell100 column4">Username</th>
                       <th class="cell100 column5">Jabatan</th>
 									    <th class="cell100 column6">Action</th>
@@ -72,17 +79,18 @@
               @foreach ($user as $data)
                     <tr>
                       <td class="cell100 column1">{{$no++}}</td>
-                      <td class="cell100 column2">{{$data->nip}}</td>
-                      <td class="cell100 column3" style="text-align: left;">{{$data->nama}}</td>
+                      <td class="cell100 column2">{{$data->nama}}</td>
+                      <td class="cell100 column3">{{$data->nip}}</td>
                       <td class="cell100 column4">{{$data->username}}</td>
-                      <td class="cell100 column6">{{$data->jabatan}}</td>
-                      <td class="cell100 column7" width="40px">
-                        <a class="btn btn-primary btn-xs">
-                          <i class="fa fa-pencil"></i>
-                        </a>
-                        <a class="btn btn-danger btn-xs">
-                          <i class="fas fa-trash-alt"></i>
-                        </a>
+                      <td class="cell100 column5">{{$data->jabatan}}</td>
+                      <td class="cell100 column6">
+                        <form action="{{ url('admin/user') }}/{{ $data->id }}" method="POST">
+                        @csrf @method('DELETE') 
+                          <a href="{{ url('admin/user') }}/{{ $data->id.'/edit' }}" class="btn btn-warning btn-sm mr-1">
+                            <i class="fa fa-pencil"></i>
+                          </a>
+                          <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>                      
+                          </form>                       
                       </td>
                     </tr>
                     @endforeach
@@ -92,47 +100,6 @@
 				    </div>
            </div>
           </div>
-
-            <div class="row">
-            <div class="col-sm-12">
-                <table id="example1" class="table table-bordered table-striped dataTable dtr-inline collapsed" role="grid" aria-describedby="example1_info">  
-                  <thead class="odd">
-                  <tr role="row">
-                  <th class="sorting sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending">No</th>
-                  <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >NIP </th>
-                  <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >Nama </th>
-                  <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >Username </th>
-                  <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >Jenis Kelamin</th>
-                  <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >Jabatan </th>
-                  <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" >Action</th></tr>
-                  </thead>
-                  
-                  <tbody>
-                    @foreach ($user as $data)
-                    <tr>
-                      <td>{{$no++}}</td>
-                      <td>{{$data->nip}}</td>
-                      <td>{{$data->nama}}</td>
-                      <td>{{$data->username}}</td>
-                      <td>{{$data->jenis_kelamin}}</td>
-                      <td>{{$data->jabatan}}</td>
-                      <td class="text-center" width="60px">
-                        <a class="btn btn-primary btn-xs">
-                          <i class="fa fa-pencil"></i>
-                        </a>
-                        <a class="btn btn-danger btn-xs">
-                          <i class="fas fa-trash-alt"></i>
-                        </a>
-                      </td>
-                    </tr>
-                    @endforeach
-                  </tbody>
-                </table>
-              <!-- col-sm-12 -->
-              </div>
-              <!-- row -->
-              </div>
-
 
           <!-- card-body -->
           </div>

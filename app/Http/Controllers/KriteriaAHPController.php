@@ -2,14 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\DetailKriteria;
 use Illuminate\Http\Request;
 use App\KriteriaAHP;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class KriteriaAHPController extends Controller
 {
     public function get_all_kr_ahp(){
         return response()->json(KriteriaAHP::all(), 200);
+    }
+
+    public function get_detail_kriteria_ahp(Request $request, $kriteria_ahp_id){
+        return DetailKriteria::where('kriteria_ahp_id', $kriteria_ahp_id)->get();
     }
 
     public function insert_kri_ahp(Request $request){
@@ -68,4 +75,78 @@ class KriteriaAHPController extends Controller
         //mengirim data ke view user
         return view('kriteria/index', ['kriteria' => $user, 'no' => 1]);
     }
+
+    public function create(){
+    	return view('kriteria.create');
+    }
+
+    public function store(Request $request){
+     	$data = $request->all();
+         
+         $validator  = Validator::make($data, [
+            'nama'   =>  'required|string|max:255',
+            'bobot'   =>  'required|string|max:50',
+            'tipe'   =>  'required|string|max:100',
+        ]);
+
+        if ($validator->fails()) {
+            # code...
+            // return redirect('siswa/create');
+            return redirect('/admin/kriteria/create')
+                    ->withInput()
+                    ->withErrors($validator);
+        }
+
+        KriteriaAHP::create($data);
+        return redirect('admin/kriteria/index');
+    }
+
+    public function edit($id){
+    	$kriteria = KriteriaAHP::findOrFail($id);
+    	return view('kriteria.edit', compact('kriteria'));
+    }
+
+    public function update(Request $request, $id){
+        $data = $request->all();
+        $kriteria = KriteriaAHP::findOrFail($id);
+
+        $validator  = Validator::make($data, [
+            'nama'   =>  'required|string|max:255',
+            'bobot'   =>  'required|string|max:50',
+            'tipe'   =>  'required|string|max:100',
+        ]);
+
+        if ($validator->fails()) {
+            # code...
+            // return redirect('siswa/create');
+            return redirect('/admin/user/' . $id . '/edit')
+                    ->withInput()
+                    ->withErrors($validator);
+        }
+
+        $kriteria->update($data);
+        return redirect('admin/kriteria/index');
+    }
+
+    public function delete($id){
+        $kriteria = KriteriaAHP::findOrFail($id);
+        $kriteria->delete();
+        // Session::flash('success','Product Deleted Success!');
+        return redirect('admin/kriteria/index');
+    }
+
+    public function detail($id){
+    	$detail_kriteria = DetailKriteria::where('kriteria_ahp_id', $id)
+            ->join('kriteria_ahp', 'kriteria_ahp.id', '=', 'detail_kriteria.kriteria_ahp_id')
+            ->select('detail_kriteria.*', 'kriteria_ahp.nama as nama_kriteria_ahp')
+            ->get();
+
+        // return "<pre>".print_r($detail_kriteria, true)."</pre>";
+        return view('kriteria.detail', ['no' => 1, 'detail_kriteria' => $detail_kriteria], compact('detail_kriteria'));
+    }
+
+    public function matriks(){
+    	return view('kriteria.matriks');
+    }
+
 }

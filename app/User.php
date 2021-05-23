@@ -20,8 +20,14 @@ class User extends Authenticatable
         'nip', 'nama', 'username', 'password', 'jabatan', 'jenis_kelamin', 'jurusan'
     ];
 
+    // protected $with = ['penilaian'];
+
     public function siswa(){
         return $this->hasMany('App\Siswa');
+    }
+    
+    public function penilaian(){
+        return $this->hasMany('App\Penilaian');
     }
 
     /**

@@ -2773,9 +2773,9 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
-  box-shadow: none;
+  background-color: #38A3FF;
+  /* border-color: #007bff; */
+  /* box-shadow: none; */
 }
 
 .btn-primary:hover {
@@ -3947,7 +3947,9 @@ input[type="button"].btn-block {
   border-radius: 0.25rem;
 }
 
-.input-group-text input[type="radio"],
+.input-group-text input[type="radio"]{
+  margin-left: 100px;
+}
 .input-group-text input[type="checkbox"] {
   margin-top: 0;
 }

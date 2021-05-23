@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DetailKriteria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DetailController extends Controller
 {
@@ -59,6 +60,27 @@ class DetailController extends Controller
                 'message' => 'Id Detail Kriteria tidak ditemukan'
             ], 404);
         }
+    }
+
+    public function index(){
+
+        //mengambil data darri database menggunakan db::table() dan disimpan ke dalam $data
+        //menggunakan ->join() untuk menggabungkan tabel lainnya
+        //diakhir get() untuk mengambil data array
+    
+        //diakhir first() jika hanya satu data yang diambil
+    
+        $data = DB::table('detail_kriteria')
+            ->join('kriteria_ahp', 'kriteria_ahp.id', '=', 'detail_kriteria.kriteria_ahp_id')
+            ->select('kriteria_ahp.nama', 'detail_kriteria.kompetensi', 'detail_kriteria_range_nilai')
+            ->get();
+     return view('kriteia/detail', ['detail_kriteria' => $data, 'no' => 1], compact('data'));
+
+
+        //mengambil data dari tabel user
+        // $penilaian = DB::table('penilaian')->get();
+        //mengirim data ke view user
+        // return view('penilaian/index', ['penilaian' => $penilaian, 'no' => 1]);
     }
 
 }

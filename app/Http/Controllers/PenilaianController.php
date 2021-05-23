@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Penilaian;
+use App\Exports\PenilaianExport;
+use App\Imports\PenilaianImport;
+use Excel;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Excel as ExcelExcel;
+use Maatwebsite\Excel\Facades\Excel as FacadesExcel;
 
 class PenilaianController extends Controller
 {
@@ -62,6 +68,36 @@ class PenilaianController extends Controller
     }
 
     public function index(){
-        return view('/penilaian/index');
+
+        //mengambil data darri database menggunakan db::table() dan disimpan ke dalam $data
+        //menggunakan ->join() untuk menggabungkan tabel lainnya
+        //diakhir get() untuk mengambil data array
+    
+        //diakhir first() jika hanya satu data yang diambil
+    
+        $data = DB::table('penilaian')
+            ->join('users', 'users.id', '=', 'penilaian.user_id')
+            ->join('kriteria_ahp', 'kriteria_ahp.id', '=', 'penilaian.kriteria_ahp_id')
+            ->select('penilaian.*', 'users.nama', 'kriteria_ahp.nama as nama_kriteria_ahp')
+            ->get();
+        // print_r($data);
+        // return "";
+     return view('penilaian/index', ['penilaian' => $data, 'no' => 1], compact('data'));
+
+
+        //mengambil data dari tabel user
+        // $penilaian = DB::table('penilaian')->get();
+        //mengirim data ke view user
+        // return view('penilaian/index', ['penilaian' => $penilaian, 'no' => 1]);
+    }
+
+    public function importForm(){
+        return view('/penilaian/import_form');
+    }
+
+    public function import(Request $request)
+    {
+        FacadesExcel::import(new PenilaianImport,$request->file);
+        return redirect('/penilaian/index');
     }
 }
