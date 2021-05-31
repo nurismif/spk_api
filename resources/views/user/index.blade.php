@@ -31,9 +31,8 @@
                                     <div class="dt-buttons btn-group flex-wrap">
                                         <div class="box" style="padding-bottom: 10px;">
                                             <div class="pull-right">
-                                                <a href="/admin/user/create" class="btn btn-primary btn-flat"
-                                                    style="border-radius: 5px;">
-                                                    <i class="fa fa-user-plus"></i>Create
+                                                <a href="/admin/user/create" class="btn btn-primary btn-flat" style="border-radius: 5px;">
+                                                    <i class="fa fa-user-plus"></i>  Create
                                                 </a>
                                             </div>
                                         </div>
@@ -104,8 +103,7 @@
                                                 <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
                                             </div>
                                             <div class="ps__rail-y" style="top: 0px; height: 585px; right: 5px;">
-                                                <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 293px;">
-                                                </div>
+                                                <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 293px;"></div>
                                             </div>
                                         </div>
                                     </div>

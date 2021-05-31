@@ -12,11 +12,11 @@
 
 						{!! Form::label('nip', 'NIP : ', ['class' => 'control-label']) !!}
 						<div class="form-control">
-						{!! Form::text('nip', null, ['class' => 'w-100']) !!}
+							{!! Form::text('nip', null, ['class' => 'w-100', 'placeholder' => 'Masukkan NIP']) !!}
 						</div>
-						@if ($errors->has('nip'))
+							@if ($errors->has('nip'))
 								<span class="help-block">{{ $errors->first('nip') }}</span>
-						@endif    
+							@endif  									
 						</div>		
 
 						@if ($errors->any())
@@ -25,11 +25,11 @@
 					@else
 						<div class="form-group">
 					@endif
-							{!! Form::label('nama', 'Nama User : ', ['class' => 'control-label']) !!}
+						{!! Form::label('nama', 'Nama User : ', ['class' => 'control-label']) !!}
 							<div class="form-control">
-							{!! Form::text('nama', null) !!}
+							{!! Form::text('nama', null, ['class' => 'w-100', 'placeholder' => 'Masukkan Nama User']) !!}
 							</div>
-							@if ($errors->has('nama'))
+								@if ($errors->has('nama'))
 									<span class="help-block">{{ $errors->first('nama') }}</span>
 								@endif
 						</div>
@@ -40,11 +40,11 @@
 					@else
 						<div class="form-group">
 					@endif
-							{!! Form::label('username', 'Username : ', ['class' => 'control-label']) !!}
+						{!! Form::label('username', 'Username : ', ['class' => 'control-label']) !!}
 							<div class="form-control">
-							{!! Form::text('username', null) !!}
+							{!! Form::text('username', null, ['class' => 'w-100', 'placeholder' => 'Masukkan Username']) !!}
 							</div>
-							@if ($errors->has('username'))
+								@if ($errors->has('username'))d
 									<span class="help-block">{{ $errors->first('username') }}</span>
 								@endif
 						</div>
@@ -55,11 +55,11 @@
 					@else
 						<div class="form-group">
 					@endif
-							{!! Form::label('password', 'Password : ', ['class' => 'control-label']) !!}
+						{!! Form::label('password', 'Password : ', ['class' => 'control-label']) !!}
 							<div class="form-control">
-							{!! Form::text('password', null) !!}
+							{!! Form::text('password', null, ['class' => 'w-100', 'placeholder' => 'Masukkan Password']) !!}
 							</div>
-							@if ($errors->has('password'))
+								@if ($errors->has('password'))
 									<span class="help-block">{{ $errors->first('password') }}</span>
 								@endif
 						</div>
@@ -80,7 +80,7 @@
 								), null, ['class' => 'form-control']);
 							!!}
 							</div>    
-							@if ($errors->has('jabatan'))
+								@if ($errors->has('jabatan'))
 									<span class="help-block">{{ $errors->first('jabatan') }}</span>
 								@endif
 						</div>
@@ -93,7 +93,7 @@
 						@else
 							<div class="form-group">
 						@endif
-								{!! Form::label('jenis_kelamin', 'Jenis Kelamin : ', ['class' => 'control-label']) !!}
+							{!! Form::label('jenis_kelamin', 'Jenis Kelamin : ', ['class' => 'control-label']) !!}
 								<div class="form-check">
 									<input class="form-check-input" value="Laki-laki" type="radio" name="jenis_kelamin">
 										<label class="form-check-label">Laki-laki</label>
@@ -102,7 +102,7 @@
 									<input class="form-check-input" value="Perempuan" type="radio" name="jenis_kelamin">
 										<label class="form-check-label">Perempuan</label>
 								</div>
-								@if ($errors->has('jenis_kelamin'))
+									@if ($errors->has('jenis_kelamin'))
 										<span class="help-block">{{ $errors->first('jenis_kelamin') }}</span>
 									@endif
 							</div>
@@ -128,9 +128,9 @@
 								), null, ['class' => 'form-control']);
 							!!}
 							</div>
-					@if ($errors->has('jurusan'))
-						<span class="help-block">{{ $errors->first('jurusan') }}</span>
-					@endif
+						@if ($errors->has('jurusan'))
+							<span class="help-block">{{ $errors->first('jurusan') }}</span>
+						@endif
 						</div>
 					</div>
 
