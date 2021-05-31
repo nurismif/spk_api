@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use App\Http\Controllers\Auth;
 use App\KriteriaAHP;
 use App\Nilai_Perbandingan;
 use App\Penilaian;
-use ArrayObject;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -68,12 +66,6 @@ class UserController extends Controller
         // }
 
         // return redirect('/login');
-    }
-
-    public function logout()
-    {
-        FacadesAuth::logout();
-        return redirect('/admin/login');
     }
 
     public function get_all_user()
