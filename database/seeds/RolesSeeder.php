@@ -12,16 +12,16 @@ class RolesSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'jabatan' => 'Tim_PKG', 
-        ]);
+        // DB::table('users')->insert([
+        //     'jabatan' => 'Tim_PKG', 
+        // ]);
 
-        DB::table('users')->insert([
-            'jabatan' => 'KepSek', 
-        ]);
+        // DB::table('users')->insert([
+        //     'jabatan' => 'KepSek', 
+        // ]);
 
-        DB::table('users')->insert([
-            'jabatan' => 'Guru', 
-        ]);
+        // DB::table('users')->insert([
+        //     'jabatan' => 'Guru', 
+        // ]);
     }
 }

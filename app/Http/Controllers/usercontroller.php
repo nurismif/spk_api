@@ -265,7 +265,7 @@ class UserController extends Controller
         $jumlah_kriteria = count($kriteria);
         $T = 0;
         $CI = 0;
-        
+
         //normalisasi
         foreach ($kriteria as $k) {
             // return "<pre>".print_r($k, true)."</pre>";
@@ -311,7 +311,7 @@ class UserController extends Controller
                 }
             }
         }
-        
+
         $T = 0;
         foreach ($kriteria as $k) {
             $T += $k->total_bobot_akhir / $k->total_bobot;
@@ -381,7 +381,7 @@ class UserController extends Controller
             }
             array_push($matriks_penilaian2, $temp);
         }
-        
+
         $matriks_penilaian3 = [];
         foreach ($matriks_penilaian2 as $m) {
             $temp = deep_copy($m);
@@ -389,7 +389,7 @@ class UserController extends Controller
                 $temp2 = deep_copy($n);
                 foreach ($n['perbandingan_dengan_user_lain'] as $p) {
                     $temp3 = deep_copy($p);
-                    $p['nilai_normal'] = $temp3['nilai']/$temp['total_nilai'];
+                    $p['nilai_normal'] = $temp3['nilai'] / $temp['total_nilai'];
                 }
             }
             array_push($matriks_penilaian3, $temp);
@@ -404,8 +404,7 @@ class UserController extends Controller
         foreach ($kriteria as $k) {
             foreach ($bobot_alternatif as $b) { //atas, atas->bawah
                 $temp2 = deep_copy($b);
-                
-            $rangking = $k->total_bobot * $b;
+                $rangking = $k->total_bobot * $b;
             }
         }
 
@@ -429,7 +428,6 @@ class UserController extends Controller
             'status' => 200,
             'data' => $data
         ], 200);
-
     }
 
     public function get_ranking_guru()
