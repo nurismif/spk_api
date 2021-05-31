@@ -23,7 +23,7 @@
           </li>
           <li class="nav-item">
             <a href="/admin/teacher/index" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
+              <i class="nav-icon fas fa-chalkboard-teacher"></i>
               <p>Guru</p>
             </a>
           </li>
@@ -56,9 +56,9 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/AHP" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>AHP Method</p>
+            <a href="/admin/ahp/index" class="nav-link">
+              <i class="nav-icon fas fa-file-text"></i>
+              <p>SPK Method</p>
             </a>
           </li>
         </ul>

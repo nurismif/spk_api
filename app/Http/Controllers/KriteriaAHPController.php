@@ -11,15 +11,18 @@ use Illuminate\Support\Facades\Validator;
 
 class KriteriaAHPController extends Controller
 {
-    public function get_all_kr_ahp(){
+    public function get_all_kr_ahp()
+    {
         return response()->json(KriteriaAHP::all(), 200);
     }
 
-    public function get_detail_kriteria_ahp(Request $request, $kriteria_ahp_id){
+    public function get_detail_kriteria_ahp(Request $request, $kriteria_ahp_id)
+    {
         return DetailKriteria::where('kriteria_ahp_id', $kriteria_ahp_id)->get();
     }
 
-    public function insert_kri_ahp(Request $request){
+    public function insert_kri_ahp(Request $request)
+    {
         $insert_kr_ahp = new KriteriaAHP;
         $insert_kr_ahp->nama = $request->namaKriteria;
         $insert_kr_ahp->bobot = $request->bobotKriteria;
@@ -32,9 +35,10 @@ class KriteriaAHPController extends Controller
         ], 200);
     }
 
-    public function update_kri_ahp(Request $request, $id){
+    public function update_kri_ahp(Request $request, $id)
+    {
         $check_kr_ahp = KriteriaAHP::firstWhere('id_kr_ahp', $id);
-        if($check_kr_ahp){
+        if ($check_kr_ahp) {
             $data_kr_ahp = KriteriaAHP::find($id);
             $data_kr_ahp->nama = $request->namaKriteria;
             $data_kr_ahp->bobot = $request->bobotKriteria;
@@ -45,7 +49,7 @@ class KriteriaAHPController extends Controller
                 'message' => 'Kriteria AHP Disimpan',
                 'data' => $data_kr_ahp
             ], 200);
-        } else{
+        } else {
             return response([
                 'status' => 'NOT FOUND',
                 'message' => 'Id Kriteria AHP tidak ditemukan'
@@ -53,7 +57,8 @@ class KriteriaAHPController extends Controller
         }
     }
 
-    public function delete_kri_ahp($id){
+    public function delete_kri_ahp($id)
+    {
         $check_kr_ahp = KriteriaAHP::firstWhere('id_kr_ahp', $id);
         if ($check_kr_ahp) {
             KriteriaAHP::destroy($id);
@@ -61,7 +66,7 @@ class KriteriaAHPController extends Controller
                 'status' => 'OK',
                 'message' => 'Kriteria AHP Dihapus'
             ], 200);
-        } else{
+        } else {
             return response([
                 'status' => 'NOT FOUND',
                 'message' => 'Id Kriteria AHP tidak ditemukan'
@@ -69,21 +74,24 @@ class KriteriaAHPController extends Controller
         }
     }
 
-    public function index(){
+    public function index()
+    {
         //mengambil data dari tabel user
         $user = DB::table('kriteria_ahp')->get();
         //mengirim data ke view user
         return view('kriteria/index', ['kriteria' => $user, 'no' => 1]);
     }
 
-    public function create(){
-    	return view('kriteria.create');
+    public function create()
+    {
+        return view('kriteria.create');
     }
 
-    public function store(Request $request){
-     	$data = $request->all();
-         
-         $validator  = Validator::make($data, [
+    public function store(Request $request)
+    {
+        $data = $request->all();
+
+        $validator  = Validator::make($data, [
             'nama'   =>  'required|string|max:255',
             'bobot'   =>  'required|string|max:50',
             'tipe'   =>  'required|string|max:100',
@@ -93,20 +101,22 @@ class KriteriaAHPController extends Controller
             # code...
             // return redirect('siswa/create');
             return redirect('/admin/kriteria/create')
-                    ->withInput()
-                    ->withErrors($validator);
+                ->withInput()
+                ->withErrors($validator);
         }
 
         KriteriaAHP::create($data);
         return redirect('admin/kriteria/index');
     }
 
-    public function edit($id){
-    	$kriteria = KriteriaAHP::findOrFail($id);
-    	return view('kriteria.edit', compact('kriteria'));
+    public function edit($id)
+    {
+        $kriteria = KriteriaAHP::findOrFail($id);
+        return view('kriteria.edit', compact('kriteria'));
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         $data = $request->all();
         $kriteria = KriteriaAHP::findOrFail($id);
 
@@ -120,23 +130,25 @@ class KriteriaAHPController extends Controller
             # code...
             // return redirect('siswa/create');
             return redirect('/admin/user/' . $id . '/edit')
-                    ->withInput()
-                    ->withErrors($validator);
+                ->withInput()
+                ->withErrors($validator);
         }
 
         $kriteria->update($data);
         return redirect('admin/kriteria/index');
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $kriteria = KriteriaAHP::findOrFail($id);
         $kriteria->delete();
         // Session::flash('success','Product Deleted Success!');
         return redirect('admin/kriteria/index');
     }
 
-    public function detail($id){
-    	$detail_kriteria = DetailKriteria::where('kriteria_ahp_id', $id)
+    public function detail($id)
+    {
+        $detail_kriteria = DetailKriteria::where('kriteria_ahp_id', $id)
             ->join('kriteria_ahp', 'kriteria_ahp.id', '=', 'detail_kriteria.kriteria_ahp_id')
             ->select('detail_kriteria.*', 'kriteria_ahp.nama as nama_kriteria_ahp')
             ->get();
@@ -145,8 +157,10 @@ class KriteriaAHPController extends Controller
         return view('kriteria.detail', ['no' => 1, 'detail_kriteria' => $detail_kriteria], compact('detail_kriteria'));
     }
 
-    public function matriks(){
-    	return view('kriteria.matriks');
+    public function matriks()
+    {
+        $list_kriteria = DB::table('kriteria_ahp')->get();
+        $list_perbandingan = DB::table('perbandingan')->get();
+        return view('kriteria.matriks', ['list_kriteria' => $list_kriteria, 'list_perbandingan' => $list_perbandingan],);
     }
-
 }

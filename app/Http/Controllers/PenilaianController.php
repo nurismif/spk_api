@@ -80,15 +80,23 @@ class PenilaianController extends Controller
             ->join('kriteria_ahp', 'kriteria_ahp.id', '=', 'penilaian.kriteria_ahp_id')
             ->select('penilaian.*', 'users.nama', 'kriteria_ahp.nama as nama_kriteria_ahp')
             ->get();
-        // print_r($data);
+        $return_penilaian = [];
+        $index = 0;
+        $log = 1;
+        foreach ($data as $key => $value) {
+            $return_penilaian[$index]['nama'] = $value->nama;
+            $return_penilaian[$index]['ahp_'.$log] = $value->nilai;
+            if($log % 5 ==0) {
+                $index ++;
+                $log = 1;
+            } else {
+                $log++;
+            }
+            
+        }
         // return "";
-     return view('penilaian/index', ['penilaian' => $data, 'no' => 1], compact('data'));
+     return view('penilaian/index', ['penilaian' => $return_penilaian, 'no' => 1], compact('data'));
 
-
-        //mengambil data dari tabel user
-        // $penilaian = DB::table('penilaian')->get();
-        //mengirim data ke view user
-        // return view('penilaian/index', ['penilaian' => $penilaian, 'no' => 1]);
     }
 
     public function importForm(){

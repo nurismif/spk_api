@@ -7,13 +7,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>User</h1>
+            <h1>Guru</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{ url('home') }}">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><a href="{{ url('user') }}">User List</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Add User</li>
+                <li class="breadcrumb-item active" aria-current="page">Edit User</li>
             </ol>
           </div>
         </div>
@@ -31,12 +31,11 @@
            <div class="card-body">
 
         <div id="users">
-			    <h2 style="text-align: center;">Add User</h2>
-			      <form action=" {{ route('user.store') }} " method="post" enctype="multipart/form-data">
-              @csrf
-              @include('user.form', ['submitButtonText'=>'Save'])
-            </form>
-        </div>
+			<h2 style="text-align: center;">Edit User</h2>
+			{!! Form::model($users, ['method'=>'PUT', 'action'=>['UserController@update',$users->id], 'enctype' => 'multipart/form-data'])!!}
+			@include('guru.form', ['submitButtonText'=>'Update'])
+			{!!Form::close()!!}
+		</div>
            </div>
             
 		</div>

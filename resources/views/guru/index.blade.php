@@ -74,13 +74,13 @@
               @foreach ($user as $data)
                     <tr>
                       <td class="cell100 column1">{{$no++}}</td>
-                      <td class="cell100 column2" style="text-align: left;">{{$data->nama}}</td>
+                      <td class="cell100 column2" >{{$data->nama}}</td>
                       <td class="cell100 column3">{{$data->nip}}</td>
                       <td class="cell100 column4">{{$data->jurusan}}</td>
                       <td class="cell100 column5">
-                        <form action="{{ url('admin/guru') }}/{{ $data->id }}" method="POST">
+                        <form action="{{ url('admin/teacher') }}/{{ $data->id }}" method="POST">
                         @csrf @method('DELETE') 
-                          <a href="{{ url('admin/guru') }}/{{ $data->id.'/edit' }}" class="btn btn-warning btn-sm mr-1">
+                          <a href="{{ url('admin/teacher') }}/{{ $data->id.'/edit' }}" class="btn btn-warning btn-sm mr-1">
                             <i class="fa fa-pencil"></i>
                           </a>
                           <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>                      

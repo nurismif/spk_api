@@ -24,23 +24,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <!-- /.card-header -->    
-          
-        <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-          <div class="row">
-          <div class="col-sm-12 col-md-6">
-          <div class="dt-buttons btn-group flex-wrap">               
-          <div class="box">
-                <div class="pull-right" style="padding-bottom: 20px;">
-                    <a href="/admin/kriteria/create" class="btn btn-primary btn-flat" style="border-radius: 10px;">
-                        <i class="fa fa-user-plus"></i> Create
-                      </a>
-                </div>
-          </div>
-          </div>
-          </div>
-          </div>
-        </div>
+          <!-- /.card-header -->   
           
           <div class="card">
           <!-- /.card-body -->
@@ -56,7 +40,6 @@
 									    <th class="cell100 column2">Nama Kriteria</th>
 									    <th class="cell100 column3">Kompetensi</th>
 									    <th class="cell100 column4">Range Nilai</th>
-									    <th class="cell100 column5">Action</th>
 								    </tr>
 							    </thead>
 						      </table>
@@ -71,15 +54,6 @@
                       <td class="cell100 column2">{{$data->nama_kriteria_ahp}}</td>
                       <td class="cell100 column3">{{$data->kompetensi}}</td>
                       <td class="cell100 column4">{{$data->range_nilai}}</td>
-                      <td class="cell100 column5">
-                        <form action="{{ url('admin/kriteria') }}/{{ $data->id }}" method="POST">
-                        @csrf @method('DELETE') 
-                          <a href="{{ url('admin/kriteria') }}/{{ $data->id.'/edit' }}" class="btn btn-warning btn-sm mr-1">
-                            <i class="fa fa-pencil"></i>
-                          </a>
-                          <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>                      
-                          </form>
-                      </td>
                     </tr>
                     @endforeach
 							</tbody>

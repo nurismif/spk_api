@@ -27,26 +27,25 @@
       
         <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
           <div class="row">
-          <div class="col-sm-12 col-md-6">
+         <div class="col-sm-12 col-md-6">
           <div class="dt-buttons btn-group flex-wrap">               
-          <div class="panel-heading">        
-            <form class="form-inline">
-                <input type="hidden" name="m" value="kriteria">
-                <div class="form-group">
-                    <input class="form-control" type="text" placeholder="Pencarian. . ." name="q" value="">
+          <div class="box" style="padding-bottom: 10px;">
+                <div class="pull-right">
+                    <a href="/admin/user/create" class="btn btn-primary btn-flat"  style="border-radius: 5px;">
+                        <i class="fa fa-user-plus"></i>Create
+                    </a>
                 </div>
-                <div class="form-group">
-                    <button class="btn btn-success"><span class="glyphicon glyphicon-refresh"></span> Refresh
-                </button></div>
-                <div class="form-group">
-                    <a class="btn btn-primary" href="?m=kriteria_tambah"><span class="glyphicon glyphicon-plus"></span> Tambah</a>
-                </div>
-                <div class="form-group">
-                    <a class="btn btn-default" href="cetak.php?m=kriteria&amp;a=" target="_blank"><span class="glyphicon glyphicon-print"></span> Cetak</a>
-                </div>
-            </form>
           </div>
           </div>
+          </div>
+
+          <!-- <div class="col-sm-12 col-md-6">
+          <div id="example1_filter" class="dataTables_filter">
+            <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example1"></label>
+            </div>
+            </div>
+        </div>
+        </div> -->
           </div>
           </div>
         </div>
@@ -84,7 +83,7 @@
                       <td class="cell100 column4">{{$data->username}}</td>
                       <td class="cell100 column5">{{$data->jabatan}}</td>
                       <td class="cell100 column6">
-                        <form action="{{ url('admin/user') }}/{{ $data->id }}" method="POST">
+                        <form action="{{ url('admin/user') }}/{{ $data->id }}" method="POST" onsubmit="return confirm('Yakin akan hapus data')">
                         @csrf @method('DELETE') 
                           <a href="{{ url('admin/user') }}/{{ $data->id.'/edit' }}" class="btn btn-warning btn-sm mr-1">
                             <i class="fa fa-pencil"></i>

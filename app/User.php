@@ -22,9 +22,6 @@ class User extends Authenticatable
 
     // protected $with = ['penilaian'];
 
-    public function siswa(){
-        return $this->hasMany('App\Siswa');
-    }
     
     public function penilaian(){
         return $this->hasMany('App\Penilaian');

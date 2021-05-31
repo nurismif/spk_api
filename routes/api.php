@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/users', 'UserController@get_all_user');
 Route::post('/user/guru', 'UserController@insert_guru');
 Route::get('/user/guru/ranking', 'UserController@get_ranking_guru');
+Route::get('/user/guru/ranking/ahp', 'UserController@get_ranking_guru_ahp');
 Route::post('/user/kepsek', 'UserController@insert_kepsek');
 Route::post('/user/tim_pkg', 'UserController@insert_tim_pkg');
 Route::post('/users/postapilogin', 'UserController@postApiLogin');

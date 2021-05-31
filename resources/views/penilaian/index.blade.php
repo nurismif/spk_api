@@ -26,21 +26,21 @@
         <div class="col-12">
           <!-- /.card-header -->    
           
-        <!-- <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+        <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
           <div class="row">
           <div class="col-sm-12 col-md-6">
           <div class="dt-buttons btn-group flex-wrap">               
           <div class="box">
                 <div class="pull-right" style="padding-bottom: 20px;">
-                    <a href="/admin/kriteria/create" class="btn btn-primary btn-flat" style="border-radius: 10px;">
-                        <i class="fa fa-user-plus"></i> Create
+                    <a href="/admin/penilaian/import_form" class="btn btn-primary btn-flat" style="border-radius: 10px;">
+                        <i class="fa fa-upload"></i> Import
                       </a>
                 </div>
           </div>
           </div>
           </div>
           </div>
-        </div> -->
+        </div>
           
           <div class="card">
           <!-- /.card-body -->
@@ -49,13 +49,16 @@
 		        	<div class="wrap-table100">
 				        <div class="table100 ver1 m-b-110">
 					        <div class="table100-head">
-						      <table>
+						      <table id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
 							    <thead>
 								    <tr class="row100 head">
 									    <th class="cell100 column1">No</th>
 									    <th class="cell100 column2">Nama User</th>
-									    <th class="cell100 column3">Umum</th>
-									    <th class="cell100 column4">Nilai</th>
+									    <th class="cell100 column3" style="width: 20px;">Umum</th>
+									    <th class="cell100 column4" style="width: 20px;">Teman Sejawat</th>
+                      <th class="cell100 column5" style="width: 20px;">Peserta didik</th>
+                      <th class="cell100 column6" style="width: 20px;">Wali Murid</th>
+                      <th class="cell100 column7" style="width: 0.1px;">DI</th>
 									    <!-- <th class="cell100 column5">Action</th> -->
 								    </tr>
 							    </thead>
@@ -65,13 +68,15 @@
 					  <div class="table100-body js-pscroll ps ps--active-y">
 						<table>
 							<tbody>
-              @foreach ($data as $row)
+              @foreach ($penilaian as $row)
                     <tr>
                       <td class="cell100 column1">{{$no++}}</td>
-                      <td class="cell100 column2">{{$row->nama}}</td>
-                      <td class="cell100 column3">{{$row->nama_kriteria_ahp}}</td>
-                      <td class="cell100 column4">{{$row->nilai}}</td>
-                      
+                      <td class="cell100 column2">{{$row['nama']}}</td>
+                      <td class="cell100 column3" >{{$row['ahp_1'] }}</td>
+                      <td class="cell100 column4" >{{$row['ahp_2'] }}</td>
+                      <td class="cell100 column5" >{{$row['ahp_3'] }}</td>
+                      <td class="cell100 column6" >{{$row['ahp_4'] }}</td>
+                      <td class="cell100 column7" style="width: 0.5px">{{$row['ahp_5'] }}</td>
                     </tr>
                     @endforeach
 							</tbody>
@@ -93,4 +98,16 @@
     </section>
   </section>
 </div>
+@endsection
+
+@section('javascripts')
+<!-- DataTables -->
+<script src="{{asset('adminlte/plugins/datatables/jquery.dataTables.js') }}"></script>
+<script src="{{asset('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
+<script> 
+    $ ( function () {
+        $('#datatable').DataTable();
+    })
+</script>
+
 @endsection

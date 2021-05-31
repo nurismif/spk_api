@@ -6,12 +6,15 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Http\Controllers\Auth;
 use App\KriteriaAHP;
+use App\Nilai_Perbandingan;
 use App\Penilaian;
 use ArrayObject;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+
+use function DeepCopy\deep_copy;
 
 class UserController extends Controller
 {
@@ -78,11 +81,13 @@ class UserController extends Controller
         return response()->json(User::all(), 200);
     }
 
-    public function get_nilai_user(Request $request, $user_id){
+    public function get_nilai_user(Request $request, $user_id)
+    {
         return Penilaian::where('user_id', $user_id)->get();
     }
 
-    public function get_profile_user(Request $request, $id){
+    public function get_profile_user(Request $request, $id)
+    {
         return User::where('id', $id)->get();
     }
 
@@ -251,7 +256,182 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
         // Session::flash('success','Product Deleted Success!');
-        return redirect('admin/user/index');
+        return redirect('admin/user/index')->with('status', 'User Berhasil Dihapus');
+    }
+
+    public function get_ranking_guru_ahp()
+    {
+        $kriteria = KriteriaAHP::all();
+        $jumlah_kriteria = count($kriteria);
+        // return "<pre>".print_r($kriteria, true)."</pre>";
+        // return "<pre>".print_r($jumlah_kriteria, true)."</pre>";
+        $T = 0;
+        $CI = 0;
+        //normalisasi
+        foreach ($kriteria as $k) {
+            // return "<pre>".print_r($k, true)."</pre>";
+            $nilai_perbandingan_per_kolom = Nilai_Perbandingan::where('target_kriteria_ahp_id', '=', $k->id)->orderBy('kriteria_ahp_id', 'asc')->get();
+            // return "<pre>".print_r($nilai_perbandingan_per_kolom, true)."</pre>";
+            $k->total_bobot_untuk_normalisasi = 0;
+
+            foreach ($nilai_perbandingan_per_kolom as $n) {
+                $k->total_bobot_untuk_normalisasi += $n->nilai_perbandingan;
+            }
+
+            // return "<pre>".print_r($k->total_bobot_untuk_normalisasi, true)."</pre>";
+
+
+            $k->nilai_perbandingan_per_kolom = $nilai_perbandingan_per_kolom;
+
+            foreach ($nilai_perbandingan_per_kolom as $n) {
+                $n->nilai_perbandingan_normal = $n->nilai_perbandingan / $k->total_bobot_untuk_normalisasi;
+            }
+        }
+        foreach ($kriteria as $k) {
+            $total_nilai_perbandingan_normal_temp = 0;
+
+            foreach ($kriteria as $k2) {
+                foreach ($k2->nilai_perbandingan_per_kolom as $n) {
+                    if ($n->kriteria_ahp_id == $k->id) {
+                        $total_nilai_perbandingan_normal_temp += $n->nilai_perbandingan_normal;
+                        $k->total_nilai_perbandingan_normal = $total_nilai_perbandingan_normal_temp;
+                    }
+                }
+            }
+
+            $total_nilai_perbandingan_normal_temp = 0;
+
+            $k->total_bobot = $k->total_nilai_perbandingan_normal / $jumlah_kriteria;
+            // return "<pre>".print_r($k->total_bobot, true)."</pre>";
+        }
+
+        foreach ($kriteria as $k) {
+            $k->total_bobot_akhir = 0;
+            foreach ($kriteria as $k2) {
+                $nilai_perbandingan_per_baris = Nilai_Perbandingan::where('target_kriteria_ahp_id', '=', $k2->id)->get();
+                foreach ($nilai_perbandingan_per_baris as $n) {
+                    if ($n->kriteria_ahp_id === $k->id) {
+                        $k->total_bobot_akhir += $n->nilai_perbandingan * $k2->total_bobot;
+                    }
+                }
+            }
+        }
+        
+        $T = 0;
+        foreach ($kriteria as $k) {
+            $T += $k->total_bobot_akhir / $k->total_bobot;
+        }
+
+        $T = $T / $jumlah_kriteria;
+        $CI = ($T - $jumlah_kriteria) / ($jumlah_kriteria - 1);
+        $RI = [0, 0, 0.58, 0.9, 1.12, 1.24, 1.32, 1.41, 1.45, 1.49, 1.51, 1.48, 1.56, 1.57, 1.59];
+
+        if ($jumlah_kriteria > count($RI)) {
+            return response()->json([
+                'status' => 400,
+                'message' => "Jumlah kriteria melebihi jumlah RI"
+            ], 400);
+        }
+
+        $status = $CI / $RI[$jumlah_kriteria - 1];
+        $keterangan = "";
+        if ($status <= 0.1) {
+            $keterangan = "Konsisten";
+        } else {
+            $keterangan = "Tidak Konsisten";
+        }
+
+        $matriks_penilaian = [];
+        foreach ($kriteria as $k) {
+            $penilaian_guru = Penilaian::where('kriteria_ahp_id', '=', $k->id)->get();
+            $perbandingan_per_kriteria = [];
+            foreach ($penilaian_guru as $p) { //samping, kiri->kanan
+                $temp = deep_copy($p);
+                $perbandingan = [];
+                foreach ($penilaian_guru as $p2) { //atas, atas->bawah
+                    $temp2 = deep_copy($p2);
+                    if ($k->tipe === 'Benefit') {
+                        $temp2->nilai = $temp->nilai / $temp2->nilai;
+                    } else {
+                        $temp2->nilai = $temp2->nilai / $temp->nilai;
+                    }
+                    array_push($perbandingan, $temp2);
+                }
+                $temp->perbandingan = $perbandingan;
+
+                array_push($perbandingan_per_kriteria, [
+                    'user_id' => $temp->user_id,
+                    'perbandingan_dengan_user_lain' => $temp->perbandingan
+                ]);
+            }
+
+            $matriks_penilaian_per_kriteria = [
+                'kriteria' => $k->nama,
+                'nilai' => $perbandingan_per_kriteria
+            ];
+            array_push($matriks_penilaian, $matriks_penilaian_per_kriteria);
+        }
+
+        $matriks_penilaian2 = [];
+        foreach ($matriks_penilaian as $m) {
+            $temp = deep_copy($m);
+            foreach ($temp['nilai'] as $n) {
+                $total_nilai = 0;
+                foreach ($n['perbandingan_dengan_user_lain'] as $p) {
+                    $total_nilai += $p['nilai'];
+                    $temp['total_nilai'] = $total_nilai;
+                    // $m = array_merge($m, ['total_nilai' => $total_nilai]);
+                    // return "<pre>".print_r($m, true)."</pre>";
+                }
+            }
+            array_push($matriks_penilaian2, $temp);
+        }
+        
+        $matriks_penilaian3 = [];
+        foreach ($matriks_penilaian2 as $m) {
+            $temp = deep_copy($m);
+            foreach ($temp['nilai'] as $n) {
+                $temp2 = deep_copy($n);
+                foreach ($n['perbandingan_dengan_user_lain'] as $p) {
+                    $temp3 = deep_copy($p);
+                    $p['nilai_normal'] = $temp3['nilai']/$temp['total_nilai'];
+                }
+            }
+            array_push($matriks_penilaian3, $temp);
+        }
+
+        $nilai_maxmin = 0;
+        foreach ($penilaian_guru as $p) { //samping, kiri->kanan
+            $nilai_maxmin = $p / max($p);
+            $bobot_alternatif = $p / $p->sum($nilai_maxmin);
+        }
+
+        foreach ($kriteria as $k) {
+            foreach ($bobot_alternatif as $b) { //atas, atas->bawah
+                $temp2 = deep_copy($b);
+            $rangking = $k->total_bobot * $b;
+        }
+
+        $data = [
+            'T' => $T,
+            'CI' => $CI,
+            'RI' => $RI[$jumlah_kriteria - 1],
+            'matriks_penilaian' => $matriks_penilaian3,
+            'status' => [
+                'nilai' => $status,
+                'keterangan' => $keterangan
+            ],
+            'kriteria' => $kriteria,
+            'jumlah_kriteria' => $jumlah_kriteria,
+            'nilai_maxmin' => $nilai_maxmin,
+            'bobot_alternatif' => $bobot_alternatif,
+            'rangking' => $rangking,
+        ];
+
+        return response()->json([
+            'status' => 200,
+            'data' => $data
+        ], 200);
     }
 
     public function get_ranking_guru()
@@ -306,7 +486,7 @@ class UserController extends Controller
             array_push($data, $u);
         }
 
-        usort($result, function($a,$b){
+        usort($result, function ($a, $b) {
             return $b['nilai'] <=> $a['nilai'];
         });
 

@@ -53,7 +53,7 @@
 							    <thead>
 								    <tr class="row100 head">
 									    <th class="cell100 column1">No</th>
-									    <th class="cell100 column2">Nama</th>
+									    <th class="cell100 column2">Nama Kriteria</th>
 									    <th class="cell100 column3">Bobot</th>
 									    <th class="cell100 column4">Tipe</th>
 									    <th class="cell100 column5">Action</th>
