@@ -263,10 +263,9 @@ class UserController extends Controller
     {
         $kriteria = KriteriaAHP::all();
         $jumlah_kriteria = count($kriteria);
-        // return "<pre>".print_r($kriteria, true)."</pre>";
-        // return "<pre>".print_r($jumlah_kriteria, true)."</pre>";
         $T = 0;
         $CI = 0;
+        
         //normalisasi
         foreach ($kriteria as $k) {
             // return "<pre>".print_r($k, true)."</pre>";
@@ -277,9 +276,6 @@ class UserController extends Controller
             foreach ($nilai_perbandingan_per_kolom as $n) {
                 $k->total_bobot_untuk_normalisasi += $n->nilai_perbandingan;
             }
-
-            // return "<pre>".print_r($k->total_bobot_untuk_normalisasi, true)."</pre>";
-
 
             $k->nilai_perbandingan_per_kolom = $nilai_perbandingan_per_kolom;
 
@@ -302,7 +298,6 @@ class UserController extends Controller
             $total_nilai_perbandingan_normal_temp = 0;
 
             $k->total_bobot = $k->total_nilai_perbandingan_normal / $jumlah_kriteria;
-            // return "<pre>".print_r($k->total_bobot, true)."</pre>";
         }
 
         foreach ($kriteria as $k) {
@@ -409,7 +404,9 @@ class UserController extends Controller
         foreach ($kriteria as $k) {
             foreach ($bobot_alternatif as $b) { //atas, atas->bawah
                 $temp2 = deep_copy($b);
+                
             $rangking = $k->total_bobot * $b;
+            }
         }
 
         $data = [
@@ -432,6 +429,7 @@ class UserController extends Controller
             'status' => 200,
             'data' => $data
         ], 200);
+
     }
 
     public function get_ranking_guru()
