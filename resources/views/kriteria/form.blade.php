@@ -12,7 +12,7 @@
 		@endif
 				{!! Form::label('nama', 'Nama Kriteria : ', ['class' => 'control-label']) !!}
                 <div class="form-control">
-				{!! Form::text('nama', null) !!}
+				{!! Form::text('nama', null, ['class' => 'w-100']) !!}
                 </div>
 				@if ($errors->has('nama'))
 						<span class="help-block">{{ $errors->first('nama') }}</span>

@@ -35,6 +35,11 @@
                                                     <i class="fa fa-user-plus"></i>  Create
                                                 </a>
                                             </div>
+
+
+                                            <button type="button" class="btn btn-primary btn-flat rounded mb-4" data-toggle="modal" data-target="#exampleModalCenter">
+                                              <i class="fa fa-upload mr-2"></i>COBA MODAL
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -50,12 +55,12 @@
                         </div>
                     </div>
 
-                    <div class="card">
+                    <div class="card w-100">
                         <!-- /.card-header -->
                         <div class="card-body">
 
                             <div class="container-table100">
-                                <div class="wrap-table100">
+                                <div class="wrap-table100 w-100">
                                     <div class="table100 ver1 m-b-110">
                                         <div class="table100-head">
                                             <table>

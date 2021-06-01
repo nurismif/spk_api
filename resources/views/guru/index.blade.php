@@ -47,12 +47,12 @@
             </div>
             </div> -->
 
-                                <div class="card">
+                                <div class="card  w-100">
                                     <!-- /.card-header -->
                                     <div class="card-body">
 
                                         <div class="container-table100">
-                                            <div class="wrap-table100">
+                                            <div class="wrap-table100  w-100">
                                                 <div class="table100 ver1 m-b-110">
                                                     <div class="table100-head">
                                                         <table>
@@ -95,7 +95,7 @@
                                                                 @endforeach
                                                             </tbody>
                                                         </table>
-                                                        <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+                                                        {{-- <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
                                                             <div class="ps__thumb-x" tabindex="0"
                                                                 style="left: 0px; width: 0px;"></div>
                                                         </div>
@@ -103,7 +103,7 @@
                                                             style="top: 0px; height: 585px; right: 5px;">
                                                             <div class="ps__thumb-y" tabindex="0"
                                                                 style="top: 0px; height: 293px;"></div>
-                                                        </div>
+                                                        </div> --}}
                                                     </div>
                                                 </div>
                                             </div>
