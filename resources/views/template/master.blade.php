@@ -38,7 +38,8 @@
     <!-- Font Select -->
     <link rel="stylesheet" type="text/css" href="{{ asset('table/vendor/select2/select2.min.css') }}">
     <!-- Theme Scrollbar -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('table/vendor/perfect-scrollbar/perfect-scrollbar.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('table/vendor/perfect-scrollbar/perfect-scrollbar.css') }}">
     <!-- Font Style -->
     <link rel="stylesheet" type="text/css" href="{{ asset('table/css/util.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('table/css/main.css') }}">
@@ -68,96 +69,99 @@
 
         <!-- ./wrapper -->
 
-        <!--===============================================================================================-->
-        <script src="{{ asset('table/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
-        <!--===============================================================================================-->
-        <script src="{{ asset('table/vendor/bootstrap/js/popper.js') }}"></script>
-        <script src="{{ asset('table/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-        <!--===============================================================================================-->
-        <script src="{{ asset('table/vendor/select2/select2.min.js') }}"></script>
-        <!--===============================================================================================-->
-        <script src="{{ asset('table/vendor/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
-        <script>
-            $('.js-pscroll').each(function() {
-                var ps = new PerfectScrollbar(this);
+    </div>
+    
+    <!--===============================================================================================-->
+    <script src="{{ asset('table/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
+    <!--===============================================================================================-->
+    <script src="{{ asset('table/vendor/bootstrap/js/popper.js') }}"></script>
+    <script src="{{ asset('table/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    <!--===============================================================================================-->
+    <script src="{{ asset('table/vendor/select2/select2.min.js') }}"></script>
+    <!--===============================================================================================-->
+    <script src="{{ asset('table/vendor/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+    <script>
+        $('.js-pscroll').each(function() {
+            var ps = new PerfectScrollbar(this);
 
-                $(window).on('resize', function() {
-                    ps.update();
-                })
+            $(window).on('resize', function() {
+                ps.update();
+            })
+        });
+
+    </script>
+    <!--===============================================================================================-->
+    <script src="{{ asset('table/js/main.js') }}"></script>
+
+    <!-- jQuery -->
+    <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
+
+    <!-- Bootstrap 4 -->
+    {{-- <script src="{{asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script> --}}
+
+    <!-- DataTables  & Plugins -->
+    <script src="{{ asset('adminlte/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('adminlte/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('adminlte/plugins/jszip/jszip.min.js') }}"></script>
+    <script src="{{ asset('adminlte/pdfmake/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('adminlte/plugins/atatables-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+    <!-- daterangepicker -->
+    <script src="{{ asset('adminlte/plugins/moment/moment.min.js') }}"></script>
+    <script src="{{ asset('adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}">
+    </script>
+    <!-- AdminLTE App -->
+    <script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}"></script>
+    <!-- Page specific script -->
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+
+    </script>
+    <!-- Append -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".add-row").click(function() {
+                var kriteria = $("#kriteria_ahp_id").val();
+                var perbandingan = $("#perbandingan_id").val();
+                var target_kriteria = $("#target_kriteria_ahp_id").val();
+                var markup = "<tr><td><input type='checkbox' name='record'></td><td>" + name +
+                    "</td><td>" + email + "</td></tr>";
+                $("table tbody").append(markup);
             });
 
-        </script>
-        <!--===============================================================================================-->
-        <script src="{{ asset('table/js/main.js') }}"></script>
-
-        <!-- jQuery -->
-        <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
-
-        <!-- Bootstrap 4 -->
-        {{-- <script src="{{asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script> --}}
-
-        <!-- DataTables  & Plugins -->
-        <script src="{{ asset('adminlte/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-        <script src="{{ asset('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-        <script src="{{ asset('adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-        <script src="{{ asset('adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-        <script src="{{ asset('adminlte/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
-        <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
-        <script src="{{ asset('adminlte/plugins/jszip/jszip.min.js') }}"></script>
-        <script src="{{ asset('adminlte/pdfmake/pdfmake.min.js') }}"></script>
-        <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
-        <script src="{{ asset('adminlte/plugins/atatables-buttons/js/buttons.print.min.js') }}"></script>
-        <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
-        <!-- daterangepicker -->
-        <script src="{{ asset('adminlte/plugins/moment/moment.min.js') }}"></script>
-        <script src="{{ asset('adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}">
-        </script>
-        <!-- AdminLTE App -->
-        <script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}"></script>
-        <!-- Page specific script -->
-        <script>
-            $(function() {
-                $("#example1").DataTable({
-                    "responsive": true,
-                    "lengthChange": false,
-                    "autoWidth": false,
-                    "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-                }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-                $('#example2').DataTable({
-                    "paging": true,
-                    "lengthChange": false,
-                    "searching": false,
-                    "ordering": true,
-                    "info": true,
-                    "autoWidth": false,
-                    "responsive": true,
+            // Find and remove selected table rows
+            $(".delete-row").click(function() {
+                $("table tbody").find('input[name="record"]').each(function() {
+                    if ($(this).is(":checked")) {
+                        $(this).parents("tr").remove();
+                    }
                 });
             });
+        });
 
-        </script>
-        <!-- Append -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                $(".add-row").click(function() {
-                    var kriteria = $("#kriteria_ahp_id").val();
-                    var perbandingan = $("#perbandingan_id").val();
-                    var target_kriteria = $("#target_kriteria_ahp_id").val();
-                    var markup = "<tr><td><input type='checkbox' name='record'></td><td>" + name +
-                        "</td><td>" + email + "</td></tr>";
-                    $("table tbody").append(markup);
-                });
-
-                // Find and remove selected table rows
-                $(".delete-row").click(function() {
-                    $("table tbody").find('input[name="record"]').each(function() {
-                        if ($(this).is(":checked")) {
-                            $(this).parents("tr").remove();
-                        }
-                    });
-                });
-            });
-        </script>
+    </script>
 </body>
 
 </html>

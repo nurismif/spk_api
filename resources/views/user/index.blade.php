@@ -99,12 +99,12 @@
                                                     @endforeach
                                                 </tbody>
                                             </table>
-                                            <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
+                                            {{-- <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
                                                 <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
                                             </div>
                                             <div class="ps__rail-y" style="top: 0px; height: 585px; right: 5px;">
                                                 <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 293px;"></div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>
