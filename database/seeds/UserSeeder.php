@@ -12,14 +12,40 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
-            'nip' => "123456789",
-            'nama' => "PKG1",
-            'username' => "PKG1",
-            'password' => bcrypt('123123123'),
-            'jabatan' => 'Tim_PKG',
-            'jenis_kelamin' => "L",
-            'jurusan' => "IT"
-        ]);
+        for ($i = 1; $i < 3; $i++) {
+            User::create([
+                'nip' => "1" . $i,
+                'nama' => "PKG" . $i,
+                'username' => "PKG" . $i,
+                'password' => '123123123',
+                'jabatan' =>  User::TIM_KPG_ROLE,
+                'jenis_kelamin' => User::MALE_TYPE,
+                'jurusan' => "Akuntansi"
+            ]);
+        }
+
+        for ($i = 1; $i < 3; $i++) {
+            User::create([
+                'nip' => "2" . $i,
+                'nama' => "KEPSEK" . $i,
+                'username' => "KEPSEK" . $i,
+                'password' => '123123123',
+                'jabatan' =>  User::KEPSEK_ROLE,
+                'jenis_kelamin' => User::FEMALE_TYPE,
+                'jurusan' => "Akuntansi"
+            ]);
+        }
+
+        for ($i = 0; $i < 2; $i++) {
+            User::create([
+                'nip' => "3" . $i,
+                'nama' => "GURU" . $i,
+                'username' => "GURU" . $i,
+                'password' => '123123123',
+                'jabatan' =>  User::GURU_ROLE,
+                'jenis_kelamin' => User::FEMALE_TYPE,
+                'jurusan' => "Akuntansi"
+            ]);
+        }
     }
 }

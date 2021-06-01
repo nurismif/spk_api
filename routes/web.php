@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PenilaianController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,8 +28,6 @@ Auth::routes();
 Route::post('/admin/postlogin', 'UserController@postlogin');
 
 Route::get('/admin/login', 'UserController@login');
-
-Route::get('/admin/logout', 'UserController@logout');
 
 Route::get('/admin/user/index', 'UserController@index');
 Route::get('/admin/user/create', 'UserController@create');
