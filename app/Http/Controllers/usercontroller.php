@@ -189,7 +189,7 @@ class UserController extends Controller
             'nip'   =>  'required|string|max:30|unique:users',
             'nama'   =>  'required|string|max:255',
             'username'   =>  'required|string|max:50|unique:users',
-            'password'   =>  'required|string|max:20',
+            'password'   =>  'required|string|max:20|confirmed',
             'jabatan'   =>  'required|string|max:100',
             'jenis_kelamin'   =>  'required|string|max:10',
             ]);

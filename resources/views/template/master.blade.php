@@ -43,6 +43,9 @@
     <!-- Font Style -->
     <link rel="stylesheet" type="text/css" href="{{ asset('table/css/util.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('table/css/main.css') }}">
+    <!-- Custom Style -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+
 </head>
 
 <body class="hold-transition sidebar-mini">

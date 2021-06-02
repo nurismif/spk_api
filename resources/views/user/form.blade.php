@@ -4,94 +4,59 @@
 			<div class="panel">
 				<div class="panel-body m-t-20">
 
-				@if ($errors->any())
-					<div style="margin: 1rem;" class="form-group row m-auto {{ $errors->has('nip') ? 'has-error' : 'has-success' }}">
-				@else
 					<div style="margin: 1rem;" class="form-group row">
-				@endif
 						<label for="inputNIP" class="col-sm-2 col-form-label">NIP</label>
 						<div class="col-sm-10">	
-						  {{-- <input type="password" class="form-control" id="inputPassword" placeholder="Password"> --}}
-						  	<div class="form-control">
-								{!! Form::text('nip', null, ['class' => 'w-100', 'placeholder' => 'Masukkan NIP']) !!}
+						  	<div class="form-control {{ $errors->has('nip') ? 'is-invalid' : '' }}">
+								<input class="w-100" type="text" placeholder="{{ $errors->has('nip') ? $errors->first('nip') : 'Masukkan NIP' }}" name="nip" value="{{ isset($users) ? $users->nip : old('nip') }}">
 							</div>
-						@if ($errors->has('nip'))
-							<span class="help-block text-danger">{{ $errors->first('nip') }}</span>
-						@endif  
 						</div>
 					</div>
 					
-				@if ($errors->any())
-					<div style="margin: 1rem;" class="form-group row m-auto {{ $errors->has('nama') ? 'has-error' : 'has-success' }}">
-				@else
 					<div style="margin: 1rem;" class="form-group row">
-				@endif
 						<label for="inputNama" class="col-sm-2 col-form-label">Nama User</label>
 						<div class="col-sm-10">
-						  {{-- <input type="password" class="form-control" id="inputPassword" placeholder="Password"> --}}
-						  	<div class="form-control">
-								{!! Form::text('nama', null, ['class' => 'w-100', 'placeholder' => 'Masukkan Nama']) !!}
+						  	<div class="form-control {{ $errors->has('nama') ? 'is-invalid' : '' }}">
+								<input class="w-100" type="text" placeholder="{{ $errors->has('nama') ? $errors->first('nama') : 'Masukkan Nama User' }}" name="nama" value="{{ isset($users) ? $users->nama : old('nama') }}">
 							</div>
-						@if ($errors->has('nama'))
-							<span class="help-block text-danger">{{ $errors->first('nama') }}</span>
-						@endif  
 						</div>
 					</div>
-				
-				@if ($errors->any())
-					<div style="margin: 1rem;" class="form-group row m-auto {{ $errors->has('username') ? 'has-error' : 'has-success' }}">
-				@else
+					
 					<div style="margin: 1rem;" class="form-group row">
-				@endif
 						<label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
 						<div class="col-sm-10">
-						  {{-- <input type="password" class="form-control" id="inputPassword" placeholder="Password"> --}}
-						  	<div class="form-control">
-								{!! Form::text('username', null, ['class' => 'w-100', 'placeholder' => 'Masukkan Username']) !!}
+							<div class="form-control {{ $errors->has('username') ? 'is-invalid' : '' }}">
+								<input class="w-100" type="text" placeholder="{{ $errors->has('username') ? $errors->first('username') : 'Masukkan Username' }}" name="username" value="{{ isset($users) ? $users->username : old('username') }}">
 							</div>
-						@if ($errors->has('username'))
-							<span class="help-block text-danger">{{ $errors->first('username') }}</span>
-						@endif  
 						</div>
 					</div>
 
-				@if ($errors->any())
-					<div style="margin: 1rem;" class="form-group row m-auto {{ $errors->has('password') ? 'has-error' : 'has-success' }}">
-				@else
 					<div style="margin: 1rem;" class="form-group row">
-				@endif
 						<label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
 						<div class="col-sm-10">
-						  {{-- <input type="password" class="form-control" id="inputPassword" placeholder="Password"> --}}
-						  	<div class="form-control">
-								{!! Form::Password('password', ['class' => 'w-100', 'placeholder' => 'Masukkan Password']) !!}
+							<div class="input-group">
+								<input type="password" id="inputPassword" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }} input-password" name="password" placeholder="{{ $errors->has('password') ? $errors->first('password') : 'Masukkan Password' }}">
+								<div class="input-group-append">
+									<button onclick="togglePassword()" type="button" class="input-group-text">
+										<i class="fa fa-eye" id="changeicon"></i>
+									</button>
+								</div>
 							</div>
-						@if ($errors->has('password'))
-							<span class="help-block text-danger">{{ $errors->first('password') }}</span>
-						@endif  
 						</div>
 					</div>
 
-				@if ($errors->any())
-					<div style="margin: 1rem;" class="form-group row m-auto {{ $errors->has('jabatan') ? 'has-error' : 'has-success' }}">
-				@else
+				
 					<div style="margin: 1rem;" class="form-group row">
-				@endif
-						<label for="inputPassword" class="col-sm-2 col-form-label">Jabatan</label>
+						<label for="inputPassword" class="col-sm-2 col-form-label">Password Confirmation</label>
 						<div class="col-sm-10">
-						  {{-- <input type="jabatan" class="form-control" id="inputPassword" placeholder="Password"> --}}
-						  	{{-- <div class="form-control"> --}}
-							{!!
-								Form::select('jabatan', array(
-								'Tim PKG' => 'Tim_PKG',
-								'Kepala Sekolah' => 'Kepala Sekolah',
-								'Guru' => 'Guru'
-								), null, ['class' => 'form-control', 'placeholder' => 'Pilih Jabatan']);
-							!!}
-							{{-- </div> --}}
-						@if ($errors->has('jabatan'))
-							<span class="help-block text-danger">{{ $errors->first('jabatan') }}</span>
-						@endif  
+							<div class="input-group">
+								<input type="password" id="inputPasswordconfirm" class="form-control input-password" name="password_confirmation" placeholder="Password">
+								<div class="input-group-append">
+									<button onclick="togglePasswordConfirm()" type="button" class="input-group-text">
+										<i class="fa fa-eye" id="changeiconconfirm"></i>
+									</button>
+								</div>
+							</div> 
 						</div>
 					</div>
 
@@ -133,74 +98,8 @@
 							<span class="help-block">{{ $errors->first('nip') }}</span>
 						@endif  									
 					</div>		 --}}
-						
-						
-						@if ($errors->any())
-						<div class="form-group {{ $errors->has('nama') ?
-							'has-error' : 'has-success' }}">
-					@else
-						<div class="form-group">
-					@endif
-						{!! Form::label('nama', 'Nama User : ', ['class' => 'control-label']) !!}
-							<div class="form-control">
-							{!! Form::text('nama', null, ['class' => 'w-100', 'placeholder' => 'Masukkan Nama User']) !!}
-							</div>
-								@if ($errors->has('nama'))
-									<span class="help-block text-danger">{{ $errors->first('nama') }}</span>
-								@endif
-						</div>
 
-					@if ($errors->any())
-						<div class="form-group {{ $errors->has('username') ?
-							'has-error' : 'has-success' }}">
-					@else
-						<div class="form-group">
-					@endif
-						{!! Form::label('username', 'Username : ', ['class' => 'control-label']) !!}
-							<div class="form-control">
-							{!! Form::text('username', null, ['class' => 'w-100', 'placeholder' => 'Masukkan Username']) !!}
-							</div>
-								@if ($errors->has('username'))
-									<span class="help-block text-danger">{{ $errors->first('username') }}</span>
-								@endif
-						</div>
-					
-					@if ($errors->any())
-						<div class="form-group {{ $errors->has('password') ?
-							'has-error' : 'has-success' }}">
-					@else
-						<div class="form-group">
-					@endif
-						{!! Form::label('password', 'Password : ', ['class' => 'control-label']) !!}
-							<div class="form-control">
-							{!! Form::text('password', null, ['class' => 'w-100', 'placeholder' => 'Masukkan Password']) !!}
-							</div>
-								@if ($errors->has('password'))
-									<span class="help-block text-danger">{{ $errors->first('password') }}</span>
-								@endif
-						</div>
-					
-					@if ($errors->any())
-						<div class="form-group {{ $errors->has('jabatan') ?
-							'has-error' : 'has-success' }}">
-					@else
-						<div class="form-group">
-					@endif
-						{!! Form::label('jabatan', 'Jabatan : ', ['class' => 'control-label']) !!}
-							<div class="form-group">
-							{!!
-								Form::select('jabatan', array(
-								'Tim PKG' => 'Tim_PKG',
-								'Kepala Sekolah' => 'Kepala Sekolah',
-								'Guru' => 'Guru'
-								), null, ['class' => 'form-control']);
-							!!}
-							</div>    
-								@if ($errors->has('jabatan'))
-									<span class="help-block text-danger">{{ $errors->first('jabatan') }}</span>
-								@endif
-						</div>
-					
+						
 					@if ($submitButtonText === 'Save')
 						@if ($errors->any())
 							<div class="form-group {{ $errors->has('jenis_kelamin') ?
