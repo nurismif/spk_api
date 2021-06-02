@@ -30,7 +30,7 @@
 							</div>
 						</div>
 					</div>
-
+					
 					<div style="margin: 1rem;" class="form-group row">
 						<label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
 						<div class="col-sm-10">
@@ -45,7 +45,7 @@
 						</div>
 					</div>
 
-				
+					
 					<div style="margin: 1rem;" class="form-group row">
 						<label for="inputPassword" class="col-sm-2 col-form-label">Password Confirmation</label>
 						<div class="col-sm-10">
@@ -59,32 +59,47 @@
 							</div> 
 						</div>
 					</div>
-
-				@if ($errors->any())
-					<div style="margin: 1rem;" class="form-group row m-auto {{ $errors->has('jabatan') ? 'has-error' : 'has-success' }}">
-				@else
+					
 					<div style="margin: 1rem;" class="form-group row">
-				@endif
 						<label for="inputPassword" class="col-sm-2 col-form-label">Jabatan</label>
 						<div class="col-sm-10">
-						  {{-- <input type="jabatan" class="form-control" id="inputPassword" placeholder="Password"> --}}
-						  	{{-- <div class="form-control"> --}}
+							@if ($errors->has('jabatan'))
 							{!!
 								Form::select('jabatan', array(
-								'Tim PKG' => 'Tim_PKG',
-								'Kepala Sekolah' => 'Kepala Sekolah',
-								'Guru' => 'Guru'
+									'Tim PKG' => 'Tim_PKG',
+									'Kepala Sekolah' => 'Kepala Sekolah',
+									'Guru' => 'Guru'
+								), null, ['class' => 'form-control is-invalid', 'placeholder' => $errors->first('jabatan')]);
+								!!}
+							@else
+							{!!
+								Form::select('jabatan', array(
+									'Tim PKG' => 'Tim_PKG',
+									'Kepala Sekolah' => 'Kepala Sekolah',
+									'Guru' => 'Guru'
 								), null, ['class' => 'form-control', 'placeholder' => 'Pilih Jabatan']);
-							!!}
-							{{-- </div> --}}
-						@if ($errors->has('jabatan'))
-							<span class="help-block text-danger">{{ $errors->first('jabatan') }}</span>
-						@endif  
+								!!}
+							@endif
 						</div>
 					</div>
 
+					@if ($submitButtonText === 'Save')
+						<div style="margin: 1rem;" class="form-group row">
+							<label for="inputJenisKelamin" class="col-sm-2 col-form-label">Jenis Kelamin</label>
+							<div style="padding-left: 2rem" class="col-sm-10">
+								<div class="form-check">
+									<input class="form-check-input" value="Laki-laki" type="radio" name="jenis_kelamin">
+										<label class="form-check-label">Laki-laki</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" value="Perempuan" type="radio" name="jenis_kelamin">
+										<label class="form-check-label">Perempuan</label>
+								</div>
+							</div>
+						</div>
+					@endif
 					
-
+					
 					{{-- @if ($errors->any())
 						<div class="form-group {{ $errors->has('nip') ? 'has-error' : 'has-success' }}">
 					@else

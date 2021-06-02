@@ -49,7 +49,8 @@
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
                             </div>
-                            <a href="/admin/kriteria/index" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="/admin/kriteria/index" class="small-box-footer">More info <i
+                                    class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -64,7 +65,8 @@
                             <div class="icon">
                                 <i class="ion ion-person-add"></i>
                             </div>
-                            <a href="/admin/penilaian/index" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="/admin/penilaian/index" class="small-box-footer">More info <i
+                                    class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <!-- ./col -->
@@ -439,8 +441,8 @@
 @endsection
 
 
-
-<div class="daterangepicker ltr show-ranges opensright">
+{{-- Uncomment this section, if it is needed to show the daterange picker --}}
+{{-- <div class="daterangepicker ltr show-ranges opensright">
     <div class="ranges">
         <ul>
             <li data-range-key="Today">Today</li>
@@ -462,5 +464,6 @@
     </div>
     <div class="drp-buttons"><span class="drp-selected"></span><button class="cancelBtn btn btn-sm btn-default"
             type="button">Cancel</button><button class="applyBtn btn btn-sm btn-primary" disabled="disabled"
-            type="button">Apply</button> </div>
-</div>
+            type="button">Apply</button>
+    </div>
+</div> --}}
