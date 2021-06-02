@@ -50,7 +50,7 @@ Route::get('/admin/kriteria/matriks', 'KriteriaAHPController@matriks');
 Route::get('/admin/teacher/index', 'TeacherController@index');
 Route::get('/admin/teacher/{user}/edit', 'TeacherController@edit');
 
-Route::get('/admin/penilaian/index', 'PenilaianController@index');
+Route::get('/admin/penilaian/index', 'PenilaianController@index')->name('admin.penilaian.index');
 Route::get('/admin/penilaian/import_form', 'PenilaianController@importForm');
 Route::post('/admin/penilaian/import', 'PenilaianController@import')->name('import');
 

@@ -13,15 +13,17 @@ use Maatwebsite\Excel\Facades\Excel as FacadesExcel;
 
 class PenilaianController extends Controller
 {
-    public function get_all_penilaian(){
+    public function get_all_penilaian()
+    {
         return response()->json(Penilaian::with('kriteria_ahp', 'user')->get(), 200);
     }
 
-    public function insert_nilai_ahp(Request $request){
+    public function insert_nilai_ahp(Request $request)
+    {
         $insert_nilai_ahp = new Penilaian;
-        $insert_nilai_ahp->user_id= $request->userID;
-        $insert_nilai_ahp->kriteria_ahp_id= $request->kriteriaID;
-        $insert_nilai_ahp->nilai= $request->nilaiKriteria;
+        $insert_nilai_ahp->user_id = $request->userID;
+        $insert_nilai_ahp->kriteria_ahp_id = $request->kriteriaID;
+        $insert_nilai_ahp->nilai = $request->nilaiKriteria;
         $insert_nilai_ahp->save();
         return response([
             'status' => 'OK',
@@ -30,9 +32,10 @@ class PenilaianController extends Controller
         ], 200);
     }
 
-    public function update_nilai_ahp(Request $request, $id){
+    public function update_nilai_ahp(Request $request, $id)
+    {
         $check_pen_ahp = Penilaian::firstWhere('id', $id);
-        if($check_pen_ahp){
+        if ($check_pen_ahp) {
             $data_pen_ahp = Penilaian::find($id);
             $data_pen_ahp->user_id = $check_pen_ahp->user_id;
             $data_pen_ahp->kriteria_ahp_id = $check_pen_ahp->kriteria_ahp_id;
@@ -43,7 +46,7 @@ class PenilaianController extends Controller
                 'message' => 'Penilaian AHP Disimpan',
                 'data' => $data_pen_ahp
             ], 200);
-        } else{
+        } else {
             return response([
                 'status' => 'NOT FOUND',
                 'message' => 'Id Penilaian AHP tidak ditemukan'
@@ -51,7 +54,8 @@ class PenilaianController extends Controller
         }
     }
 
-    public function delete_nilai_ahp($id){
+    public function delete_nilai_ahp($id)
+    {
         $check_pen_ahp = Penilaian::firstWhere('id', $id);
         if ($check_pen_ahp) {
             Penilaian::destroy($id);
@@ -59,7 +63,7 @@ class PenilaianController extends Controller
                 'status' => 'OK',
                 'message' => 'Penilaian Dihapus'
             ], 200);
-        } else{
+        } else {
             return response([
                 'status' => 'NOT FOUND',
                 'message' => 'Id Penilaian tidak ditemukan'
@@ -67,14 +71,15 @@ class PenilaianController extends Controller
         }
     }
 
-    public function index(){
+    public function index()
+    {
 
         //mengambil data darri database menggunakan db::table() dan disimpan ke dalam $data
         //menggunakan ->join() untuk menggabungkan tabel lainnya
         //diakhir get() untuk mengambil data array
-    
+
         //diakhir first() jika hanya satu data yang diambil
-    
+
         $data = DB::table('penilaian')
             ->join('users', 'users.id', '=', 'penilaian.user_id')
             ->join('kriteria_ahp', 'kriteria_ahp.id', '=', 'penilaian.kriteria_ahp_id')
@@ -85,27 +90,26 @@ class PenilaianController extends Controller
         $log = 1;
         foreach ($data as $key => $value) {
             $return_penilaian[$index]['nama'] = $value->nama;
-            $return_penilaian[$index]['ahp_'.$log] = $value->nilai;
-            if($log % 5 ==0) {
-                $index ++;
+            $return_penilaian[$index]['ahp_' . $log] = $value->nilai;
+            if ($log % 5 == 0) {
+                $index++;
                 $log = 1;
             } else {
                 $log++;
             }
-            
         }
         // return "";
-     return view('penilaian/index', ['penilaian' => $return_penilaian, 'no' => 1], compact('data'));
-
+        return view('penilaian/index', ['penilaian' => $return_penilaian, 'no' => 1], compact('data'));
     }
 
-    public function importForm(){
+    public function importForm()
+    {
         return view('/penilaian/import_form');
     }
 
     public function import(Request $request)
     {
-        FacadesExcel::import(new PenilaianImport,$request->file);
-        return redirect('/penilaian/index');
+        FacadesExcel::import(new PenilaianImport, $request->file);
+        return route('admin.penilaian.index');
     }
 }
