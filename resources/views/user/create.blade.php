@@ -49,3 +49,9 @@
     </div>
 
 @endsection
+
+@push('scripts')
+<script>
+  console.log("test")
+</script>
+@endpush
