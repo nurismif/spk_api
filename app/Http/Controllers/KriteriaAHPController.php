@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\DetailKriteria;
 use Illuminate\Http\Request;
 use App\KriteriaAHP;
-use App\Services\Constant;
+use App\Services\ConstantService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -161,7 +161,7 @@ class KriteriaAHPController extends Controller
     public function matriks()
     {
         $list_kriteria = KriteriaAHP::get();
-        $list_perbandingan =  (new Constant())->get_perbandingan_rules();
+        $list_perbandingan =  (new ConstantService())->getPerbandinganRules();
         return view('kriteria.matriks', ['list_kriteria' => $list_kriteria, 'list_perbandingan' => $list_perbandingan],);
     }
 }

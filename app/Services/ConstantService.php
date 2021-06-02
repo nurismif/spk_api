@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-class Constant
+class ConstantService
 {
-     public function get_perbandingan_rules()
+     public function getPerbandinganRules()
      {
           return [
                (object)[
