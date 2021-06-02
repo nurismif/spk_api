@@ -110,6 +110,6 @@ class PenilaianController extends Controller
     public function import(Request $request)
     {
         FacadesExcel::import(new PenilaianImport, $request->file);
-        return route('admin.penilaian.index');
+        return redirect()->route('admin.penilaian.index');
     }
 }
