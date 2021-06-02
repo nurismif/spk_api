@@ -31,30 +31,25 @@
                                     <div class="dt-buttons btn-group flex-wrap">
                                         <div class="box" style="padding-bottom: 10px;">
                                             <div class="pull-right">
-                                                <a href="/admin/user/create" class="btn btn-primary btn-flat" style="border-radius: 5px;">
-                                                    <i class="fa fa-user-plus"></i>  Create
+                                                <a href="/admin/user/create" class="btn btn-primary btn-flat"
+                                                    style="border-radius: 5px;">
+                                                    <i class="fa fa-user-plus"></i> Create
                                                 </a>
                                             </div>
-
-
-                                            <button type="button" class="btn btn-primary btn-flat rounded mb-4" data-toggle="modal" data-target="#exampleModalCenter">
-                                              <i class="fa fa-upload mr-2"></i>COBA MODAL
-                                            </button>
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- <div class="col-sm-12 col-md-6">
-              <div id="example1_filter" class="dataTables_filter">
-                <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example1"></label>
-                </div>
-                </div>
-            </div>
-            </div> -->
+                      <div id="example1_filter" class="dataTables_filter">
+                        <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example1"></label>
+                        </div>
+                        </div>
+                    </div>
+                    </div> -->
                             </div>
                         </div>
                     </div>
-
                     <div class="card w-100">
                         <!-- /.card-header -->
                         <div class="card-body">

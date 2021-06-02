@@ -2,23 +2,43 @@
 	<div class="main-content">
 		<div class="container-fluid">
 			<div class="panel">
-				<div class="panel-body">
+				<div class="panel-body m-t-20">
 
-					@if ($errors->any())
+				@if ($errors->any())
+					<div style="width: 80%" class="form-group row m-auto {{ $errors->has('nip') ? 'has-error' : 'has-success' }}">
+				@else
+					<div style="width: 80%" class="form-group row m-auto">
+				@endif
+						<label for="inputPassword" class="col-sm-2 col-form-label">NIP : </label>
+						<div class="col-sm-10">
+						  {{-- <input type="password" class="form-control" id="inputPassword" placeholder="Password"> --}}
+						  	<div class="form-control">
+								{!! Form::text('nip', null, ['class' => 'w-100', 'placeholder' => 'Masukkan NIP']) !!}
+							</div>
+						@if ($errors->has('nip'))
+							<span class="help-block text-danger">{{ $errors->first('nip') }}</span>
+						@endif  
+						</div>
+					</div>
+
+
+					
+
+					{{-- @if ($errors->any())
 						<div class="form-group {{ $errors->has('nip') ? 'has-error' : 'has-success' }}">
 					@else
 						<div class="form-group">
 					@endif
+							{!! Form::label('nip', 'NIP : ', ['class' => 'control-label']) !!}
+							<div class="form-control">
+								{!! Form::text('nip', null, ['class' => 'w-100', 'placeholder' => 'Masukkan NIP']) !!}
+							</div>
+						@if ($errors->has('nip'))
+							<span class="help-block">{{ $errors->first('nip') }}</span>
+						@endif  									
+					</div>		 --}}
 
-						{!! Form::label('nip', 'NIP : ', ['class' => 'control-label']) !!}
-						<div class="form-control">
-							{!! Form::text('nip', null, ['class' => 'w-100', 'placeholder' => 'Masukkan NIP']) !!}
-						</div>
-							@if ($errors->has('nip'))
-								<span class="help-block">{{ $errors->first('nip') }}</span>
-							@endif  									
-						</div>		
-
+						
 						@if ($errors->any())
 						<div class="form-group {{ $errors->has('nama') ?
 							'has-error' : 'has-success' }}">
@@ -30,7 +50,7 @@
 							{!! Form::text('nama', null, ['class' => 'w-100', 'placeholder' => 'Masukkan Nama User']) !!}
 							</div>
 								@if ($errors->has('nama'))
-									<span class="help-block">{{ $errors->first('nama') }}</span>
+									<span class="help-block text-danger">{{ $errors->first('nama') }}</span>
 								@endif
 						</div>
 
@@ -44,8 +64,8 @@
 							<div class="form-control">
 							{!! Form::text('username', null, ['class' => 'w-100', 'placeholder' => 'Masukkan Username']) !!}
 							</div>
-								@if ($errors->has('username'))d
-									<span class="help-block">{{ $errors->first('username') }}</span>
+								@if ($errors->has('username'))
+									<span class="help-block text-danger">{{ $errors->first('username') }}</span>
 								@endif
 						</div>
 					
@@ -60,7 +80,7 @@
 							{!! Form::text('password', null, ['class' => 'w-100', 'placeholder' => 'Masukkan Password']) !!}
 							</div>
 								@if ($errors->has('password'))
-									<span class="help-block">{{ $errors->first('password') }}</span>
+									<span class="help-block text-danger">{{ $errors->first('password') }}</span>
 								@endif
 						</div>
 					
@@ -81,12 +101,11 @@
 							!!}
 							</div>    
 								@if ($errors->has('jabatan'))
-									<span class="help-block">{{ $errors->first('jabatan') }}</span>
+									<span class="help-block text-danger">{{ $errors->first('jabatan') }}</span>
 								@endif
 						</div>
 					
-					@if ($submitButtonText === 'SAVE')
-					
+					@if ($submitButtonText === 'Save')
 						@if ($errors->any())
 							<div class="form-group {{ $errors->has('jenis_kelamin') ?
 								'has-error' : 'has-success' }}">
@@ -103,7 +122,7 @@
 										<label class="form-check-label">Perempuan</label>
 								</div>
 									@if ($errors->has('jenis_kelamin'))
-										<span class="help-block">{{ $errors->first('jenis_kelamin') }}</span>
+										<span class="help-block text-danger">{{ $errors->first('jenis_kelamin') }}</span>
 									@endif
 							</div>
 						</div>
@@ -129,12 +148,12 @@
 							!!}
 							</div>
 						@if ($errors->has('jurusan'))
-							<span class="help-block">{{ $errors->first('jurusan') }}</span>
+							<span class="help-block text-danger">{{ $errors->first('jurusan') }}</span>
 						@endif
 						</div>
 					</div>
 
-					<div class="form-group" style="padding-top: 20px;">
+					<div class="form-group" style="padding-top: 20px; width: 25%; margin: auto;">
 						{!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
 					</div>
 				</div>

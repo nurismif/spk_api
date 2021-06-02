@@ -184,6 +184,7 @@ class UserController extends Controller
     {
         $data = $request->all();
 
+        
         $validator  = Validator::make($data, [
             'nip'   =>  'required|string|max:30|unique:users',
             'nama'   =>  'required|string|max:255',
@@ -191,17 +192,19 @@ class UserController extends Controller
             'password'   =>  'required|string|max:20',
             'jabatan'   =>  'required|string|max:100',
             'jenis_kelamin'   =>  'required|string|max:10',
-        ]);
-
-        if ($validator->fails()) {
-            # code...
-            // return redirect('siswa/create');
-            return redirect('/admin/user/create')
+            ]);
+            
+            if ($validator->fails()) {
+                # code...
+                // return redirect('siswa/create');
+                return redirect('/admin/user/create')
                 ->withInput()
                 ->withErrors($validator);
-        }
-
-        User::create($data);
+            }
+            
+        $user = User::create($data);
+        $user->save();
+        // dd($user);
         return redirect('admin/user/index');
     }
 

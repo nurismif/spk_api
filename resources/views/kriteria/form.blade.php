@@ -57,7 +57,7 @@
 			</div>
         </div>
 
-        <div class="form-group" style="padding-top: 20px;">
+        <div class="form-group" style="padding-top: 20px; width: 25%; margin: auto;">
 			{!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
 		</div>
 </div>
