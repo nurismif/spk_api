@@ -1,10 +1,5 @@
 html {
 	position: relative;
-	overflow-x: hidden;
-}
-body {
-	min-height: 100vh;
-	margin-bottom: 70px;
 }
 h2{
 	border-bottom: 1px solid #0000;
