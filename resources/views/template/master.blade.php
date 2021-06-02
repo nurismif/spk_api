@@ -52,11 +52,11 @@
         <!-- Navbar -->
         @include('template.navbar')
         <!-- /.navbar -->
-
+        
         <!-- Main Sidebar Container -->
         @include('template.sidebar')
         <!-- Sidebar Menu -->
-
+        
         <!-- Content Wrapper. Contains page content -->
         @yield('content')
         <!-- /.content -->
@@ -70,7 +70,7 @@
         <!-- ./wrapper -->
 
     </div>
-    
+
     <!--===============================================================================================-->
     <script src="{{ asset('table/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
     <!--===============================================================================================-->

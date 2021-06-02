@@ -46,14 +46,7 @@
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                    <div class="row">
-                                        <div class="col-sm-12 col-md-6">
-                                            <div class="dt-buttons btn-group flex-wrap">
-
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-6"></div>
-                                    </div>
+                                    
                                     <div class="row">
                                         <div class="col-sm-12">
                                           {{-- table library --}}
