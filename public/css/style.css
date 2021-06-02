@@ -57,3 +57,17 @@ h2{
 ul.pagination, ul.pager {
 	margin-top: 5px;
 }
+
+.input-password.form-control {
+	border: 1px solid rgba(0,0,0,.15) !important
+}
+
+.input-password.form-control + .input-group-append button {
+	min-width: 50px;
+	display: flex;
+	justify-content: center;
+}
+
+.input-password.form-control + .input-group-append button i{
+	color:grey;
+}

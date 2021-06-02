@@ -49,3 +49,29 @@
     </div>
 
 @endsection
+
+@push('scripts')
+    <script>
+        function togglePassword() {
+            var x = document.getElementById("inputPassword");
+            if (x.type === "password") {
+                $("#changeicon").attr("class", "fas fa-eye-slash");
+                x.type = "text";
+            } else {
+                $("#changeicon").attr("class", "fas fas fa-eye");
+                x.type = "password";
+            }
+        }
+        function togglePasswordConfirm() {
+            var x = document.getElementById("inputPasswordconfirm");
+            if (x.type === "password") {
+                $("#changeiconconfirm").attr("class", "fas fa-eye-slash");
+                x.type = "text";
+            } else {
+                $("#changeiconconfirm").attr("class", "fas fas fa-eye");
+                x.type = "password";
+            }
+        }
+
+    </script>
+@endpush
