@@ -53,7 +53,6 @@
                     <div class="card w-100">
                         <!-- /.card-header -->
                         <div class="card-body">
-
                             <div class="container-table100">
                                 <div class="wrap-table100 w-100">
                                     <div class="table100 ver1 m-b-110">

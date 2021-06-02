@@ -79,9 +79,7 @@ class PenilaianController extends Controller
         //diakhir get() untuk mengambil data array
 
         //diakhir first() jika hanya satu data yang diambil
-
-        $data = DB::table('penilaian')
-            ->join('users', 'users.id', '=', 'penilaian.user_id')
+        $data = Penilaian::join('users', 'users.id', '=', 'penilaian.user_id')
             ->join('kriteria_ahp', 'kriteria_ahp.id', '=', 'penilaian.kriteria_ahp_id')
             ->select('penilaian.*', 'users.nama', 'kriteria_ahp.nama as nama_kriteria_ahp')
             ->get();
