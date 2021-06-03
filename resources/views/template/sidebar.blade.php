@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background:#242A61">
     <!-- Brand Logo  -->
-    <a href="#" class="brand-link">
+    <a href="/admin/template/dashboard" class="brand-link">
         <img src="{{ asset('adminlte/img/kemendikbud.png') }}" class="brand-image img-circle" style="opacity: .8">
         <span class="brand-text font-weight-light">SMK JAKSEL 2</span>
     </a>
