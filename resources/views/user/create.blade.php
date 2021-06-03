@@ -36,7 +36,7 @@
                                     <form action=" {{ route('user.store') }} " method="post"
                                         enctype="multipart/form-data">
                                         @csrf
-                                        @include('user.form', ['submitButtonText'=>'Save'])
+                                        @include('user.form', ['submitButtonText'=>'Save', 'editType' => 'user'])
                                     </form>
                                 </div>
                             </div>

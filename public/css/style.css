@@ -66,3 +66,7 @@ ul.pagination, ul.pager {
 .input-password.form-control + .input-group-append button i{
 	color:grey;
 }
+
+.tableIndex {
+	min-height: 68.5vh;
+}
