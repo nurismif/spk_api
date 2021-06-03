@@ -68,5 +68,18 @@ ul.pagination, ul.pager {
 }
 
 .tableIndex {
-	min-height: 68.5vh;
+	height: 73.5vh;
+}
+
+#exam1 {
+	margin-top: 1rem !important;
+}
+
+.dataTables_filter input[type='search'] {
+	border: 1px solid grey !important;
+}
+
+.centerThingsColumn {
+	display: flex;
+	justify-content: center;
 }

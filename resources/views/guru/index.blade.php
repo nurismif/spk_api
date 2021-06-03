@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
@@ -16,41 +15,17 @@
                         </ol>
                     </div>
                 </div>
-            </div><!-- /.container-fluid -->
+            </div>
         </section>
 
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <!-- /.card-header -->
-
                         <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
                             <div class="row">
-                                <!-- <div class="col-sm-12 col-md-6">
-              <div class="dt-buttons btn-group flex-wrap">               
-              <div class="box">
-                    <div class="pull-right">
-                        <a href="#" class="btn btn-primary btn-flat">
-                            <i class="fa fa-user-plus"></i>Create
-                        </a>
-                    </div>
-              </div>
-              </div>
-              </div> -->
-
-                                <!-- <div class="col-sm-12 col-md-6">
-              <div id="example1_filter" class="dataTables_filter">
-                <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example1"></label>
-                </div>
-                </div>
-            </div>
-            </div> -->
-
                                 <div class="card  w-100">
-                                    <!-- /.card-header -->
                                     <div class="card-body">
-
                                         <div class="container-table100">
                                             <div class="wrap-table100  w-100 tableIndex">
                                                 <div class="table100 ver1 m-b-110">
@@ -67,7 +42,6 @@
                                                             </thead>
                                                         </table>
                                                     </div>
-
                                                     <div class="table100-body js-pscroll ps ps--active-y">
                                                         <table>
                                                             <tbody>
@@ -95,30 +69,17 @@
                                                                 @endforeach
                                                             </tbody>
                                                         </table>
-                                                        {{-- <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
-                                                            <div class="ps__thumb-x" tabindex="0"
-                                                                style="left: 0px; width: 0px;"></div>
-                                                        </div>
-                                                        <div class="ps__rail-y"
-                                                            style="top: 0px; height: 585px; right: 5px;">
-                                                            <div class="ps__thumb-y" tabindex="0"
-                                                                style="top: 0px; height: 293px;"></div>
-                                                        </div> --}}
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <!-- /card-body -->
                                     </div>
-                                    <!-- /card-header -->
                                 </div>
-                                <!-- /.col -->
                             </div>
-                            <!-- /.row -->
                         </div>
-                        <!-- /.container-fluid -->
                     </div>
+                </div>
+            </div>
         </section>
     </div>
 @endsection
