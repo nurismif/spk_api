@@ -46,30 +46,32 @@
                                                 <div class="form-group" style="padding-right: 10px;">
                                                     <select nama="kriteria" id="kriteria" class="form-control" require>
                                                         <option value=""> - Pilih - </option>
-                                                        <?php foreach ($list_kriteria as $kriteria) { ?>
-                                                        <option
-                                                            value="<?php echo $kriteria->id; ?>">
-                                                            {{ $kriteria->nama }}</option>;
-                                                        <?php } ?>
+                                                        @foreach ($list_kriteria as $kriteria)
+                                                            <option value="{{ $kriteria->id }}">
+                                                                {{ $kriteria->nama }}
+                                                            </option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group" style="padding-right: 10px;">
                                                     <select nama="perbandingan" id="perbandingan" class="form-control"
                                                         require>
                                                         <option value=""> - Pilih - </option>
-                                                        <?php foreach ($list_perbandingan as $perbandingan) {
-                                                        ?>
-                                                        <option value="{{ $perbandingan->nilai }}">{{ $perbandingan->nama }}
-                                                        </option>;
-                                                        <?php } ?>
+                                                        @foreach ($list_perbandingan as $perbandingan)
+                                                            <option value="{{ $perbandingan->nilai }}">
+                                                                {{ $perbandingan->nama }}
+                                                            </option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group" style="padding-right: 10px;">
                                                     <select nama="kriteria" id="kriteria" class="form-control" require>
                                                         <option value=""> - Pilih - </option>
-                                                        <?php foreach ($list_kriteria as $kriteria) { ?>
-                                                        <option value="{{ $kriteria->id }}">{{ $kriteria->nama }}</option>;
-                                                        <?php } ?>
+                                                        @foreach ($list_kriteria as $kriteria)
+                                                            <option value="{{ $kriteria->id }}">
+                                                                {{ $kriteria->nama }}
+                                                            </option>
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group" style="padding-right: 10px;">
@@ -84,23 +86,21 @@
                                             <thead>
                                                 <tr>
                                                     <th>Kode</th>
-                                                    <th>C01</th>
-                                                    <th>C02</th>
-                                                    <th>C03</th>
-                                                    <th>C04</th>
-                                                    <th>C05</th>
+                                                    @foreach ($list_kriteria as $kriteria)
+                                                        <th>{{ $kriteria->nama }}</th>
+                                                    @endforeach
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <th>C01</th>
-                                                    <td>1</td>
-                                                    <td>1</td>
-                                                    <td>3</td>
-                                                    <td>1</td>
-                                                    <td>3</td>
-                                                </tr>
-                                                <tr>
+                                                @foreach ($matriks as $nama => $perbandingan_list)
+                                                    <tr>
+                                                        <th>{{ $nama }}</th>
+                                                        @foreach ($perbandingan_list as $perbandingan)
+                                                            <td>{{ number_format($perbandingan, 2) }}</td>
+                                                        @endforeach
+                                                    </tr>
+                                                @endforeach
+                                                {{-- <tr>
                                                     <th>C02</th>
                                                     <td>1</td>
                                                     <td>1</td>
@@ -131,7 +131,7 @@
                                                     <td>0.5</td>
                                                     <td>0.333</td>
                                                     <td>1</td>
-                                                </tr>
+                                                </tr> --}}
                                             </tbody>
                                         </table>
 

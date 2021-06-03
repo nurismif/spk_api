@@ -6,8 +6,8 @@ use App\DetailKriteria;
 use Illuminate\Http\Request;
 use App\KriteriaAHP;
 use App\Services\ConstantService;
+use App\Services\MatriksPerbandinganService;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class KriteriaAHPController extends Controller
@@ -162,6 +162,18 @@ class KriteriaAHPController extends Controller
     {
         $list_kriteria = KriteriaAHP::get();
         $list_perbandingan =  (new ConstantService())->getPerbandinganRules();
-        return view('kriteria.matriks', ['list_kriteria' => $list_kriteria, 'list_perbandingan' => $list_perbandingan],);
+
+        $matrix_perbandingan_service = new MatriksPerbandinganService();
+        $matrix_perbandingan_service->setMatrix($list_kriteria);
+        $matriks = $matrix_perbandingan_service->getMatrix();
+
+        return view(
+            'kriteria.matriks',
+            [
+                'list_kriteria' => $list_kriteria,
+                'list_perbandingan' => $list_perbandingan,
+                'matriks' => $matriks
+            ]
+        );
     }
 }
