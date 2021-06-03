@@ -179,11 +179,11 @@ class UserController extends Controller
     {
         return view('user.create');
     }
-
+    
     public function store(Request $request)
     {
         $data = $request->all();
-
+        
         
         $validator  = Validator::make($data, [
             'nip'   =>  'required|string|max:30|unique:users',
@@ -192,6 +192,7 @@ class UserController extends Controller
             'password'   =>  'required|string|max:20|confirmed',
             'jabatan'   =>  'required|string|max:100',
             'jenis_kelamin'   =>  'required|string|max:10',
+            'jurusan'   =>  'required|string|max:20',
             ]);
             
             if ($validator->fails()) {
@@ -202,24 +203,24 @@ class UserController extends Controller
                 ->withErrors($validator);
             }
             
-        $user = User::create($data);
-        $user->save();
-        // dd($user);
-        return redirect('admin/user/index');
-    }
-
-    public function show($id)
-    {
-        $users = User::findOrFail($id);
-        return view('user.show', compact('users'));
-    }
-
-    public function edit($id)
+            $user = User::create($data);
+            $user->save();
+            // dd($user);
+            return redirect('admin/user/index');
+        }
+        
+        public function show($id)
+        {
+            $users = User::findOrFail($id);
+            return view('user.show', compact('users'));
+        }
+        
+        public function edit($id)
     {
         $users = User::findOrFail($id);
         return view('user.edit', compact('users'));
     }
-
+    
     public function update(Request $request, $id)
     {
         $data = $request->all();
@@ -243,7 +244,8 @@ class UserController extends Controller
         }
 
         $user->update($request->all());
-        return redirect('admin/user/index');
+
+        return $request->type == 'user' ? redirect('admin/user/index') : redirect('admin/teacher/index');
     }
 
     public function delete($id)
