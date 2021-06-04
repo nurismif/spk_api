@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PenilaianController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,13 +29,11 @@ Route::post('/admin/postlogin', 'UserController@postlogin');
 
 Route::get('/admin/login', 'UserController@login');
 
-Route::get('/admin/logout', 'UserController@logout');
-
 Route::get('/admin/user/index', 'UserController@index');
 Route::get('/admin/user/create', 'UserController@create');
 Route::post('/admin/user', 'UserController@store')->name('user.store');
 Route::get('/admin/user/{user}/edit', 'UserController@edit');
-Route::put('/admin/user/{user}', 'UserController@update');
+Route::put('/admin/user/{user}', 'UserController@update')->name('user.update');
 Route::delete('/admin/user/{user}', 'UserController@delete')->name('user.delete');
 
 Route::get('/admin/template/dashboard', 'HomeController@index');
@@ -51,7 +50,7 @@ Route::get('/admin/kriteria/matriks', 'KriteriaAHPController@matriks');
 Route::get('/admin/teacher/index', 'TeacherController@index');
 Route::get('/admin/teacher/{user}/edit', 'TeacherController@edit');
 
-Route::get('/admin/penilaian/index', 'PenilaianController@index');
+Route::get('/admin/penilaian/index', 'PenilaianController@index')->name('admin.penilaian.index');
 Route::get('/admin/penilaian/import_form', 'PenilaianController@importForm');
 Route::post('/admin/penilaian/import', 'PenilaianController@import')->name('import');
 

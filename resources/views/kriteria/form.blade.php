@@ -12,7 +12,7 @@
 		@endif
 				{!! Form::label('nama', 'Nama Kriteria : ', ['class' => 'control-label']) !!}
                 <div class="form-control">
-				{!! Form::text('nama', null) !!}
+				{!! Form::text('nama', null, ['class' => 'w-100']) !!}
                 </div>
 				@if ($errors->has('nama'))
 						<span class="help-block">{{ $errors->first('nama') }}</span>
@@ -57,7 +57,7 @@
 			</div>
         </div>
 
-        <div class="form-group" style="padding-top: 20px;">
+        <div class="form-group" style="padding-top: 20px; width: 25%; margin: auto;">
 			{!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
 		</div>
 </div>

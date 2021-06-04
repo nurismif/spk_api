@@ -10,7 +10,15 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    
+    // JABATAN
+    const TIM_KPG_ROLE = 'Tim_PKG';
+    const KEPSEK_ROLE = 'Kepsek';
+    const GURU_ROLE = 'Guru';
+
+    // JENIS KELAMIN
+    const MALE_TYPE = "Pria";
+    const FEMALE_TYPE = "Wanita";
+
     /**
      * The attributes that are mass assignable.
      *
@@ -22,8 +30,9 @@ class User extends Authenticatable
 
     // protected $with = ['penilaian'];
 
-    
-    public function penilaian(){
+
+    public function penilaian()
+    {
         return $this->hasMany('App\Penilaian');
     }
 
@@ -44,5 +53,5 @@ class User extends Authenticatable
     // protected $unique = [
     //     'nip', 'username',
     // ];
-    
+
 }

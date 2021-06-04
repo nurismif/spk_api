@@ -229,6 +229,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Datatables' => Yajra\DataTables\Facades\DataTables::class,
+        'User' => App\User::class,
     ],
 
 ];

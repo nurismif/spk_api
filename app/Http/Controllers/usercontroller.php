@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use App\Http\Controllers\Auth;
 use App\KriteriaAHP;
 use App\Nilai_Perbandingan;
 use App\Penilaian;
-use ArrayObject;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -68,12 +66,6 @@ class UserController extends Controller
         // }
 
         // return redirect('/login');
-    }
-
-    public function logout()
-    {
-        FacadesAuth::logout();
-        return redirect('/admin/login');
     }
 
     public function get_all_user()
@@ -187,44 +179,48 @@ class UserController extends Controller
     {
         return view('user.create');
     }
-
+    
     public function store(Request $request)
     {
         $data = $request->all();
-
+        
+        
         $validator  = Validator::make($data, [
             'nip'   =>  'required|string|max:30|unique:users',
             'nama'   =>  'required|string|max:255',
             'username'   =>  'required|string|max:50|unique:users',
-            'password'   =>  'required|string|max:20',
+            'password'   =>  'required|string|max:20|confirmed',
             'jabatan'   =>  'required|string|max:100',
             'jenis_kelamin'   =>  'required|string|max:10',
-        ]);
-
-        if ($validator->fails()) {
-            # code...
-            // return redirect('siswa/create');
-            return redirect('/admin/user/create')
+            'jurusan'   =>  'required|string|max:20',
+            ]);
+            
+            if ($validator->fails()) {
+                # code...
+                // return redirect('siswa/create');
+                return redirect('/admin/user/create')
                 ->withInput()
                 ->withErrors($validator);
+            }
+            
+            $user = User::create($data);
+            $user->save();
+            // dd($user);
+            return redirect('admin/user/index');
         }
-
-        User::create($data);
-        return redirect('admin/user/index');
-    }
-
-    public function show($id)
-    {
-        $users = User::findOrFail($id);
-        return view('user.show', compact('users'));
-    }
-
-    public function edit($id)
+        
+        public function show($id)
+        {
+            $users = User::findOrFail($id);
+            return view('user.show', compact('users'));
+        }
+        
+        public function edit($id)
     {
         $users = User::findOrFail($id);
         return view('user.edit', compact('users'));
     }
-
+    
     public function update(Request $request, $id)
     {
         $data = $request->all();
@@ -248,7 +244,8 @@ class UserController extends Controller
         }
 
         $user->update($request->all());
-        return redirect('admin/user/index');
+
+        return $request->type == 'user' ? redirect('admin/user/index') : redirect('admin/teacher/index');
     }
 
     public function delete($id)
@@ -263,10 +260,9 @@ class UserController extends Controller
     {
         $kriteria = KriteriaAHP::all();
         $jumlah_kriteria = count($kriteria);
-        // return "<pre>".print_r($kriteria, true)."</pre>";
-        // return "<pre>".print_r($jumlah_kriteria, true)."</pre>";
         $T = 0;
         $CI = 0;
+
         //normalisasi
         foreach ($kriteria as $k) {
             // return "<pre>".print_r($k, true)."</pre>";
@@ -277,9 +273,6 @@ class UserController extends Controller
             foreach ($nilai_perbandingan_per_kolom as $n) {
                 $k->total_bobot_untuk_normalisasi += $n->nilai_perbandingan;
             }
-
-            // return "<pre>".print_r($k->total_bobot_untuk_normalisasi, true)."</pre>";
-
 
             $k->nilai_perbandingan_per_kolom = $nilai_perbandingan_per_kolom;
 
@@ -302,7 +295,6 @@ class UserController extends Controller
             $total_nilai_perbandingan_normal_temp = 0;
 
             $k->total_bobot = $k->total_nilai_perbandingan_normal / $jumlah_kriteria;
-            // return "<pre>".print_r($k->total_bobot, true)."</pre>";
         }
 
         foreach ($kriteria as $k) {
@@ -316,7 +308,7 @@ class UserController extends Controller
                 }
             }
         }
-        
+
         $T = 0;
         foreach ($kriteria as $k) {
             $T += $k->total_bobot_akhir / $k->total_bobot;
@@ -386,7 +378,7 @@ class UserController extends Controller
             }
             array_push($matriks_penilaian2, $temp);
         }
-        
+
         $matriks_penilaian3 = [];
         foreach ($matriks_penilaian2 as $m) {
             $temp = deep_copy($m);
@@ -394,7 +386,7 @@ class UserController extends Controller
                 $temp2 = deep_copy($n);
                 foreach ($n['perbandingan_dengan_user_lain'] as $p) {
                     $temp3 = deep_copy($p);
-                    $p['nilai_normal'] = $temp3['nilai']/$temp['total_nilai'];
+                    $p['nilai_normal'] = $temp3['nilai'] / $temp['total_nilai'];
                 }
             }
             array_push($matriks_penilaian3, $temp);
@@ -409,7 +401,8 @@ class UserController extends Controller
         foreach ($kriteria as $k) {
             foreach ($bobot_alternatif as $b) { //atas, atas->bawah
                 $temp2 = deep_copy($b);
-            $rangking = $k->total_bobot * $b;
+                $rangking = $k->total_bobot * $b;
+            }
         }
 
         $data = [
