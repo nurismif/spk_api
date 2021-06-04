@@ -45,11 +45,10 @@ class MatriksPerbandinganService
           );
 
           $val1 = floatval($pebandingan_value);
-          $val2 = $row_data->{$kriteria2_name} != "0" ? floatval($row_data->{$kriteria2_name}) : 1;
           if ($ratio_reversed == false) {
-               $row_data->{$kriteria2_name} = $val1 / $val2;
+               $row_data->{$kriteria2_name} = $val1;
           } else {
-               $row_data->{$kriteria2_name} = $val2 / $val1;
+               $row_data->{$kriteria2_name} = 1 / $val1;
           }
 
           $matriks->row = json_encode($row_data);
