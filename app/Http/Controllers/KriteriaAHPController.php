@@ -188,11 +188,11 @@ class KriteriaAHPController extends Controller
         $pebandingan_value = $request->perbandingan;
 
         if ($kriteria1_id == $kriteria2_id) {
-            // when row and coll is in a same index, we update only one value at matrix[row][col]
+            // when row and coll have a same value, we update only one value at matrix[row][col]
             $kriteria = KriteriaAHP::find($kriteria1_id);
             $matriks_service->updateMatrixValue($pebandingan_value, $kriteria->nama, $kriteria->nama);
         } else {
-            // when row and coll is in a diffrent index, we update the value at matrix[row][col] and matrix[col][row]
+            // when row and coll have a diffrent value, we update the value at matrix[row][col] and matrix[col][row]
             $kriteria1 = KriteriaAHP::find($kriteria1_id);
             $kriteria2 = KriteriaAHP::find($kriteria2_id);
 
