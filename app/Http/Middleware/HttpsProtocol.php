@@ -16,10 +16,13 @@ class HttpsProtocol
      */
     public function handle($request, Closure $next)
     {
-        // Use this method will be resulting an infinite loop,
-        // so use \URL::forceScheme('https') in the app service provider instead
-        if (!$request->secure() && App::environment() === 'production') {
-            return redirect()->secure($request->getRequestUri());
+        if (
+            $request->header('x-forwarded-proto') <> 'https' &&
+            !$request->secure() &&
+            App::environment() === 'production'
+        ) {
+            // return redirect()->secure($request->getRequestUri());
+            return redirect()->secure($request->getRequestUri(), 301);
         }
 
         return $next($request);
