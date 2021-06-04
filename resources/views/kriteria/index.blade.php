@@ -16,106 +16,68 @@
                         </ol>
                     </div>
                 </div>
-            </div><!-- /.container-fluid -->
+            </div>
         </section>
 
 
         <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <!-- /.card-header -->
-
-                        <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                            <div class="row">
-                                <div class="col-sm-12 col-md-6">
-                                    <div class="dt-buttons btn-group flex-wrap">
-                                        <div class="box">
-                                            <div class="pull-right" style="padding-bottom: 20px;">
-                                                <a href="/admin/kriteria/create" class="btn btn-primary btn-flat"
-                                                    style="border-radius: 10px;">
-                                                    <i class="fa fa-user-plus"></i> Create
-                                                </a>
-                                            </div>
+            <div class="card w-100">
+                <div class="card-header">
+                    <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="dt-buttons btn-group flex-wrap">
+                                    <div class="box p-0" style="padding-bottom: 10px;">
+                                        <div class="pull-right">
+                                            <a href="/admin/kriteria/create" class="btn btn-primary btn-flat"
+                                                style="border-radius: 5px;">
+                                                <i class="fa fa-user-plus"></i> Create
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="card w-100">
-                            <!-- /.card-body -->
-                            <div class="card-body">
-                                <div class="container-table100">
-                                    <div class="wrap-table100 w-100 tableIndex">
-                                        <div class="table100 ver1 m-b-110">
-                                            <div class="table100-head">
-                                                <table>
-                                                    <thead>
-                                                        <tr class="row100 head">
-                                                            <th class="cell100 column1">No</th>
-                                                            <th class="cell100 column2">Nama Kriteria</th>
-                                                            <th class="cell100 column3">Bobot</th>
-                                                            <th class="cell100 column4">Tipe</th>
-                                                            <th class="cell100 column5">Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                </table>
-                                            </div>
-
-                                            <div class="table100-body js-pscroll ps ps--active-y">
-                                                <table>
-                                                    <tbody>
-                                                        @foreach ($kriteria as $data)
-                                                            <tr>
-                                                                <td class="cell100 column1">{{ $no++ }}</td>
-                                                                <td class="cell100 column2">{{ $data->nama }}</td>
-                                                                <td class="cell100 column3">{{ $data->bobot }}</td>
-                                                                <td class="cell100 column4">{{ $data->tipe }}</td>
-                                                                <td class="cell100 column5">
-                                                                    <form
-                                                                        action="{{ url('admin/kriteria') }}/{{ $data->id }}"
-                                                                        method="POST">
-                                                                        @csrf @method('DELETE')
-                                                                        <a href="{{ url('admin/kriteria') }}/{{ $data->id . '/detail' }}"
-                                                                            class="btn btn-primary btn-sm mr-1">
-                                                                            <i class="fa fa-eye"></i>
-                                                                        </a>
-                                                                        <a href="{{ url('admin/kriteria') }}/{{ $data->id . '/edit' }}"
-                                                                            class="btn btn-warning btn-sm mr-1">
-                                                                            <i class="fa fa-pencil"></i>
-                                                                        </a>
-                                                                        <button class="btn btn-danger btn-sm"><i
-                                                                                class="fa fa-trash"></i></button>
-                                                                    </form>
-                                                                </td>
-                                                            </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-                                                {{-- <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
-                                                    <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;">
-                                                    </div>
-                                                </div>
-                                                <div class="ps__rail-y" style="top: 0px; height: 585px; right: 5px;">
-                                                    <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 293px;">
-                                                    </div>
-                                                </div> --}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /card-body -->
-                            </div>
-                            <!-- /card-header -->
-                        </div>
-                        <!-- /.col -->
                     </div>
-                    <!-- /.row -->
                 </div>
-                <!-- /.container-fluid -->
+                <div class="card-body tableIndex">
+                    <table id="exam1" class="table table-hover table-bordered table-striped mt-8">
+                        <thead>
+                            <tr style="background-color: #4a6283; color: white;">
+                                <th style="width: 1rem">No</th>
+                                <th>Nama Kriteria</th>
+                                <th>Bobot</th>
+                                <th>Tipe</th>
+                                <th style="width: 7rem">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($kriteria as $data)
+                                <tr>
+                                    <td class="centerThingsColumn">{{ $no++ }}</td>
+                                    <td>{{ $data->nama }}</td>
+                                    <td>{{ $data->bobot }}</td>
+                                    <td>{{ $data->tipe }}</td>
+                                    <td class="centerThingsColumn">
+                                        <form action="{{ url('admin/kriteria') }}/{{ $data->id }}" method="POST">
+                                            @csrf @method('DELETE')
+                                            <a href="{{ url('admin/kriteria') }}/{{ $data->id . '/detail' }}"
+                                                class="btn btn-primary btn-sm mr-1">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <a href="{{ url('admin/kriteria') }}/{{ $data->id . '/edit' }}"
+                                                class="btn btn-warning btn-sm mr-1">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                            <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </section>
         </section>
     </div>
 @endsection

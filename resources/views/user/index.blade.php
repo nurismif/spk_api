@@ -44,19 +44,19 @@
                         <thead>
                             <tr style="background-color: #4a6283; color: white;">
                                 <th style="width: 1rem">No</th>
-                                <th>Nama</th>
                                 <th>NIP</th>
+                                <th>Nama</th>
                                 <th>Username</th>
                                 <th>Jabatan</th>
-                                <th>Action</th>
+                                <th style="width: 7rem">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($user as $data)
                                 <tr>
                                     <td class="centerThingsColumn">{{ $no++ }}</td>
-                                    <td>{{ $data->nama }}</td>
                                     <td>{{ $data->nip }}</td>
+                                    <td>{{ $data->nama }}</td>
                                     <td>{{ $data->username }}</td>
                                     <td>{{ $data->jabatan }}</td>
                                     <td class="centerThingsColumn">

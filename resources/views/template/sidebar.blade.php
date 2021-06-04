@@ -37,14 +37,14 @@
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="/admin/kriteria/index" class="nav-link">
-                            <i class="far nav-icon"></i>
-                            <p>Detail Kriteria</p>
+                            <i class="fas nav-icon"></i>
+                            <p><i class="fas nav-icon fa-angle-right"></i>Detail Kriteria</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="/admin/kriteria/matriks" class="nav-link">
-                            <i class="far nav-icon"></i>
-                            <p>Matriks Kriteria</p>
+                            <i class="fas nav-icon"></i>
+                            <p><i class="fas nav-icon fa-angle-right"></i>Matriks Kriteria</p>
                         </a>
                     </li>
                 </ul>
@@ -56,10 +56,26 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="/admin/ahp/index" class="nav-link">
+                <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-file-text"></i>
-                    <p>SPK Method</p>
+                    <p>SPK Method
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
                 </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="/admin/kriteria/index" class="nav-link">
+                            <i class="fas nav-icon"></i>
+                            <p><i class="fas nav-icon fa-angle-right"></i>WP Method</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/admin/ahp/index" class="nav-link">
+                            <i class="fas nav-icon"></i>
+                            <p><i class="fas nav-icon fa-angle-right"></i>AHP Method</p>
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </nav>
