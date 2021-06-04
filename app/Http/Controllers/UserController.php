@@ -7,7 +7,6 @@ use App\User;
 use App\KriteriaAHP;
 use App\Nilai_Perbandingan;
 use App\Penilaian;
-use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -59,13 +58,6 @@ class UserController extends Controller
         }
 
         return redirect('/admin/login');
-
-        // if ($this->get_all_user()::attempt($request->only('username', 'password'))) {
-        // 	# code...
-        // 	return redirect('/welcome');
-        // }
-
-        // return redirect('/login');
     }
 
     public function get_all_user()
@@ -179,12 +171,12 @@ class UserController extends Controller
     {
         return view('user.create');
     }
-    
+
     public function store(Request $request)
     {
         $data = $request->all();
-        
-        
+
+
         $validator  = Validator::make($data, [
             'nip'   =>  'required|string|max:30|unique:users',
             'nama'   =>  'required|string|max:255',
@@ -193,34 +185,31 @@ class UserController extends Controller
             'jabatan'   =>  'required|string|max:100',
             'jenis_kelamin'   =>  'required|string|max:10',
             'jurusan'   =>  'required|string|max:20',
-            ]);
-            
-            if ($validator->fails()) {
-                # code...
-                // return redirect('siswa/create');
-                return redirect('/admin/user/create')
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/admin/user/create')
                 ->withInput()
                 ->withErrors($validator);
-            }
-            
-            $user = User::create($data);
-            $user->save();
-            // dd($user);
-            return redirect('admin/user/index');
         }
-        
-        public function show($id)
-        {
-            $users = User::findOrFail($id);
-            return view('user.show', compact('users'));
-        }
-        
-        public function edit($id)
+
+        $user = User::create($data);
+        $user->save();
+        return redirect('admin/user/index');
+    }
+
+    public function show($id)
+    {
+        $users = User::findOrFail($id);
+        return view('user.show', compact('users'));
+    }
+
+    public function edit($id)
     {
         $users = User::findOrFail($id);
         return view('user.edit', compact('users'));
     }
-    
+
     public function update(Request $request, $id)
     {
         $data = $request->all();
@@ -252,7 +241,6 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
-        // Session::flash('success','Product Deleted Success!');
         return redirect('admin/user/index')->with('status', 'User Berhasil Dihapus');
     }
 
@@ -398,6 +386,7 @@ class UserController extends Controller
             $bobot_alternatif = $p / $p->sum($nilai_maxmin);
         }
 
+        $bobot_alternatif = [];
         foreach ($kriteria as $k) {
             foreach ($bobot_alternatif as $b) { //atas, atas->bawah
                 $temp2 = deep_copy($b);
