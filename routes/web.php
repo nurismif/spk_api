@@ -33,7 +33,7 @@ Route::get('/admin/user/index', 'UserController@index');
 Route::get('/admin/user/create', 'UserController@create');
 Route::post('/admin/user', 'UserController@store')->name('user.store');
 Route::get('/admin/user/{user}/edit', 'UserController@edit');
-Route::put('/admin/user/{user}', 'UserController@update');
+Route::put('/admin/user/{user}', 'UserController@update')->name('user.update');
 Route::delete('/admin/user/{user}', 'UserController@delete')->name('user.delete');
 
 Route::get('/admin/template/dashboard', 'HomeController@index');

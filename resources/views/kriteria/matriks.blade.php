@@ -40,7 +40,7 @@
                             <!-- /.card-body -->
                             <div class="card-body">
                                 <div class="container-table100">
-                                    <div class="wrap-table100">
+                                    <div class="wrap-table100 tableIndex w-100">
                                         <div class="panel-heading" style="padding-bottom: 20px;">
                                             <form class="form-inline" action="?m=rel_kriteria" method="post">
                                                 <div class="form-group" style="padding-right: 10px;">

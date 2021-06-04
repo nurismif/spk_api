@@ -184,7 +184,7 @@ class UserController extends Controller
     {
         $data = $request->all();
 
-        
+
         $validator  = Validator::make($data, [
             'nip'   =>  'required|string|max:30|unique:users',
             'nama'   =>  'required|string|max:255',
@@ -192,16 +192,17 @@ class UserController extends Controller
             'password'   =>  'required|string|max:20|confirmed',
             'jabatan'   =>  'required|string|max:100',
             'jenis_kelamin'   =>  'required|string|max:10',
-            ]);
-            
-            if ($validator->fails()) {
-                # code...
-                // return redirect('siswa/create');
-                return redirect('/admin/user/create')
+            'jurusan'   =>  'required|string|max:20',
+        ]);
+
+        if ($validator->fails()) {
+            # code...
+            // return redirect('siswa/create');
+            return redirect('/admin/user/create')
                 ->withInput()
                 ->withErrors($validator);
-            }
-            
+        }
+
         $user = User::create($data);
         $user->save();
         // dd($user);
@@ -243,7 +244,8 @@ class UserController extends Controller
         }
 
         $user->update($request->all());
-        return redirect('admin/user/index');
+
+        return $request->type == 'user' ? redirect('admin/user/index') : redirect('admin/teacher/index');
     }
 
     public function delete($id)
@@ -396,6 +398,7 @@ class UserController extends Controller
             $bobot_alternatif = $p / $p->sum($nilai_maxmin);
         }
 
+        $bobot_alternatif = [];
         foreach ($kriteria as $k) {
             foreach ($bobot_alternatif as $b) { //atas, atas->bawah
                 $temp2 = deep_copy($b);

@@ -154,6 +154,7 @@ class KriteriaAHPController extends Controller
             ->select('detail_kriteria.*', 'kriteria_ahp.nama as nama_kriteria_ahp')
             ->get();
 
+        // dd($detail_kriteria);
         // return "<pre>".print_r($detail_kriteria, true)."</pre>";
         return view('kriteria.detail', ['no' => 1, 'detail_kriteria' => $detail_kriteria], compact('detail_kriteria'));
     }

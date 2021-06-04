@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
@@ -16,7 +15,6 @@
                         </ol>
                     </div>
                 </div>
-            </div><!-- /.container-fluid -->
         </section>
 
 
@@ -24,30 +22,6 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <!-- /.card-header -->
-
-                        <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                            <div class="row">
-                                <div class="col-sm-12 col-md-6">
-                                    {{-- <div class="dt-buttons btn-group flex-wrap">
-                                        <div class="box">
-                                            <div class="pull-right" style="padding-bottom: 20px;">
-                                                <a href="/admin/penilaian/import_form" class="btn btn-primary btn-flat"
-                                                    style="border-radius: 10px;">
-                                                    <i class="fa fa-upload"></i> Import
-                                                  </a>
-                                                </div>
-                                              </div>
-                                            </div> --}}
-                                    <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary btn-flat rounded mb-4" data-toggle="modal" data-target="#exampleModalCenter">
-                                      <i class="fa fa-upload mr-2"></i>Import
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -77,70 +51,59 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="card w-100">
-                            <!-- /.card-body -->
-                            <div class="card-body">
-                                <div class="container-table100">
-                                    <div class="wrap-table100  w-100">
-                                        <div class="table100 ver1 m-b-110">
-                                            <div class="table100-head">
-                                                <table id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                                    <thead>
-                                                        <tr class="row100 head">
-                                                            <th class="cell100 column1">No</th>
-                                                            <th class="cell100 column2">Nama User</th>
-                                                            <th class="cell100 column3" style="width: 20px;">Umum</th>
-                                                            <th class="cell100 column4" style="width: 20px;">Teman Sejawat
-                                                            </th>
-                                                            <th class="cell100 column5" style="width: 20px;">Peserta didik
-                                                            </th>
-                                                            <th class="cell100 column6" style="width: 20px;">Wali Murid</th>
-                                                            <th class="cell100 column7" style="width: 0.1px;">DI</th>
-                                                            <!-- <th class="cell100 column5">Action</th> -->
-                                                        </tr>
-                                                    </thead>
-                                                </table>
-                                            </div>
-
-                                            <div class="table100-body js-pscroll ps ps--active-y">
-                                                <table>
-                                                    <tbody>
-                                                        @foreach ($penilaian as $row)
-                                                            <tr>
-                                                                <td class="cell100 column1">{{ $no++ }}</td>
-                                                                <td class="cell100 column2">{{ $row['nama'] }}</td>
-                                                                <td class="cell100 column3">{{ $row['ahp_1'] }}</td>
-                                                                <td class="cell100 column4">{{ $row['ahp_2'] }}</td>
-                                                                <td class="cell100 column5">{{ $row['ahp_3'] }}</td>
-                                                                <td class="cell100 column6">{{ $row['ahp_4'] }}</td>
-                                                                <td class="cell100 column7" style="width: 0.5px">
-                                                                    {{ $row['ahp_5'] }}</td>
-                                                            </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-                                                {{-- <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
-                                                    <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;">
+                        
+                        <section class="content">
+                            <div class="card w-100">
+                                <div class="card-header">
+                                    <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="dt-buttons btn-group flex-wrap">
+                                                    <div class="box p-0" style="padding-bottom: 10px;">
+                                                        <div class="pull-right">
+                                                            <button type="button" class="btn btn-primary btn-flat rounded" data-toggle="modal" data-target="#exampleModalCenter">
+                                                                <i class="fa fa-upload mr-2"></i>Import
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="ps__rail-y" style="top: 0px; height: 585px; right: 5px;">
-                                                    <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 293px;">
-                                                    </div>
-                                                </div> --}}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- /card-body -->
+
+                                <div class="card-body tableIndex">
+                                    <table id="exam1" class="table table-hover table-bordered table-striped mt-8">
+                                        <thead>
+                                            <tr style="background-color: #4a6283; color: white;">
+                                                <th style="width: 1rem">No</th>
+                                                <th>Nama User</th>
+                                                <th>Umum</th>
+                                                <th>Teman Sejawat</th>
+                                                <th>Peserta didik</th>
+                                                <th>Wali Murid</th>
+                                                <th>DI</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($penilaian as $row)
+                                                <tr>
+                                                    <td class="centerThingsColumn">{{ $no++ }}</td>
+                                                    <td>{{ $row['nama'] }}</td>
+                                                    <td>{{ $row['ahp_1'] }}</td>
+                                                    <td>{{ $row['ahp_2'] }}</td>
+                                                    <td>{{ $row['ahp_3'] }}</td>
+                                                    <td>{{ $row['ahp_4'] }}</td>
+                                                    <td>{{ $row['ahp_5'] }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                            <!-- /card-header -->
-                        </div>
-                        <!-- /.col -->
+                        </section>
                     </div>
-                    <!-- /.row -->
                 </div>
-                <!-- /.container-fluid -->
             </div>
         </section>
     </div>

@@ -66,3 +66,20 @@ ul.pagination, ul.pager {
 .input-password.form-control + .input-group-append button i{
 	color:grey;
 }
+
+.tableIndex {
+	height: 73.5vh;
+}
+
+#exam1 {
+	margin-top: 1rem !important;
+}
+
+.dataTables_filter input[type='search'] {
+	border: 1px solid grey !important;
+}
+
+.centerThingsColumn {
+	display: flex;
+	justify-content: center;
+}

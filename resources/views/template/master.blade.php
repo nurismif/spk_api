@@ -55,11 +55,11 @@
         <!-- Navbar -->
         @include('template.navbar')
         <!-- /.navbar -->
-        
+
         <!-- Main Sidebar Container -->
         @include('template.sidebar')
         <!-- Sidebar Menu -->
-        
+
         <!-- Content Wrapper. Contains page content -->
         @yield('content')
         <!-- /.content -->
@@ -73,9 +73,12 @@
         <!-- ./wrapper -->
 
     </div>
-
+    
+    <!-- jQuery -->
+    <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
+    
     <!--===============================================================================================-->
-    <script src="{{ asset('table/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
+    {{-- <script src="{{ asset('table/vendor/jquery/jquery-3.2.1.min.js') }}"></script> --}}
     <!--===============================================================================================-->
     <script src="{{ asset('table/vendor/bootstrap/js/popper.js') }}"></script>
     <script src="{{ asset('table/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
@@ -95,12 +98,15 @@
     </script>
     <!--===============================================================================================-->
     <script src="{{ asset('table/js/main.js') }}"></script>
-
-    <!-- jQuery -->
-    <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
+    
 
     <!-- Bootstrap 4 -->
     {{-- <script src="{{asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script> --}}
+{{-- 
+    <!-- DataTables  & Plugins -->
+    <script src="../../plugins/jszip/jszip.min.js"></script>
+    <script src="../../plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="../../plugins/pdfmake/vfs_fonts.js"></script> --}}
 
     <!-- DataTables -->
     <script src="{{ asset('adminlte/plugins/datatables/jquery.dataTables.min.js') }}"></script>
@@ -124,21 +130,23 @@
     <!-- Page specific script -->
     <script>
         $(function() {
-            $("#example1").DataTable({
+            $.noConflict();
+            $("#exam1").DataTable({
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
+                "buttons": ["excel", "print", "colvis"]
+            }).buttons().container().appendTo('#exam1_wrapper .col-md-6:eq(0)');
+
+            // $('#example2').DataTable({
+            //     "paging": true,
+            //     "lengthChange": false,
+            //     "searching": true,
+            //     "ordering": true,
+            //     "info": true,
+            //     "autoWidth": false,
+            //     "responsive": true,
+            // });
         });
 
     </script>
