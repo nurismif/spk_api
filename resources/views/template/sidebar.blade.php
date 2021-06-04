@@ -64,13 +64,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="/admin/ahp/index" class="nav-link">
+                        <a href="{{ route('ahp') }}" class="nav-link">
                             <i class="fas nav-icon"></i>
                             <p><i class="fas nav-icon fa-angle-right"></i>WP Method</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/admin/ahp/index" class="nav-link">
+                        <a href="{{ route('wp') }}" class="nav-link">
                             <i class="fas nav-icon"></i>
                             <p><i class="fas nav-icon fa-angle-right"></i>AHP Method</p>
                         </a>
