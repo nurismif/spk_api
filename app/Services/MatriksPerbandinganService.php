@@ -45,7 +45,9 @@ class MatriksPerbandinganService
           );
 
           $val1 = floatval($pebandingan_value);
-          if ($ratio_reversed == false) {
+          if ($kriteria1_name == $kriteria2_name) {
+               $row_data->{$kriteria2_name} = 1;
+          } else if ($ratio_reversed == false) {
                $row_data->{$kriteria2_name} = $val1;
           } else {
                $row_data->{$kriteria2_name} = 1 / $val1;

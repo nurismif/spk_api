@@ -15,23 +15,23 @@ class MatriksKriteriaSeeder extends Seeder
         $records = [
             (object)[
                 'nama' => 'Umum',
-                'row' => '{"Umum":0,"Teman Sejawat":0,"Peserta Didik":0,"Wali Murid":0,"Dunia Industri":0}',
+                'row' => '{"Umum":1,"Teman Sejawat":0,"Peserta Didik":0,"Wali Murid":0,"Dunia Industri":0}',
             ],
             (object)[
                 'nama' => 'Teman Sejawat',
-                'row' => '{"Umum":0,"Teman Sejawat":0,"Peserta Didik":0,"Wali Murid":0,"Dunia Industri":0}',
+                'row' => '{"Umum":0,"Teman Sejawat":1,"Peserta Didik":0,"Wali Murid":0,"Dunia Industri":0}',
             ],
             (object)[
                 'nama' => 'Peserta Didik',
-                'row' => '{"Umum":0,"Teman Sejawat":0,"Peserta Didik":0,"Wali Murid":0,"Dunia Industri":0}',
+                'row' => '{"Umum":0,"Teman Sejawat":0,"Peserta Didik":1,"Wali Murid":0,"Dunia Industri":0}',
             ],
             (object)[
                 'nama' => 'Wali Murid',
-                'row' => '{"Umum":0,"Teman Sejawat":0,"Peserta Didik":0,"Wali Murid":0,"Dunia Industri":0}',
+                'row' => '{"Umum":0,"Teman Sejawat":0,"Peserta Didik":0,"Wali Murid":1,"Dunia Industri":0}',
             ],
             (object)[
                 'nama' => 'Dunia Industri',
-                'row' => '{"Umum":0,"Teman Sejawat":0,"Peserta Didik":0,"Wali Murid":0,"Dunia Industri":0}',
+                'row' => '{"Umum":0,"Teman Sejawat":0,"Peserta Didik":0,"Wali Murid":0,"Dunia Industri":1}',
             ],
         ];
 
