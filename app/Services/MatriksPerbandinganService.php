@@ -2,60 +2,59 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Collection;
+use App\KriteriaAHP;
+use App\MatriksKriteria;
 
 class MatriksPerbandinganService
 {
-     private $matrix;
 
-     /**
-      * @param KriteriaAHP|Collection $list_kriteria
-      */
-     public function setMatrix(Collection $list_kriteria)
+     public function regenarateMatrix()
      {
-          $this->setKriteriaPerbandinganValue($list_kriteria);
-          $this->initMatrixValue($list_kriteria);
+          $list_kriteria = KriteriaAHP::get();
+          $current_matrix = MatriksKriteria::get();
 
-          $len = count($list_kriteria);
-
-          for ($i = 0; $i < $len; $i++) {
-               $nama_row = $list_kriteria[$i]->nama;
-               for ($j = 0; $j < $i; $j++) {
-                    $nama_col = $list_kriteria[$j]->nama;
-                    $this->matrix[$nama_row][$j] = $list_kriteria[$i]->perbandingan / $list_kriteria[$j]->perbandingan;
-                    $this->matrix[$nama_col][$i] = $list_kriteria[$j]->perbandingan / $list_kriteria[$i]->perbandingan;
-               }
+          if (count($list_kriteria) == count($current_matrix)) {
+               return;
           }
-     }
 
-     private function initMatrixValue(Collection $list_kriteria)
-     {
-          $this->matrix = collect();
-          $len = count($list_kriteria);
-          foreach ($list_kriteria as $i => $kriteria) {
-               $this->matrix->put(
-                    $kriteria->nama,
-                    collect()->pad($len, 1)->all()
-               );
-          };
-          $this->matrix = $this->matrix->all();
-     }
-
-     public function setKriteriaPerbandinganValue(Collection $list_kriteria)
-     {
-          $bobot_list = $list_kriteria->pluck("bobot")
-               ->unique()
-               ->sort()
-               ->values();
-          foreach ($list_kriteria as $i => $kriteria) {
-               $perbandingan = $bobot_list->search($kriteria->bobot);
-               $perbandingan += 1 + ($i * 2);
-               $kriteria->perbandingan = $perbandingan;
-          };
+          // foreach ($list_kriteria as $kriteria) {
+          //      # code...
+          // }
      }
 
      public function getMatrix()
      {
-          return $this->matrix;
+          $data = collect();
+
+          $current_matrix = MatriksKriteria::get();
+          foreach ($current_matrix as $i => $matrix) {
+               $row = collect(json_decode($matrix->row));
+               $data->put(
+                    $matrix->nama,
+                    $row->values()
+               );
+          }
+          return $data;
+     }
+
+     public function updateMatrixValue($pebandingan_value, $kriteria1_name, $kriteria2_name, $ratio_reversed = false)
+     {
+          $matriks = MatriksKriteria::where("nama", $kriteria1_name)->first();
+          $row_data = json_decode(
+               $matriks->row
+          );
+
+          $val1 = floatval($pebandingan_value);
+          $val2 = $row_data->{$kriteria2_name} != "0" ? floatval($row_data->{$kriteria2_name}) : 1;
+          if ($ratio_reversed == false) {
+               $row_data->{$kriteria2_name} = $val1 / $val2;
+          } else {
+               $row_data->{$kriteria2_name} = $val2 / $val1;
+          }
+
+          $matriks->row = json_encode($row_data);
+          $matriks->save();
+
+          return $matriks;
      }
 }

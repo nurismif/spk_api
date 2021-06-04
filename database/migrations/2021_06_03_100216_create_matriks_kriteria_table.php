@@ -16,7 +16,7 @@ class CreateMatriksKriteriaTable extends Migration
         Schema::create('matriks_kriteria', function (Blueprint $table) {
             $table->id();
             $table->string("nama")->nullable();
-            $table->json("row")->nullable();
+            $table->text("row")->nullable();
             $table->timestamps();
         });
     }

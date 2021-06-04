@@ -30,7 +30,6 @@
                             <div class="row">
                                 <div class="col-sm-12 col-md-6">
                                     <div class="dt-buttons btn-group flex-wrap">
-
                                     </div>
                                 </div>
                             </div>
@@ -42,9 +41,11 @@
                                 <div class="container-table100">
                                     <div class="wrap-table100 tableIndex w-100">
                                         <div class="panel-heading" style="padding-bottom: 20px;">
-                                            <form class="form-inline" action="?m=rel_kriteria" method="post">
+                                            <form class="form-inline" action="{{ route('matriks.update') }}"
+                                                method="post">
+                                                @csrf
                                                 <div class="form-group" style="padding-right: 10px;">
-                                                    <select nama="kriteria" id="kriteria" class="form-control" require>
+                                                    <select name="kriteria1" id="kriteria1" class="form-control" required>
                                                         <option value=""> - Pilih - </option>
                                                         @foreach ($list_kriteria as $kriteria)
                                                             <option value="{{ $kriteria->id }}">
@@ -54,18 +55,18 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group" style="padding-right: 10px;">
-                                                    <select nama="perbandingan" id="perbandingan" class="form-control"
-                                                        require>
+                                                    <select name="perbandingan" id="perbandingan" class="form-control"
+                                                        required>
                                                         <option value=""> - Pilih - </option>
-                                                        @foreach ($list_perbandingan as $perbandingan)
-                                                            <option value="{{ $perbandingan->nilai }}">
-                                                                {{ $perbandingan->nama }}
+                                                        @foreach ($list_perbandingan as $nama => $nilai)
+                                                            <option value="{{ $nilai }}">
+                                                                {{ $nama }}
                                                             </option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group" style="padding-right: 10px;">
-                                                    <select nama="kriteria" id="kriteria" class="form-control" require>
+                                                    <select name="kriteria2" id="kriteria2" class="form-control" required>
                                                         <option value=""> - Pilih - </option>
                                                         @foreach ($list_kriteria as $kriteria)
                                                             <option value="{{ $kriteria->id }}">
@@ -75,8 +76,9 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group" style="padding-right: 10px;">
-                                                    <button class="btn btn-primary"><span
-                                                            class="glyphicon glyphicon-edit"></span> Ubah
+                                                    <button class="btn btn-primary">
+                                                        <span class="glyphicon glyphicon-edit"></span>
+                                                        Ubah
                                                     </button>
                                                 </div>
                                             </form>
@@ -86,8 +88,8 @@
                                             <thead>
                                                 <tr>
                                                     <th>Kode</th>
-                                                    @foreach ($list_kriteria as $kriteria)
-                                                        <th>{{ $kriteria->nama }}</th>
+                                                    @foreach ($matriks as $nama => $perbandingan_list)
+                                                        <th>{{ $nama }}</th>
                                                     @endforeach
                                                 </tr>
                                             </thead>
@@ -100,42 +102,8 @@
                                                         @endforeach
                                                     </tr>
                                                 @endforeach
-                                                {{-- <tr>
-                                                    <th>C02</th>
-                                                    <td>1</td>
-                                                    <td>1</td>
-                                                    <td>2</td>
-                                                    <td>1</td>
-                                                    <td>1</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>C03</th>
-                                                    <td>0.333</td>
-                                                    <td>0.5</td>
-                                                    <td>1</td>
-                                                    <td>1</td>
-                                                    <td>2</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>C04</th>
-                                                    <td>1</td>
-                                                    <td>1</td>
-                                                    <td>1</td>
-                                                    <td>1</td>
-                                                    <td>3</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>C05</th>
-                                                    <td>0.333</td>
-                                                    <td>1</td>
-                                                    <td>0.5</td>
-                                                    <td>0.333</td>
-                                                    <td>1</td>
-                                                </tr> --}}
                                             </tbody>
                                         </table>
-
-
                                     </div>
                                     <!-- /card-body -->
                                 </div>
