@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\PenilaianController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -45,7 +44,8 @@ Route::get('/admin/kriteria/{kriteria}/edit', 'KriteriaAHPController@edit');
 Route::put('/admin/kriteria/{kriteria}', 'KriteriaAHPController@update');
 Route::delete('/admin/kriteria/{kriteria}', 'KriteriaAHPController@delete')->name('kriteria.delete');
 Route::get('/admin/kriteria/{kriteria}/detail', 'KriteriaAHPController@detail');
-Route::get('/admin/kriteria/matriks', 'KriteriaAHPController@matriks');
+Route::get('/admin/kriteria/matriks', 'KriteriaAHPController@matriks')->name('matriks');
+Route::post('/admin/kriteria/matriks/update', 'KriteriaAHPController@matriksUpdate')->name('matriks.update');
 
 Route::get('/admin/teacher/index', 'TeacherController@index');
 Route::get('/admin/teacher/{user}/edit', 'TeacherController@edit');

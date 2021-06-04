@@ -7,7 +7,6 @@ use App\User;
 use App\KriteriaAHP;
 use App\Nilai_Perbandingan;
 use App\Penilaian;
-use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -59,13 +58,6 @@ class UserController extends Controller
         }
 
         return redirect('/admin/login');
-
-        // if ($this->get_all_user()::attempt($request->only('username', 'password'))) {
-        // 	# code...
-        // 	return redirect('/welcome');
-        // }
-
-        // return redirect('/login');
     }
 
     public function get_all_user()
@@ -196,8 +188,6 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails()) {
-            # code...
-            // return redirect('siswa/create');
             return redirect('/admin/user/create')
                 ->withInput()
                 ->withErrors($validator);
@@ -205,7 +195,6 @@ class UserController extends Controller
 
         $user = User::create($data);
         $user->save();
-        // dd($user);
         return redirect('admin/user/index');
     }
 
@@ -252,7 +241,6 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
-        // Session::flash('success','Product Deleted Success!');
         return redirect('admin/user/index')->with('status', 'User Berhasil Dihapus');
     }
 

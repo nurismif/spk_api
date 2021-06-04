@@ -14,5 +14,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(KriteriaAhpSeeder::class);
         $this->call(DetailKriteriaSeeder::class);
+        $this->call(MatriksKriteriaSeeder::class);
     }
 }
