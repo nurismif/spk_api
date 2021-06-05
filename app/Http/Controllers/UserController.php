@@ -7,6 +7,7 @@ use App\User;
 use App\KriteriaAHP;
 use App\NilaiPerbandingan;
 use App\Penilaian;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -45,16 +46,20 @@ class UserController extends Controller
 
     public function postlogin(Request $request)
     {
-
-        $data = User::firstWhere([
-            'username' => $request->input('username'),
-            'password' => $request->input('password')
+        $credentials = $request->validate([
+            'username' => ['required'],
+            'password' => ['required'],
         ]);
 
-        if ($data) {
+        if (Auth::attempt($credentials)) {
+            $data = User::firstWhere([
+                'username' => $request->username,
+            ]);
+
             Session::put('user_id', $data->id);
             Session::put('user_nama', $data->nama);
-            return redirect('/admin/template/dashboard');
+
+            return redirect()->route('dashboard');
         }
 
         return redirect('/admin/login');

@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
                 'nip' => "1" . $i,
                 'nama' => "PKG" . $i,
                 'username' => "PKG" . $i,
-                'password' => '123123123',
+                'password' => bcrypt('123123123'),
                 'jabatan' =>  User::TIM_KPG_ROLE,
                 'jenis_kelamin' => User::MALE_TYPE,
                 'jurusan' => "Akuntansi"
