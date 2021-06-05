@@ -8,20 +8,18 @@ class Penilaian extends Model
 {
     //
     protected $table = 'penilaian';
-    
-    protected $fillable = ['user_id', 'kriteria_ahp_id', 'nilai']; 
+
+    protected $fillable = ['user_id', 'kriteria_ahp_id', 'nilai'];
 
     // protected $with = ['user', 'kriteria_ahp'];
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 
-    public function kriteria_ahp()
+    public function kriteriaAhp()
     {
-        return $this->belongsTo('App\KriteriaAHP');
+        return $this->belongsTo(KriteriaAHP::class, 'kriteria_ahp_id');
     }
-
-
 }
