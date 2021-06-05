@@ -98,7 +98,7 @@
                                                     <tr>
                                                         <th>{{ $nama }}</th>
                                                         @foreach ($perbandingan_list as $perbandingan)
-                                                            <td>{{ number_format($perbandingan, 2) }}</td>
+                                                            <td>{{ $perbandingan }}</td>
                                                         @endforeach
                                                     </tr>
                                                 @endforeach
