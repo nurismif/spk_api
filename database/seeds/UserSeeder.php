@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
                 'nip' => "2" . $i,
                 'nama' => "KEPSEK" . $i,
                 'username' => "KEPSEK" . $i,
-                'password' => '123123123',
+                'password' => bcrypt('123123123'),
                 'jabatan' =>  User::KEPSEK_ROLE,
                 'jenis_kelamin' => User::FEMALE_TYPE,
                 'jurusan' => "Akuntansi"
@@ -41,7 +41,7 @@ class UserSeeder extends Seeder
                 'nip' => "3" . $i,
                 'nama' => "GURU" . $i,
                 'username' => "GURU" . $i,
-                'password' => '123123123',
+                'password' => bcrypt('123123123'),
                 'jabatan' =>  User::GURU_ROLE,
                 'jenis_kelamin' => User::FEMALE_TYPE,
                 'jurusan' => "Akuntansi"
