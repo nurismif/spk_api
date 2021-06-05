@@ -13,7 +13,7 @@ class CreateNilaiPerbandinganTable extends Migration
      */
     public function up()
     {
-        Schema::create('NilaiPerbandinga', function (Blueprint $table) {
+        Schema::create('nilai_perbandingan', function (Blueprint $table) {
             $table->id();
 
             $table->unsignedBigInteger('kriteria_ahp_id');
@@ -22,7 +22,7 @@ class CreateNilaiPerbandinganTable extends Migration
             $table->unsignedBigInteger('target_kriteria_ahp_id');
             $table->foreign('target_kriteria_ahp_id')->references('id')->on('kriteria_ahp')->onUpdate('RESTRICT')->onDelete('CASCADE');
 
-            $table->integer('nilai_perbandingan');
+            $table->float('nilai_perbandingan');
             $table->timestamps();
         });
     }
@@ -34,6 +34,6 @@ class CreateNilaiPerbandinganTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('NilaiPerbandinga');
+        Schema::dropIfExists('nilai_perbandingan');
     }
 }
