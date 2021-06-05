@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
@@ -16,31 +15,19 @@
                         </ol>
                     </div>
                 </div>
-            </div><!-- /.container-fluid -->
+            </div>
         </section>
 
 
         <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <!-- /.card-header -->
-
-                        <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                            <div class="row">
-                                <div class="col-sm-12 col-md-6">
-                                    <div class="dt-buttons btn-group flex-wrap">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <!-- /.card-body -->
-                            <div class="card-body">
-                                <div class="container-table100">
-                                    <div class="wrap-table100 tableIndex w-100">
-                                        <div class="panel-heading" style="padding-bottom: 20px;">
+            <div class="card w-100">
+                <div class="card-header">
+                    <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                        <div class="row">
+                            <div class="col">
+                                <div class="dt-buttons btn-group flex-wrap">
+                                    <div class="box p-0" style="padding-bottom: 10px;">
+                                        <div class="pull-right">
                                             <form class="form-inline" action="{{ route('matriks.update') }}"
                                                 method="post">
                                                 @csrf
@@ -83,39 +70,35 @@
                                                 </div>
                                             </form>
                                         </div>
-
-                                        <table class="table table-bordered table-hover table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Kode</th>
-                                                    @foreach ($matriks as $nama => $perbandingan_list)
-                                                        <th>{{ $nama }}</th>
-                                                    @endforeach
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($matriks as $nama => $perbandingan_list)
-                                                    <tr>
-                                                        <th>{{ $nama }}</th>
-                                                        @foreach ($perbandingan_list as $perbandingan)
-                                                            <td>{{ $perbandingan }}</td>
-                                                        @endforeach
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
                                     </div>
-                                    <!-- /card-body -->
                                 </div>
-                                <!-- /card-header -->
                             </div>
-                            <!-- /.col -->
                         </div>
-                        <!-- /.row -->
                     </div>
-                    <!-- /.container-fluid -->
                 </div>
-        </section>
+                <div class="card-body tableIndex">
+                    <table id="exam1" class="table table-hover table-bordered table-striped mt-8">
+                        <thead>
+                            <tr class="tableHeadRow">
+                                <th>Kode</th>
+                                @foreach ($matriks as $nama => $perbandingan_list)
+                                    <th>{{ $nama }}</th>
+                                @endforeach
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($matriks as $nama => $perbandingan_list)
+                                <tr>
+                                    <th style="width: 10rem">{{ $nama }}</th>
+                                    @foreach ($perbandingan_list as $perbandingan)
+                                        <td style="width: 10rem">{{ $perbandingan }}</td>
+                                    @endforeach
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </section>
     </div>
 @endsection
