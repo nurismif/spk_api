@@ -54,6 +54,7 @@ Route::get('/admin/penilaian/index', 'PenilaianController@index')->name('admin.p
 Route::get('/admin/penilaian/import_form', 'PenilaianController@importForm');
 Route::post('/admin/penilaian/import', 'PenilaianController@import')->name('import');
 
-Route::get('/admin/ahp/index', 'SPKController@index');
+Route::get('/admin/ahp/index', 'SPKController@AHPindex');
+Route::get('/admin/wp/index', 'SPKController@WPindex');
 
 // Route::get('/admin/home', 'HomeController@index')->name('home');
