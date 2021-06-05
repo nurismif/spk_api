@@ -19,13 +19,29 @@
             </div><!-- /.container-fluid -->
         </section>
 
-
         <section class="content">
-            <div class="card w-100">
+            <div class="card w-100"><div class="card-header">
+                <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="dt-buttons btn-group flex-wrap">
+                                <div class="box p-0" style="padding-bottom: 10px;">
+                                    <div class="pull-right">
+                                        <a href="/admin/user/create" class="btn btn-primary btn-flat"
+                                            style="border-radius: 5px;">
+                                            <i class="fa fa-cog"></i> Generate
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
                 <div class="card-body tableIndex">
-                    <table id="exam1" class="table table-hover table-bordered table-striped mt-8">
+                    <table id="exam1" class="table table-hover table-bordered table-striped mt-8" data-export-title="WP Method" no-action="true">
                         <thead>
-                            <tr style="background-color: #4a6283; color: white;">
+                            <tr class="tableHeadRow">
                                 <th style="width: 1rem">No</th>
                                 <th>Nama</th>
                                 <th>Jurusan</th>
