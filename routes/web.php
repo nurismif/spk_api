@@ -54,7 +54,8 @@ Route::get('/admin/penilaian/index', 'PenilaianController@index')->name('admin.p
 Route::get('/admin/penilaian/import_form', 'PenilaianController@importForm');
 Route::post('/admin/penilaian/import', 'PenilaianController@import')->name('import');
 
-Route::get('/admin/ahp/index', 'SPKController@AHPindex');
-Route::get('/admin/wp/index', 'SPKController@WPindex');
+Route::get('/admin/ahp', 'AhpMethodController@index')->name('ahp');
+Route::get('/admin/ahp/generate', 'AhpMethodController@generate')->name('ahp.generate');
 
-// Route::get('/admin/home', 'HomeController@index')->name('home');
+Route::get('/admin/wp', 'WpMethodController@index')->name('wp');
+Route::get('/admin/wp/generate', 'AhpMethodController@generate')->name('wp.generate');

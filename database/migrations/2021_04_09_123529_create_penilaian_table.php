@@ -17,10 +17,10 @@ class CreatePenilaianTable extends Migration
             $table->id();
             
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('RESTRICT')->onDelete('CASCADE');
 
             $table->unsignedBigInteger('kriteria_ahp_id');
-            $table->foreign('kriteria_ahp_id')->references('id')->on('kriteria_ahp');
+            $table->foreign('kriteria_ahp_id')->references('id')->on('kriteria_ahp')->onUpdate('RESTRICT')->onDelete('CASCADE');
 
             // $table->unsignedBigInteger('penilaian2_id');
             // $table->foreign('penialain2_id')->references('id')->on('kriteria_wp');

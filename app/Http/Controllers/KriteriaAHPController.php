@@ -166,7 +166,7 @@ class KriteriaAHPController extends Controller
         $list_perbandingan =  (new ConstantService())->getPerbandinganRules();
 
         $matrix_perbandingan_service = new MatriksPerbandinganService();
-        $matriks = $matrix_perbandingan_service->getMatrix();
+        $matriks = $matrix_perbandingan_service->getMatrix($list_kriteria);
 
         return view(
             'kriteria.matriks',
@@ -188,16 +188,12 @@ class KriteriaAHPController extends Controller
         $pebandingan_value = $request->perbandingan;
 
         if ($kriteria1_id == $kriteria2_id) {
-            // when row and coll is in a same index, we update only one value at matrix[row][col]
-            $kriteria = KriteriaAHP::find($kriteria1_id);
-            $matriks_service->updateMatrixValue($pebandingan_value, $kriteria->nama, $kriteria->nama);
+            // when row and coll have a same value, we update only one value at matrix[row][col]
+            $matriks_service->updateMatrixValue($pebandingan_value, $kriteria1_id, $kriteria1_id);
         } else {
-            // when row and coll is in a diffrent index, we update the value at matrix[row][col] and matrix[col][row]
-            $kriteria1 = KriteriaAHP::find($kriteria1_id);
-            $kriteria2 = KriteriaAHP::find($kriteria2_id);
-
-            $matriks_service->updateMatrixValue($pebandingan_value, $kriteria1->nama, $kriteria2->nama);
-            $matriks_service->updateMatrixValue($pebandingan_value, $kriteria2->nama, $kriteria1->nama, true);
+            // when row and coll have a diffrent value, we update the value at matrix[row][col] and matrix[col][row]
+            $matriks_service->updateMatrixValue($pebandingan_value, $kriteria1_id, $kriteria2_id);
+            $matriks_service->updateMatrixValue($pebandingan_value, $kriteria2_id, $kriteria1_id, true);
         }
 
         return redirect()->back();

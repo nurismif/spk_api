@@ -4,58 +4,45 @@ namespace App\Services;
 
 use App\KriteriaAHP;
 use App\MatriksKriteria;
+use App\NilaiPerbandingan;
+use Illuminate\Support\Collection;
 
 class MatriksPerbandinganService
 {
-
-     public function regenarateMatrix()
-     {
-          $list_kriteria = KriteriaAHP::get();
-          $current_matrix = MatriksKriteria::get();
-
-          if (count($list_kriteria) == count($current_matrix)) {
-               return;
-          }
-
-          // foreach ($list_kriteria as $kriteria) {
-          //      # code...
-          // }
-     }
-
-     public function getMatrix()
+     public function getMatrix(Collection $list_kriteria)
      {
           $data = collect();
+          $groups = NilaiPerbandingan::orderBy('target_kriteria_ahp_id', "asc")
+               ->get()
+               ->groupBy("kriteria_ahp_id");
 
-          $current_matrix = MatriksKriteria::get();
-          foreach ($current_matrix as $i => $matrix) {
-               $row = collect(json_decode($matrix->row));
-               $data->put(
-                    $matrix->nama,
-                    $row->values()
-               );
-          }
+          $index = 0;
+          foreach ($groups as $key => $group) {
+               $map_group = $group->map(function ($item) {
+                    return $item->nilai_perbandingan;
+               });
+               $data->put($list_kriteria[$index]->nama, $map_group);
+               $index += 1;
+          };
+
           return $data;
      }
 
-     public function updateMatrixValue($pebandingan_value, $kriteria1_name, $kriteria2_name, $ratio_reversed = false)
+     public function updateMatrixValue($pebandingan_value, $kriteria1_id, $kriteria2_id, $ratio_reversed = false)
      {
-          $matriks = MatriksKriteria::where("nama", $kriteria1_name)->first();
-          $row_data = json_decode(
-               $matriks->row
-          );
+          $cell = NilaiPerbandingan::where("kriteria_ahp_id", $kriteria1_id)
+               ->where("target_kriteria_ahp_id", $kriteria2_id)
+               ->first();
 
-          $val1 = floatval($pebandingan_value);
-          if ($kriteria1_name == $kriteria2_name) {
-               $row_data->{$kriteria2_name} = 1;
+          $float_ratio = floatval($pebandingan_value);
+          if ($kriteria1_id == $kriteria2_id) {
+               $cell->nilai_perbandingan = 1;
           } else if ($ratio_reversed == false) {
-               $row_data->{$kriteria2_name} = $val1;
+               $cell->nilai_perbandingan = $float_ratio;
           } else {
-               $row_data->{$kriteria2_name} = 1 / $val1;
+               $cell->nilai_perbandingan = 1 / $float_ratio;
           }
 
-          $matriks->row = json_encode($row_data);
-          $matriks->save();
-
-          return $matriks;
+          $cell->save();
      }
 }

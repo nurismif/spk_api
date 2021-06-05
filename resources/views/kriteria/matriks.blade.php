@@ -18,13 +18,13 @@
             </div>
         </section>
 
-        
+
         <section class="content">
             <div class="card w-100">
                 <div class="card-header">
                     <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col">
                                 <div class="dt-buttons btn-group flex-wrap">
                                     <div class="box p-0" style="padding-bottom: 10px;">
                                         <div class="pull-right">
@@ -91,7 +91,7 @@
                                 <tr>
                                     <th style="width: 10rem">{{ $nama }}</th>
                                     @foreach ($perbandingan_list as $perbandingan)
-                                        <td style="width: 10rem">{{ number_format($perbandingan, 2) }}</td>
+                                        <td style="width: 10rem">{{ $perbandingan }}</td>
                                     @endforeach
                                 </tr>
                             @endforeach
