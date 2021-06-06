@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+// Users
 Route::get('/users', 'UserController@get_all_user');
 Route::post('/user/guru', 'UserController@insert_guru');
 Route::get('/user/guru/ranking', 'UserController@get_ranking_guru');
@@ -22,25 +24,20 @@ Route::post('/user/tim_pkg', 'UserController@insert_tim_pkg');
 Route::post('/users/postapilogin', 'UserController@postApiLogin');
 Route::put('/user/update/{id}', 'UserController@update_user');
 Route::delete('/user/delete/{id}', 'UserController@delete_user');
-
-//Untuk get data daftar nilai berdasarkan id user
-Route::get('/penilaian/{id}/nilai', 'UserController@get_nilai_user');
-
 //Untuk get data profile berdasarkan id user
 Route::get('/user/{id}/profile', 'UserController@get_profile_user');
-
 
 Route::get('/penilaian', 'PenilaianController@get_all_penilaian');
 Route::post('/penilaian/insert_nilai_ahp', 'PenilaianController@insert_nilai_ahp');
 Route::put('/penilaian/update/{id}', 'PenilaianController@update_nilai_ahp');
 Route::delete('/penilaian/delete/{id}', 'PenilaianController@delete_nilai_ahp');
-
+//Untuk get data daftar nilai berdasarkan id user
+Route::get('/penilaian/{id}/nilai', 'UserController@get_nilai_user');
 
 Route::get('/kri_ahp', 'KriteriaAHPController@get_all_kr_ahp');
 Route::post('/kri_ahp/tambah_kri_ahp', 'KriteriaAHPController@insert_kri_ahp');
 Route::put('/kri_ahp/update/{id_kr_ahp}', 'KriteriaAHPController@update_kri_ahp');
 Route::delete('/kri_ahp/delete/{id_kr_ahp}', 'KriteriaAHPController@delete_kri_ahp');
-
 //Untuk get detail kriteria berdasarkan id kriteria
 Route::get('/kri_ahp/{id_kr_ahp}/detail', 'KriteriaAHPController@get_detail_kriteria_ahp');
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\AhpMethod;
+use App\Services\AhpMethodService;
 use Illuminate\Http\Request;
 
 class AhpMethodController extends Controller
@@ -13,7 +15,8 @@ class AhpMethodController extends Controller
      */
     public function index()
     {
-        return view('spk.ahp');
+        $ahp_methods = AhpMethod::get();
+        return view('spk.ahp', compact('ahp_methods'));
     }
 
     /**
@@ -23,6 +26,9 @@ class AhpMethodController extends Controller
      */
     public function generate()
     {
-        //
+        $ahp_method_service = new AhpMethodService();
+        $ahp_method_service->recalculateAhpValues();
+
+        return redirect()->route('ahp');
     }
 }
