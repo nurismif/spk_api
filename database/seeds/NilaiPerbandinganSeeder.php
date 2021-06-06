@@ -44,7 +44,7 @@ class NilaiPerbandinganSeeder extends Seeder
             NilaiPerbandingan::create([
                 'kriteria_ahp_id' => $rec[0],
                 'target_kriteria_ahp_id' => $rec[1],
-                'Nilai_perbandingan' => $rec[2]
+                'nilai_perbandingan' => $rec[2]
             ]);
         }
     }
