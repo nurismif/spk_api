@@ -194,13 +194,4 @@ class AhpMethodService
 
           return $avg_per_rows;
      }
-
-
-     private function normalize()
-     {
-     }
-
-     public function getRanks()
-     {
-     }
 }
