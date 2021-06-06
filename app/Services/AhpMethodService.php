@@ -66,14 +66,14 @@ class AhpMethodService
           });
 
           // Find total bobot
-          $total_bobot_list = $total_normalized_row->map(function ($value) use ($jumlah_kriteria) {
+          $bobot_list = $total_normalized_row->map(function ($value) use ($jumlah_kriteria) {
                return $value / $jumlah_kriteria;
           })->values();
 
           // Find total bobot akhir
           $total_bobot_akhir_list = collect()->pad($jumlah_kriteria, 0);
           for ($i = 0; $i < $jumlah_kriteria; $i++) {
-               foreach ($total_bobot_list as $key => $value) {
+               foreach ($bobot_list as $key => $value) {
                     $cell = $groups_by_row[$i + 1][$key]->nilai_perbandingan;
                     $total_bobot_akhir_list[$i] += $cell * $value;
                }
@@ -81,7 +81,7 @@ class AhpMethodService
 
           // Find total_cm by totaling the division of total_botot_akir_list with total_bobot_list
           for ($i = 0; $i < $jumlah_kriteria; $i++) {
-               $total_cm += $total_bobot_akhir_list[$i] / $total_bobot_list[$i];
+               $total_cm += $total_bobot_akhir_list[$i] / $bobot_list[$i];
           }
           // Divide the total cm with jumlah kriteria
           $total_cm = $total_cm / $jumlah_kriteria;
@@ -107,7 +107,7 @@ class AhpMethodService
           $final_values = collect()->pad($avg_criteria_list[0]->count(), 0);
           foreach ($avg_criteria_list as $i => $col) {
                foreach ($col as $j => $val) {
-                    $final_values[$j] += $val;
+                    $final_values[$j] += $val * $bobot_list[$i];
                }
           }
 
