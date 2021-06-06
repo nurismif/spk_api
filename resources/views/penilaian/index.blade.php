@@ -35,23 +35,25 @@
                                     </div>
                                     <form method="POST" action="{{ route('import') }}" enctype="multipart/form-data">
                                         @csrf
-                                      <div class="modal-body">
-                                          <div class="form-group">
-                                              <label for="file"> Choose File </label>
-                                              <table>
-                                                  <td><input type="file" name="file" class="form-control"style="padding-bottom: 20px;" /></td>
-                                              </table>
-                                          </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label for="file"> Choose File </label>
+                                                <table>
+                                                    <td><input type="file" name="file" class="form-control"
+                                                            style="padding-bottom: 20px;" /></td>
+                                                </table>
+                                            </div>
                                         </div>
                                         <div class="modal-footer">
-                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                          <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
                                         </div>
-                                      </form>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <section class="content">
                             <div class="card w-100">
                                 <div class="card-header">
@@ -61,7 +63,8 @@
                                                 <div class="dt-buttons btn-group flex-wrap">
                                                     <div class="box p-0" style="padding-bottom: 10px;">
                                                         <div class="pull-right">
-                                                            <button type="button" class="btn btn-primary btn-flat rounded" data-toggle="modal" data-target="#exampleModalCenter">
+                                                            <button type="button" class="btn btn-primary btn-flat rounded"
+                                                                data-toggle="modal" data-target="#exampleModalCenter">
                                                                 <i class="fa fa-upload mr-2"></i>Import
                                                             </button>
                                                         </div>
@@ -75,26 +78,22 @@
                                 <div class="card-body tableIndex">
                                     <table id="exam1" class="table table-hover table-bordered table-striped mt-8">
                                         <thead>
-                                            <tr style="background-color: #4a6283; color: white;">
+                                            <tr class="tableHeadRow">
                                                 <th style="width: 1rem">No</th>
                                                 <th>Nama User</th>
-                                                <th>Umum</th>
-                                                <th>Teman Sejawat</th>
-                                                <th>Peserta didik</th>
-                                                <th>Wali Murid</th>
-                                                <th>DI</th>
+                                                @foreach ($kriteria_list as $kriteria)
+                                                    <th>{{ $kriteria->nama }}</th>
+                                                @endforeach
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($penilaian as $row)
+                                            @foreach ($penilaian_list as $i => $penilaian)
                                                 <tr>
-                                                    <td class="centerThingsColumn">{{ $no++ }}</td>
-                                                    <td>{{ $row['nama'] }}</td>
-                                                    <td>{{ $row['ahp_1'] }}</td>
-                                                    <td>{{ $row['ahp_2'] }}</td>
-                                                    <td>{{ $row['ahp_3'] }}</td>
-                                                    <td>{{ $row['ahp_4'] }}</td>
-                                                    <td>{{ $row['ahp_5'] }}</td>
+                                                    <td class="centerThingsColumn">{{ $i + 1 }}</td>
+                                                    <td>{{ $penilaian[0]->user->nama }}</td>
+                                                    @foreach ($penilaian as $item)
+                                                        <td>{{ $item->nilai }}</td>
+                                                    @endforeach
                                                 </tr>
                                             @endforeach
                                         </tbody>

@@ -18,7 +18,7 @@ class CreateDetailKriteriaTable extends Migration
             $table->string('kompetensi');
 
             $table->unsignedBigInteger('kriteria_ahp_id');
-            $table->foreign('kriteria_ahp_id')->references('id')->on('kriteria_ahp');
+            $table->foreign('kriteria_ahp_id')->references('id')->on('kriteria_ahp')->onUpdate('RESTRICT')->onDelete('CASCADE');
 
             $table->string('range_nilai');
             $table->timestamps();

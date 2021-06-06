@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Penilaian;
 use App\Exports\PenilaianExport;
 use App\Imports\PenilaianImport;
+use App\KriteriaAHP;
 use Excel;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Excel as ExcelExcel;
@@ -79,25 +80,16 @@ class PenilaianController extends Controller
         //diakhir get() untuk mengambil data array
 
         //diakhir first() jika hanya satu data yang diambil
-        $data = Penilaian::join('users', 'users.id', '=', 'penilaian.user_id')
-            ->join('kriteria_ahp', 'kriteria_ahp.id', '=', 'penilaian.kriteria_ahp_id')
-            ->select('penilaian.*', 'users.nama', 'kriteria_ahp.nama as nama_kriteria_ahp')
-            ->get();
-        $return_penilaian = [];
-        $index = 0;
-        $log = 1;
-        foreach ($data as $key => $value) {
-            $return_penilaian[$index]['nama'] = $value->nama;
-            $return_penilaian[$index]['ahp_' . $log] = $value->nilai;
-            if ($log % 5 == 0) {
-                $index++;
-                $log = 1;
-            } else {
-                $log++;
-            }
-        }
-        // return "";
-        return view('penilaian/index', ['penilaian' => $return_penilaian, 'no' => 1], compact('data'));
+        $penilaian_list = Penilaian::orderBy('kriteria_ahp_id')->get()
+            ->groupBy('user_id')
+            ->sort()
+            ->values();
+        $kriteria_list = KriteriaAHP::get();
+
+        return view('penilaian/index', [
+            'penilaian_list' => $penilaian_list,
+            'kriteria_list' => $kriteria_list
+        ]);
     }
 
     public function importForm()

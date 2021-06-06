@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\DetailKriteria;
 use Illuminate\Http\Request;
 use App\KriteriaAHP;
+use App\MatriksKriteria;
+use App\Services\ConstantService;
+use App\Services\MatriksPerbandinganService;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class KriteriaAHPController extends Controller
@@ -160,8 +162,40 @@ class KriteriaAHPController extends Controller
 
     public function matriks()
     {
-        $list_kriteria = DB::table('kriteria_ahp')->get();
-        $list_perbandingan = DB::table('perbandingan')->get();
-        return view('kriteria.matriks', ['list_kriteria' => $list_kriteria, 'list_perbandingan' => $list_perbandingan],);
+        $list_kriteria = KriteriaAHP::get();
+        $list_perbandingan =  (new ConstantService())->getPerbandinganRules();
+
+        $matrix_perbandingan_service = new MatriksPerbandinganService();
+        $matriks = $matrix_perbandingan_service->getMatrix($list_kriteria);
+
+        return view(
+            'kriteria.matriks',
+            [
+                'list_kriteria' => $list_kriteria,
+                'list_perbandingan' => $list_perbandingan,
+                'matriks' => $matriks
+            ]
+        );
+    }
+
+
+    public function matriksUpdate(Request $request)
+    {
+        $matriks_service = new  MatriksPerbandinganService();
+
+        $kriteria1_id = $request->kriteria1;
+        $kriteria2_id = $request->kriteria2;
+        $pebandingan_value = $request->perbandingan;
+
+        if ($kriteria1_id == $kriteria2_id) {
+            // when row and coll have a same value, we update only one value at matrix[row][col]
+            $matriks_service->updateMatrixValue($pebandingan_value, $kriteria1_id, $kriteria1_id);
+        } else {
+            // when row and coll have a diffrent value, we update the value at matrix[row][col] and matrix[col][row]
+            $matriks_service->updateMatrixValue($pebandingan_value, $kriteria1_id, $kriteria2_id);
+            $matriks_service->updateMatrixValue($pebandingan_value, $kriteria2_id, $kriteria1_id, true);
+        }
+
+        return redirect()->back();
     }
 }

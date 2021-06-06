@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\KriteriaAHP;
-use App\Nilai_Perbandingan;
+use App\NilaiPerbandingan;
 use App\Penilaian;
-use Illuminate\Support\Facades\Auth as FacadesAuth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -46,26 +46,23 @@ class UserController extends Controller
 
     public function postlogin(Request $request)
     {
-
-        $data = User::firstWhere([
-            'username' => $request->input('username'),
-            'password' => $request->input('password')
+        $credentials = $request->validate([
+            'username' => ['required'],
+            'password' => ['required'],
         ]);
 
-        if ($data) {
+        if (Auth::attempt($credentials)) {
+            $data = User::firstWhere([
+                'username' => $request->username,
+            ]);
+
             Session::put('user_id', $data->id);
             Session::put('user_nama', $data->nama);
-            return redirect('/admin/template/dashboard');
+
+            return redirect()->route('dashboard');
         }
 
         return redirect('/admin/login');
-
-        // if ($this->get_all_user()::attempt($request->only('username', 'password'))) {
-        // 	# code...
-        // 	return redirect('/welcome');
-        // }
-
-        // return redirect('/login');
     }
 
     public function get_all_user()
@@ -196,8 +193,6 @@ class UserController extends Controller
         ]);
 
         if ($validator->fails()) {
-            # code...
-            // return redirect('siswa/create');
             return redirect('/admin/user/create')
                 ->withInput()
                 ->withErrors($validator);
@@ -205,7 +200,6 @@ class UserController extends Controller
 
         $user = User::create($data);
         $user->save();
-        // dd($user);
         return redirect('admin/user/index');
     }
 
@@ -252,7 +246,6 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
-        // Session::flash('success','Product Deleted Success!');
         return redirect('admin/user/index')->with('status', 'User Berhasil Dihapus');
     }
 
@@ -266,7 +259,7 @@ class UserController extends Controller
         //normalisasi
         foreach ($kriteria as $k) {
             // return "<pre>".print_r($k, true)."</pre>";
-            $nilai_perbandingan_per_kolom = Nilai_Perbandingan::where('target_kriteria_ahp_id', '=', $k->id)->orderBy('kriteria_ahp_id', 'asc')->get();
+            $nilai_perbandingan_per_kolom = NilaiPerbandingan::where('target_kriteria_ahp_id', '=', $k->id)->orderBy('kriteria_ahp_id', 'asc')->get();
             // return "<pre>".print_r($nilai_perbandingan_per_kolom, true)."</pre>";
             $k->total_bobot_untuk_normalisasi = 0;
 
@@ -300,7 +293,7 @@ class UserController extends Controller
         foreach ($kriteria as $k) {
             $k->total_bobot_akhir = 0;
             foreach ($kriteria as $k2) {
-                $nilai_perbandingan_per_baris = Nilai_Perbandingan::where('target_kriteria_ahp_id', '=', $k2->id)->get();
+                $nilai_perbandingan_per_baris = NilaiPerbandingan::where('target_kriteria_ahp_id', '=', $k2->id)->get();
                 foreach ($nilai_perbandingan_per_baris as $n) {
                     if ($n->kriteria_ahp_id === $k->id) {
                         $k->total_bobot_akhir += $n->nilai_perbandingan * $k2->total_bobot;

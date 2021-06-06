@@ -7,12 +7,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Kriteria</h1>
+                        <h1>AHP Method</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Kriteria Page</li>
+                            <li class="breadcrumb-item active">AHP Method Page</li>
                         </ol>
                     </div>
                 </div>
@@ -29,9 +29,9 @@
                                 <div class="dt-buttons btn-group flex-wrap">
                                     <div class="box p-0" style="padding-bottom: 10px;">
                                         <div class="pull-right">
-                                            <a href="/admin/kriteria/create" class="btn btn-primary btn-flat"
+                                            <a href="{{ route('ahp.generate') }}" class="btn btn-primary btn-flat"
                                                 style="border-radius: 5px;">
-                                                <i class="fa fa-user-plus"></i> Create
+                                                <i class="fa fa-cog"></i> Generate
                                             </a>
                                         </div>
                                     </div>
@@ -41,36 +41,38 @@
                     </div>
                 </div>
                 <div class="card-body tableIndex">
-                    <table id="exam1" class="table table-hover table-bordered table-striped mt-8">
+                    <table id="exam1" class="table table-hover table-bordered table-striped mt-8"
+                        data-export-title="AHP Method" no-action="true">
                         <thead>
                             <tr class="tableHeadRow">
                                 <th style="width: 1rem">No</th>
-                                <th>Nama Kriteria</th>
-                                <th>Bobot</th>
-                                <th>Tipe</th>
-                                <th style="width: 7rem">Action</th>
+                                <th>Nama</th>
+                                <th>NIP</th>
+                                <th>Jurusan</th>
+                                <th>Nilai</th>
+                                <th>Ranking</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($kriteria as $data)
+                            @foreach ($ahp_methods as $i => $ahp_method)
                                 <tr>
-                                    <td class="centerThingsColumn">{{ $no++ }}</td>
-                                    <td>{{ $data->nama }}</td>
-                                    <td>{{ $data->bobot }}</td>
-                                    <td>{{ $data->tipe }}</td>
-                                    <td class="centerThingsColumn">
-                                        <form action="{{ url('admin/kriteria') }}/{{ $data->id }}" method="POST">
-                                            @csrf @method('DELETE')
-                                            <a href="{{ url('admin/kriteria') }}/{{ $data->id . '/detail' }}"
-                                                class="btn btn-primary btn-sm mr-1">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                            <a href="{{ url('admin/kriteria') }}/{{ $data->id . '/edit' }}"
-                                                class="btn btn-warning btn-sm mr-1">
-                                                <i class="fa fa-pencil"></i>
-                                            </a>
-                                            <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                                        </form>
+                                    <td class="cell100 column1">
+                                        {{ $i + 1 }}
+                                    </td>
+                                    <td class="cell100 column2">
+                                        {{ $ahp_method->user->nama }}
+                                    </td>
+                                    <td class="cell100 column3">
+                                        {{ $ahp_method->user->nip }}
+                                    </td>
+                                    <td class="cell100 column4">
+                                        {{ $ahp_method->user->jurusan }}
+                                    </td>
+                                    <td class="cell100 column5">
+                                        {{ $ahp_method->ahp_value }}
+                                    </td>
+                                    <td class="cell100 column6">
+                                        {{ $ahp_method->rank }}
                                     </td>
                                 </tr>
                             @endforeach

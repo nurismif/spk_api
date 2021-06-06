@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Nilai_Perbandingan extends Model
+class NilaiPerbandingan extends Model
 {
     protected $table = 'nilai_perbandingan';
 

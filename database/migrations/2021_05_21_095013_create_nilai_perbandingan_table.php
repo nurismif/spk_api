@@ -17,13 +17,12 @@ class CreateNilaiPerbandinganTable extends Migration
             $table->id();
 
             $table->unsignedBigInteger('kriteria_ahp_id');
-            $table->foreign('kriteria_ahp_id')->references('id')->on('kriteria_ahp');
+            $table->foreign('kriteria_ahp_id')->references('id')->on('kriteria_ahp')->onUpdate('RESTRICT')->onDelete('CASCADE');
 
             $table->unsignedBigInteger('target_kriteria_ahp_id');
-            $table->foreign('target_kriteria_ahp_id')->references('id')->on('kriteria_ahp');
+            $table->foreign('target_kriteria_ahp_id')->references('id')->on('kriteria_ahp')->onUpdate('RESTRICT')->onDelete('CASCADE');
 
-            $table->unsignedBigInteger('nilai_perbandingan');
-            $table->foreign('nilai_perbandingan')->references('id')->on('perbandingan');
+            $table->float('nilai_perbandingan');
             $table->timestamps();
         });
     }

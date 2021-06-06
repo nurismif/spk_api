@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sistem Pendukung Keputusan </title>
+    <title>Sistem Pendukung Keputusan</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -73,10 +73,10 @@
         <!-- ./wrapper -->
 
     </div>
-    
+
     <!-- jQuery -->
     <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
-    
+
     <!--===============================================================================================-->
     {{-- <script src="{{ asset('table/vendor/jquery/jquery-3.2.1.min.js') }}"></script> --}}
     <!--===============================================================================================-->
@@ -98,12 +98,11 @@
     </script>
     <!--===============================================================================================-->
     <script src="{{ asset('table/js/main.js') }}"></script>
-    
+
 
     <!-- Bootstrap 4 -->
     {{-- <script src="{{asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script> --}}
-{{-- 
-    <!-- DataTables  & Plugins -->
+    {{-- <!-- DataTables  & Plugins -->
     <script src="../../plugins/jszip/jszip.min.js"></script>
     <script src="../../plugins/pdfmake/pdfmake.min.js"></script>
     <script src="../../plugins/pdfmake/vfs_fonts.js"></script> --}}
@@ -131,11 +130,40 @@
     <script>
         $(function() {
             $.noConflict();
+            var buttonCommon = {
+                init: function(dt, node, config) {
+                    var table = dt.table().context[0].nTable;
+                    if (table) config.title = $(table).data('export-title')
+                },
+                title: 'default title'
+            };
+
+            var numCols = $('#exam1 thead th').length;
+            if($('#exam1').attr('no-action') == undefined){
+                numCols -= 1;
+            }
+            var arr = []
+
+            for (let i=0; i<numCols; i++){
+                arr.push(i);
+            }
+
             $("#exam1").DataTable({
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
-                "buttons": ["excel", "print", "colvis"]
+                "buttons": [
+                    $.extend(true, {}, buttonCommon, {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: arr
+                        }
+                    }),
+                    $.extend(true, {}, buttonCommon, {
+                        extend: 'colvis'
+                    }),
+                ]
+                // "buttons": ["excel", "print", "colvis"]
             }).buttons().container().appendTo('#exam1_wrapper .col-md-6:eq(0)');
 
             // $('#example2').DataTable({

@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Nilai_Perbandingan;
+use App\NilaiPerbandingan;
 use Illuminate\Support\Facades\DB;
 
 class NilaiPerbandinganController extends Controller
 {
     public function get_all_nil_perbandingan(){
-        return response()->json(Nilai_Perbandingan::all(), 200);
+        return response()->json(NilaiPerbandingan::all(), 200);
     }
 
     public function insert_nil_perbandingan(Request $request){
@@ -19,7 +19,7 @@ class NilaiPerbandinganController extends Controller
         ])->first();
 
         if ($check_nil_perbandingan1) {
-            $data_nil_perbandingan1 = Nilai_Perbandingan::find($check_nil_perbandingan1->id);
+            $data_nil_perbandingan1 = NilaiPerbandingan::find($check_nil_perbandingan1->id);
             $data_nil_perbandingan1->nilai_perbandingan = $request->nilai;
             $data_nil_perbandingan1->save();
             
@@ -29,7 +29,7 @@ class NilaiPerbandinganController extends Controller
             ])->first();
             
             if ($check_nil_perbandingan2) {
-                $data_nil_perbandingan2 = Nilai_Perbandingan::find($check_nil_perbandingan2->id);
+                $data_nil_perbandingan2 = NilaiPerbandingan::find($check_nil_perbandingan2->id);
                 $data_nil_perbandingan2->nilai_perbandingan = 1/$request->nilai;
                 $data_nil_perbandingan2->save();
             }
@@ -41,13 +41,13 @@ class NilaiPerbandinganController extends Controller
             ], 200);
         }
 
-        $insert_nil_perbandingan1 = new Nilai_Perbandingan();
+        $insert_nil_perbandingan1 = new NilaiPerbandingan();
         $insert_nil_perbandingan1->kriteria_ahp_id= $request->kriteriaID;
         $insert_nil_perbandingan1->target_kriteria_ahp_id= $request->targetkriteriaID;
         $insert_nil_perbandingan1->nilai_perbandingan = $request->nilai;
         $insert_nil_perbandingan1->save();
         
-        $insert_nil_perbandingan2 = new Nilai_Perbandingan();
+        $insert_nil_perbandingan2 = new NilaiPerbandingan();
         $insert_nil_perbandingan2->kriteria_ahp_id= $request->targetkriteriaID;
         $insert_nil_perbandingan2->target_kriteria_ahp_id= $request->kriteriaID;
         $insert_nil_perbandingan2->nilai_perbandingan = 1/$request->nilai;
@@ -60,9 +60,9 @@ class NilaiPerbandinganController extends Controller
     }
 
     public function update_nil_perbandingan(Request $request, $id){
-        $check_nil_perbandingan= Nilai_Perbandingan::firstWhere('id', $id);
+        $check_nil_perbandingan= NilaiPerbandingan::firstWhere('id', $id);
         if($check_nil_perbandingan){
-            $data_nil_perbandingan = Nilai_Perbandingan::find($id);
+            $data_nil_perbandingan = NilaiPerbandingan::find($id);
             $data_nil_perbandingan->kriteria_ahp_id = $request->kriteriaID;
             $data_nil_perbandingan->targetkriteria_ahp_id = $request->targetkriteriaID;
             $data_nil_perbandingan->perbandingan_id = $request->perbandinganID;
@@ -81,9 +81,9 @@ class NilaiPerbandinganController extends Controller
     }
 
     public function delete_nil_perbandingan($id){
-        $check_nil_perbandingan = Nilai_Perbandingan::firstWhere('id', $id);
+        $check_nil_perbandingan = NilaiPerbandingan::firstWhere('id', $id);
         if ($check_nil_perbandingan) {
-            Nilai_Perbandingan::destroy($id);
+            NilaiPerbandingan::destroy($id);
             return response([
                 'status' => 'OK',
                 'message' => 'Nilai Perbandingan Dihapus'

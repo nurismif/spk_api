@@ -40,9 +40,9 @@
                     </div>
                 </div>
                 <div class="card-body tableIndex">
-                    <table id="exam1" class="table table-hover table-bordered table-striped mt-8">
+                    <table id="exam1" class="table table-hover table-bordered table-striped mt-8" data-export-title="User">
                         <thead>
-                            <tr style="background-color: #4a6283; color: white;">
+                            <tr class="tableHeadRow">
                                 <th style="width: 1rem">No</th>
                                 <th>NIP</th>
                                 <th>Nama</th>
