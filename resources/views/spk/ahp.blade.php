@@ -69,7 +69,7 @@
                                         {{ $ahp_method->user->jurusan }}
                                     </td>
                                     <td class="cell100 column5">
-                                        {{ $ahp_method->ahp_value }}
+                                        {{ number_format($ahp_method->ahp_value, 2) }}
                                     </td>
                                     <td class="cell100 column6">
                                         {{ $ahp_method->rank }}
