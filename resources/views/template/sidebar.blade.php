@@ -33,7 +33,7 @@
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-puzzle-piece"></i>
+                    <i class="nav-icon fas 3"></i>
                     <p>Kriteria
                         <i class="right fas fa-angle-left"></i>
                     </p>
@@ -57,14 +57,14 @@
             @if (Auth::user()->jabatan == User::KEPSEK_ROLE)
             <li class="nav-item">
                 <a href="/admin/penilaian/index" class="nav-link">
-                    <i class="nav-icon fas fa-bookmark"></i>
+                    <i class="nav-icon fas fa-chart-line"></i>
                     <p>Penilaian </p>
                 </a>
             </li>
             @endif
             <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-file-text"></i>
+                    <i class="nav-icon fas fa-clipboard-list"></i>
                     <p>SPK Method
                         <i class="right fas fa-angle-left"></i>
                     </p>
