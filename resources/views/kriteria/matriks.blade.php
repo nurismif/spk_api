@@ -24,51 +24,60 @@
                 <div class="card-header">
                     <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
-                            <div class="col">
+                            <div class="col-md-10">
+                                <div class="dt-buttons btn-group flex-wrap">
+                                    <div class="box p-0" style="padding-bottom: 10px;">
+                                        <form class="form-inline" action="{{ route('matriks.update') }}"
+                                            method="post">
+                                            @csrf
+                                            <div class="form-group" style="padding-right: 10px;">
+                                                <select name="kriteria1" id="kriteria1" class="form-control" required>
+                                                    <option value=""> - Pilih - </option>
+                                                    @foreach ($list_kriteria as $kriteria)
+                                                        <option value="{{ $kriteria->id }}">
+                                                            {{ $kriteria->nama }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-group" style="padding-right: 10px;">
+                                                <select name="perbandingan" id="perbandingan" class="form-control"
+                                                    required>
+                                                    <option value=""> - Pilih - </option>
+                                                    @foreach ($list_perbandingan as $nama => $nilai)
+                                                        <option value="{{ $nilai }}">
+                                                            {{ $nama }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-group" style="padding-right: 10px;">
+                                                <select name="kriteria2" id="kriteria2" class="form-control" required>
+                                                    <option value=""> - Pilih - </option>
+                                                    @foreach ($list_kriteria as $kriteria)
+                                                        <option value="{{ $kriteria->id }}">
+                                                            {{ $kriteria->nama }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-group" style="padding-right: 10px;">
+                                                <button class="btn btn-primary">
+                                                    <span class="glyphicon glyphicon-edit"></span>
+                                                    Ubah
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content:flex-end" class="col-md-2">
                                 <div class="dt-buttons btn-group flex-wrap">
                                     <div class="box p-0" style="padding-bottom: 10px;">
                                         <div class="pull-right">
-                                            <form class="form-inline" action="{{ route('matriks.update') }}"
-                                                method="post">
-                                                @csrf
-                                                <div class="form-group" style="padding-right: 10px;">
-                                                    <select name="kriteria1" id="kriteria1" class="form-control" required>
-                                                        <option value=""> - Pilih - </option>
-                                                        @foreach ($list_kriteria as $kriteria)
-                                                            <option value="{{ $kriteria->id }}">
-                                                                {{ $kriteria->nama }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="form-group" style="padding-right: 10px;">
-                                                    <select name="perbandingan" id="perbandingan" class="form-control"
-                                                        required>
-                                                        <option value=""> - Pilih - </option>
-                                                        @foreach ($list_perbandingan as $nama => $nilai)
-                                                            <option value="{{ $nilai }}">
-                                                                {{ $nama }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="form-group" style="padding-right: 10px;">
-                                                    <select name="kriteria2" id="kriteria2" class="form-control" required>
-                                                        <option value=""> - Pilih - </option>
-                                                        @foreach ($list_kriteria as $kriteria)
-                                                            <option value="{{ $kriteria->id }}">
-                                                                {{ $kriteria->nama }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="form-group" style="padding-right: 10px;">
-                                                    <button class="btn btn-primary">
-                                                        <span class="glyphicon glyphicon-edit"></span>
-                                                        Ubah
-                                                    </button>
-                                                </div>
-                                            </form>
+                                            <a href="/admin/user/create" class="btn btn-danger btn-flat"
+                                                style="border-radius: 5px;"> Reset Perubahan
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -77,7 +86,7 @@
                     </div>
                 </div>
                 <div class="card-body tableIndex">
-                    <table id="exam1" class="table table-hover table-bordered table-striped mt-8">
+                    <table id="exam1" class="table table-hover table-bordered table-striped mt-8" data-export-title="Matriks Kriteria" no-action="true">
                         <thead>
                             <tr class="tableHeadRow">
                                 <th>Kode</th>

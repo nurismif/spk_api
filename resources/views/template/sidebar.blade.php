@@ -9,12 +9,16 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+
+            @if (Auth::user()->jabatan == User::TIM_KPG_ROLE ||  Auth::user()->jabatan == User::KEPSEK_ROLE)
             <li class="nav-item">
                 <a href="/admin/template/dashboard" class="nav-link">
                     <i class="nav-icon fas fa-home"></i>
                     <p>Dashboard</p>
                 </a>
             </li>
+            @endif
+            @if (Auth::user()->jabatan == User::TIM_KPG_ROLE)
             <li class="nav-item">
                 <a href="/admin/user/index" class="nav-link">
                     <i class="nav-icon fas fa-users"></i>
@@ -49,12 +53,15 @@
                     </li>
                 </ul>
             </li>
+            @endif
+            @if (Auth::user()->jabatan == User::KEPSEK_ROLE)
             <li class="nav-item">
                 <a href="/admin/penilaian/index" class="nav-link">
                     <i class="nav-icon fas fa-bookmark"></i>
                     <p>Penilaian </p>
                 </a>
             </li>
+            @endif
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-file-text"></i>

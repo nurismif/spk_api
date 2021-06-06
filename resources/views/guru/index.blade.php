@@ -21,7 +21,7 @@
         <section class="content">
             <div class="card w-100">
                 <div class="card-body tableIndex">
-                    <table id="exam1" class="table table-hover table-bordered table-striped mt-8">
+                    <table id="exam1" class="table table-hover table-bordered table-striped mt-8" data-export-title="Guru">
                         <thead>
                             <tr class="tableHeadRow">
                                 <th style="width: 1rem">No</th>
