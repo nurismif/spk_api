@@ -113,10 +113,7 @@ class AhpMethodService
 
           $user_ids = Penilaian::pluck('user_id')->unique()->values();
           $final_values_sorted = deep_copy($final_values)->sortDesc();
-
-          $ranks = $final_values->keys();
-
-          dd($final_values, $final_values_sorted, $ranks);
+          $ranks = $final_values_sorted->keys()->flip();
 
           foreach ($user_ids as $i => $user_id) {
                AhpMethod::updateOrCreate(
