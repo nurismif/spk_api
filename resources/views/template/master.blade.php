@@ -175,20 +175,8 @@
                             extend: 'colvis'
                         }),
                     ]
-                    // "buttons": ["excel", "print", "colvis"]
                 }).buttons().container().appendTo('#exam1_wrapper .col-md-6:eq(0)');
             }
-
-
-            // $('#example2').DataTable({
-            //     "paging": true,
-            //     "lengthChange": false,
-            //     "searching": true,
-            //     "ordering": true,
-            //     "info": true,
-            //     "autoWidth": false,
-            //     "responsive": true,
-            // });
         });
 
     </script>
