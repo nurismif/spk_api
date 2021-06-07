@@ -33,7 +33,7 @@
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas 3"></i>
+                    <i class="nav-icon fas fa-puzzle-piece"></i>
                     <p>Kriteria
                         <i class="right fas fa-angle-left"></i>
                     </p>

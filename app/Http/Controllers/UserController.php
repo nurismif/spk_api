@@ -252,10 +252,6 @@ class UserController extends Controller
         }
         $user->save();
 
-        // $user->save();
-
-        // $user->update($request->all());
-
         return $request->type == 'user' ? redirect('admin/user/index') : redirect('admin/teacher/index');
     }
 

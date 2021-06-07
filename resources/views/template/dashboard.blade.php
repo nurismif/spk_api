@@ -32,7 +32,7 @@
                                 <p>Users</p>
                             </div>
                             <div class="icon">
-                                <i class="nav-icon fas fa-home"></i>
+                                <i class="nav-icon fas fa-users"></i>
                             </div>
                             <a href="/admin/user/index" class="small-box-footer">More info <i
                                     class="fas fa-arrow-circle-right"></i></a>

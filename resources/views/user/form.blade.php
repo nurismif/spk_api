@@ -43,10 +43,8 @@
                             <div class="input-group">
                                 <input type="password" id="inputPassword"
                                     class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }} input-password"
-                                    name="password" 
-                                    {{-- value="{{ isset($users) ? $users->password : old('password') }}" --}}
-                                    placeholder="{{ $errors->has('password') ? $errors->first('password') : 'Masukkan Password' }}"
-                                    >
+                                    name="password" {{-- value="{{ isset($users) ? $users->password : old('password') }}" --}}
+                                    placeholder="{{ $errors->has('password') ? $errors->first('password') : 'Masukkan Password' }}">
                                 <div class="input-group-append">
                                     <button onclick="togglePassword()" type="button" class="input-group-text">
                                         <i class="fa fa-eye" id="changeicon"></i>
@@ -64,9 +62,7 @@
                             <div class="input-group">
                                 <input type="password" id="inputPasswordconfirm"
                                     class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }} input-password"
-                                    name="password_confirmation"
-                                    {{-- value="{{ isset($users) ? $users->password : old('password') }}" --}}
-                                    placeholder="Password">
+                                    name="password_confirmation" {{-- value="{{ isset($users) ? $users->password : old('password') }}" --}} placeholder="Password">
                                 <div class="input-group-append">
                                     <button onclick="togglePasswordConfirm()" type="button" class="input-group-text">
                                         <i class="fa fa-eye" id="changeiconconfirm"></i>
@@ -80,18 +76,18 @@
                         <label for="inputJabatan" class="col-sm-2 col-form-label">Jabatan</label>
                         <div class="col-sm-10">
                             {!! Form::select(
-								'jabatan',
-								[
-									User::TIM_KPG_ROLE => 'Tim_PKG',
-									User::KEPSEK_ROLE => 'Kepala Sekolah',
-									User::GURU_ROLE => 'Guru',
-								],
-								isset($users) ? $users->jabatan : old('jabatan'),
-								[
-									'class' => $errors->has('jabatan') ? 'form-control is-invalid' : 'form-control',
-									'placeholder' => $errors->has('jabatan') ? $errors->first('jabatan') : 'Pilih Jabatan',
-								],
-							) !!}
+    'jabatan',
+    [
+        User::TIM_KPG_ROLE => 'Tim_PKG',
+        User::KEPSEK_ROLE => 'Kepala Sekolah',
+        User::GURU_ROLE => 'Guru',
+    ],
+    isset($users) ? $users->jabatan : old('jabatan'),
+    [
+        'class' => $errors->has('jabatan') ? 'form-control is-invalid' : 'form-control',
+        'placeholder' => $errors->has('jabatan') ? $errors->first('jabatan') : 'Pilih Jabatan',
+    ],
+) !!}
                         </div>
                     </div>
 
@@ -100,11 +96,13 @@
                             <label for="inputJenisKelamin" class="col-sm-2 col-form-label">Jenis Kelamin</label>
                             <div style="padding-left: 2rem" class="col-sm-2">
                                 <div class="form-check">
-                                    <input class="form-check-input" value='{{ User::MALE_TYPE }}' type="radio" name="jenis_kelamin">
+                                    <input class="form-check-input" value='{{ User::MALE_TYPE }}' type="radio"
+                                        name="jenis_kelamin">
                                     <label class="form-check-label">Pria</label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" value='{{ User::FEMALE_TYPE }}' type="radio" name="jenis_kelamin">
+                                    <input class="form-check-input" value='{{ User::FEMALE_TYPE }}' type="radio"
+                                        name="jenis_kelamin">
                                     <label class="form-check-label">Wanita</label>
                                 </div>
                             </div>
@@ -119,22 +117,22 @@
                     <div style="margin: 1rem;" class="form-group row">
                         <label for="inputJurusan" class="col-sm-2 col-form-label">Jurusan</label>
                         <div class="col-sm-10">
-							{!! Form::select(
-								'jurusan',
-								[
-									null => '----',
-									'Multimedia' => 'Multimedia',
-									'Animasi' => 'Animasi',
-									'Akuntansi' => 'Akuntansi',
-									'Perkantoran' => 'Perkantoran',
-									'BDP' => 'BDP',
-								],
-								isset($users) ? $users->jurusan : old('jurusan'),
-								[
-									'class' => $errors->has('jurusan') ? 'form-control is-invalid' : 'form-control',
-									'placeholder' => $errors->has('jurusan') ? $errors->first('jurusan') : 'Pilih Jurusan',
-								],
-							) !!}
+                            {!! Form::select(
+    'jurusan',
+    [
+        null => '----',
+        'Multimedia' => 'Multimedia',
+        'Animasi' => 'Animasi',
+        'Akuntansi' => 'Akuntansi',
+        'Perkantoran' => 'Perkantoran',
+        'BDP' => 'BDP',
+    ],
+    isset($users) ? $users->jurusan : old('jurusan'),
+    [
+        'class' => $errors->has('jurusan') ? 'form-control is-invalid' : 'form-control',
+        'placeholder' => $errors->has('jurusan') ? $errors->first('jurusan') : 'Pilih Jurusan',
+    ],
+) !!}
                         </div>
                     </div>
 
@@ -151,10 +149,10 @@
 							<span class="help-block">{{ $errors->first('nip') }}</span>
 						@endif  									
 					</div> --}}
-					<input type="hidden" name="type" value="{{$editType}}">
+                    <input type="hidden" name="type" value="{{ $editType }}">
                     <div class="form-group" style="padding-top: 20px; width: 25%; margin: auto;">
                         {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
-					</div>
+                    </div>
                 </div>
             </div>
         </div>
