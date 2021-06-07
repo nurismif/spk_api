@@ -115,6 +115,8 @@ class AhpMethodService
           $final_values = $final_values->sortDesc();
           $ranks = $final_values->keys();
 
+          dd($final_values,$ranks);
+
           foreach ($user_ids as $i => $user_id) {
                AhpMethod::updateOrCreate(
                     [
