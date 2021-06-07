@@ -68,7 +68,7 @@ ul.pagination, ul.pager {
 }
 
 .tableIndex {
-	height: 73.5vh;
+	min-height: 73.5vh;
 }
 
 #exam1 {

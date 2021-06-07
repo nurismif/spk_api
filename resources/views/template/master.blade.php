@@ -130,6 +130,7 @@
     <script>
         $(function() {
             $.noConflict();
+
             var buttonCommon = {
                 init: function(dt, node, config) {
                     var table = dt.table().context[0].nTable;
@@ -148,23 +149,36 @@
                 arr.push(i);
             }
 
-            $("#exam1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": [
-                    $.extend(true, {}, buttonCommon, {
-                        extend: 'excelHtml5',
-                        exportOptions: {
-                            columns: arr
-                        }
-                    }),
-                    $.extend(true, {}, buttonCommon, {
-                        extend: 'colvis'
-                    }),
-                ]
-                // "buttons": ["excel", "print", "colvis"]
-            }).buttons().container().appendTo('#exam1_wrapper .col-md-6:eq(0)');
+            var tableName = $('#exam1').attr('data-export-title')
+            console.log(tableName)
+            if(tableName == "User" || tableName == "Guru" || tableName == "Matriks Kriteria" || tableName == "Detail Kriteria"){
+                $("#exam1").DataTable({
+                    "responsive": true,
+                    "lengthChange": false,
+                    "autoWidth": false,
+                    "pageResize": true,
+                }).buttons().container().appendTo('#exam1_wrapper .col-md-6:eq(0)');
+            }else{
+                $("#exam1").DataTable({
+                    "responsive": true,
+                    "lengthChange": false,
+                    "autoWidth": false,
+                    "pageResize": true,
+                    "buttons": [
+                        $.extend(true, {}, buttonCommon, {
+                            extend: 'excelHtml5',
+                            exportOptions: {
+                                columns: arr
+                            }
+                        }),
+                        $.extend(true, {}, buttonCommon, {
+                            extend: 'colvis'
+                        }),
+                    ]
+                    // "buttons": ["excel", "print", "colvis"]
+                }).buttons().container().appendTo('#exam1_wrapper .col-md-6:eq(0)');
+            }
+
 
             // $('#example2').DataTable({
             //     "paging": true,
