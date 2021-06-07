@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 use function DeepCopy\deep_copy;
 
@@ -224,7 +225,7 @@ class UserController extends Controller
             'nip'   =>  'required|string|max:30',
             'nama'   =>  'required|string|max:255',
             'username'   =>  'required|string|max:50',
-            'password'   =>  'required|string|max:20',
+            'password'   =>  'sometimes|max:20|confirmed',
             'jurusan'   =>  'required|string|max:100',
             'jabatan'   =>  'required|string|max:100'
         ]);
@@ -237,7 +238,23 @@ class UserController extends Controller
                 ->withErrors($validator);
         }
 
-        $user->update($request->all());
+        // Update User
+        $user = User::find($id);
+        $user->nip = $request->input('nip');
+        $user->nama = $request->input('nama');
+        $user->username = $request->input('username');
+        $user->jurusan = $request->input('jurusan');
+        $user->jabatan = $request->input('jabatan');
+
+        if(!empty($request->input('password')))
+        {
+            $user->password = bcrypt($request->input('password'));
+        }
+        $user->save();
+
+        // $user->save();
+
+        // $user->update($request->all());
 
         return $request->type == 'user' ? redirect('admin/user/index') : redirect('admin/teacher/index');
     }
