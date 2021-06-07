@@ -18,6 +18,41 @@
             </div>
         </section>
 
+        <!-- Modal -->
+        <div class="modal fade" id="modalTingatKepentingan" tabindex="-1" role="dialog"
+            aria-labelledby="modalTingatKepentinganTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Daftar Tingkat Kepentingan</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th scope="col w-4">Nilai</th>
+                                <th scope="col">Tingat Kepentingan</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($list_perbandingan as $nama => $nilai)
+                                    <tr>
+                                      <td>{{ $nilai }}</td>
+                                      <td>{{ $nama }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                          </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <section class="content">
             <div class="card w-100">
@@ -27,12 +62,11 @@
                             <div class="col-md-10">
                                 <div class="dt-buttons btn-group flex-wrap">
                                     <div class="box p-0" style="padding-bottom: 10px;">
-                                        <form class="form-inline" action="{{ route('matriks.update') }}"
-                                            method="post">
+                                        <form class="form-inline" action="{{ route('matriks.update') }}" method="post">
                                             @csrf
                                             <div class="form-group" style="padding-right: 10px;">
                                                 <select name="kriteria1" id="kriteria1" class="form-control" required>
-                                                    <option value=""> - Pilih - </option>
+                                                    <option value=""> - Pilih Kriteria - </option>
                                                     @foreach ($list_kriteria as $kriteria)
                                                         <option value="{{ $kriteria->id }}">
                                                             {{ $kriteria->nama }}
@@ -40,10 +74,9 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="form-group" style="padding-right: 10px;">
-                                                <select name="perbandingan" id="perbandingan" class="form-control"
-                                                    required>
-                                                    <option value=""> - Pilih - </option>
+                                            <div class="form-group">
+                                                <select name="perbandingan" id="perbandingan" class="form-control" required>
+                                                    <option value=""> - Pilih Tingkat Kepentingan - </option>
                                                     @foreach ($list_perbandingan as $nama => $nilai)
                                                         <option value="{{ $nilai }}">
                                                             {{ $nama }}
@@ -51,9 +84,14 @@
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            <div style="margin-left: 10px; margin-right: 10px;">
+                                                <a href="#" data-toggle="modal" data-target="#modalTingatKepentingan">
+                                                    <i class="far fa-question-circle"></i>
+                                                </a>
+                                            </div>
                                             <div class="form-group" style="padding-right: 10px;">
                                                 <select name="kriteria2" id="kriteria2" class="form-control" required>
-                                                    <option value=""> - Pilih - </option>
+                                                    <option value=""> - Pilih Kriteria Target - </option>
                                                     @foreach ($list_kriteria as $kriteria)
                                                         <option value="{{ $kriteria->id }}">
                                                             {{ $kriteria->nama }}
@@ -86,7 +124,8 @@
                     </div>
                 </div>
                 <div class="card-body tableIndex">
-                    <table id="exam1" class="table table-hover table-bordered table-striped mt-8" data-export-title="Matriks Kriteria" no-action="true">
+                    <table id="exam1" class="table table-hover table-bordered table-striped mt-8"
+                        data-export-title="Matriks Kriteria" no-action="true">
                         <thead>
                             <tr class="tableHeadRow">
                                 <th>Kode</th>
