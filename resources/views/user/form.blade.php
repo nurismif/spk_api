@@ -43,7 +43,8 @@
                             <div class="input-group">
                                 <input type="password" id="inputPassword"
                                     class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }} input-password"
-                                    name="password" value="{{ isset($users) ? $users->password : old('password') }}"
+                                    name="password" 
+                                    {{-- value="{{ isset($users) ? $users->password : old('password') }}" --}}
                                     placeholder="{{ $errors->has('password') ? $errors->first('password') : 'Masukkan Password' }}">
                                 <div class="input-group-append">
                                     <button onclick="togglePassword()" type="button" class="input-group-text">
@@ -63,7 +64,7 @@
                                 <input type="password" id="inputPasswordconfirm"
                                     class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }} input-password"
                                     name="password_confirmation"
-                                    value="{{ isset($users) ? $users->password : old('password') }}"
+                                    {{-- value="{{ isset($users) ? $users->password : old('password') }}" --}}
                                     placeholder="Password">
                                 <div class="input-group-append">
                                     <button onclick="togglePasswordConfirm()" type="button" class="input-group-text">

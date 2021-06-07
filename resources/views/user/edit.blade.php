@@ -12,7 +12,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ url('home') }}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page"><a href="{{ url('user') }}">User
+                            <li class="breadcrumb-item active" aria-current="page"><a href="{{ url('admin/user/index') }}">User
                                     List</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Add User</li>
                         </ol>
