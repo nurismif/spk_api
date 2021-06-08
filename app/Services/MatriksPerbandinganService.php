@@ -2,8 +2,6 @@
 
 namespace App\Services;
 
-use App\KriteriaAHP;
-use App\MatriksKriteria;
 use App\NilaiPerbandingan;
 use Illuminate\Support\Collection;
 
@@ -44,5 +42,11 @@ class MatriksPerbandinganService
           }
 
           $cell->save();
+     }
+
+     public function resetMatrixValue()
+     {
+          NilaiPerbandingan::where("nilai_perbandingan", "!=", 0)
+               ->update(["nilai_perbandingan" => 0]);
      }
 }

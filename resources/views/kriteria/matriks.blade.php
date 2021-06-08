@@ -32,20 +32,20 @@
                     <div class="modal-body">
                         <table class="table table-striped">
                             <thead>
-                              <tr>
-                                <th scope="col w-4">Nilai</th>
-                                <th scope="col">Tingat Kepentingan</th>
-                              </tr>
+                                <tr>
+                                    <th scope="col w-4">Nilai</th>
+                                    <th scope="col">Tingat Kepentingan</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 @foreach ($list_perbandingan as $nama => $nilai)
                                     <tr>
-                                      <td>{{ $nilai }}</td>
-                                      <td>{{ $nama }}</td>
+                                        <td>{{ $nilai }}</td>
+                                        <td>{{ $nama }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
-                          </table>
+                        </table>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -113,9 +113,12 @@
                                 <div class="dt-buttons btn-group flex-wrap">
                                     <div class="box p-0" style="padding-bottom: 10px;">
                                         <div class="pull-right">
-                                            <a href="/admin/user/create" class="btn btn-danger btn-flat"
-                                                style="border-radius: 5px;"> Reset Perubahan
-                                            </a>
+                                            <form action="{{ route('matriks.reset') }}" method="post">
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger btn-flat"
+                                                    style="border-radius: 5px;"> Reset Perubahan
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

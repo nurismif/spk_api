@@ -42,6 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/admin/kriteria/{kriteria}/detail', 'KriteriaAHPController@detail');
     Route::get('/admin/kriteria/matriks', 'KriteriaAHPController@matriks')->name('matriks');
     Route::post('/admin/kriteria/matriks/update', 'KriteriaAHPController@matriksUpdate')->name('matriks.update');
+    Route::post('/admin/kriteria/matriks/reset', 'KriteriaAHPController@matriksReset')->name('matriks.reset');
 
     Route::get('/admin/teacher/index', 'TeacherController@index');
     Route::get('/admin/teacher/{user}/edit', 'TeacherController@edit');

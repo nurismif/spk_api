@@ -198,4 +198,12 @@ class KriteriaAHPController extends Controller
 
         return redirect()->back();
     }
+
+    public function matriksReset()
+    {
+        $matriks_service = new  MatriksPerbandinganService();
+        $matriks_service->resetMatrixValue();
+
+        return redirect()->back();
+    }
 }
