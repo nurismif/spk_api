@@ -246,8 +246,7 @@ class UserController extends Controller
         $user->jurusan = $request->input('jurusan');
         $user->jabatan = $request->input('jabatan');
 
-        if(!empty($request->input('password')))
-        {
+        if (!empty($request->input('password'))) {
             $user->password = bcrypt($request->input('password'));
         }
         $user->save();
@@ -450,10 +449,8 @@ class UserController extends Controller
                 $k->bobot = $k->bobot * 1;
             }
         }
-        // return "<pre>".print_r($kriteria,true)."</pre>";
-        $users = User::with('penilaian')->where('jabatan', '=', 'Guru')->get();
-        // return "<pre>".print_r($users, true)."</pre>";
-        // return response()->json($users, 200);
+        
+        $users = User::with('penilaian')->where('jabatan', 'Guru')->get();
         $data = [];
         $result = [];
         foreach ($users as $u) {

@@ -111,10 +111,12 @@ class AhpMethodService
                }
           }
 
+          // Get the rank into a seperate list
           $user_ids = Penilaian::pluck('user_id')->unique()->values();
           $final_values_sorted = deep_copy($final_values)->sortDesc();
           $ranks = $final_values_sorted->keys()->flip();
 
+          // Set the value and rank to the database
           foreach ($user_ids as $i => $user_id) {
                AhpMethod::updateOrCreate(
                     [

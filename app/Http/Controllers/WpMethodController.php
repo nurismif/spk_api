@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Services\WpMethodService;
+use App\WpMethod;
 
 class WpMethodController extends Controller
 {
@@ -13,16 +14,20 @@ class WpMethodController extends Controller
      */
     public function index()
     {
-        return view('spk.wp');
+        $wp_methods = WpMethod::get();
+        return view('spk.wp', compact('wp_methods'));
     }
 
     /**
-     * Generate the AHP method and store it to database.
+     * Generate the WP method and store it to database.
      *
      * @return \Illuminate\Http\Response
      */
     public function generate()
     {
-        //
+        $wp_method_service = new WpMethodService();
+        $wp_method_service->recalculateWpValues();
+
+        return redirect()->route('wp');
     }
 }

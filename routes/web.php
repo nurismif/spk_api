@@ -54,5 +54,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/admin/ahp/generate', 'AhpMethodController@generate')->name('ahp.generate');
 
     Route::get('/admin/wp', 'WpMethodController@index')->name('wp');
-    Route::get('/admin/wp/generate', 'AhpMethodController@generate')->name('wp.generate');
+    Route::get('/admin/wp/generate', 'WpMethodController@generate')->name('wp.generate');
 });
