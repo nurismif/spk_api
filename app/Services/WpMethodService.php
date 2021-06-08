@@ -49,8 +49,6 @@ class WpMethodService
                return $item / $vector_s_total;
           });
 
-          dd($vector_v);
-
           // Get the rank into a seperate list
           $user_ids = Penilaian::pluck('user_id')->unique()->values();
           $final_values_sorted = deep_copy($vector_v)->sortDesc();
