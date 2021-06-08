@@ -1,31 +1,35 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Perbandingan;
 use Illuminate\Http\Request;
 
-class PerbandinganController extends Controller
+class ApiPerbandinganController extends Controller
 {
-    public function get_all_perbandingan(){
+    public function getAllPerbandingan()
+    {
         return response()->json(Perbandingan::with('perbandingan')->get(), 200);
     }
 
-    public function insert_perbandingan(Request $request){
-        $insert_perbandingan = new Perbandingan();
-        $insert_perbandingan->nama= $request->nama;
-        $insert_perbandingan->nilai= $request->nilai;
-        $insert_perbandingan->save();
+    public function storePerbandingan(Request $request)
+    {
+        $storePerbandingan = new Perbandingan();
+        $storePerbandingan->nama = $request->nama;
+        $storePerbandingan->nilai = $request->nilai;
+        $storePerbandingan->save();
         return response([
             'status' => 'OK',
             'message' => 'Pebandingan Disimpan',
-            'data' => $insert_perbandingan
+            'data' => $storePerbandingan
         ], 200);
     }
 
-    public function update_perbandingan(Request $request, $id){
+    public function updatePerbandingan(Request $request, $id)
+    {
         $check_perbandingan = Perbandingan::firstWhere('id', $id);
-        if($check_perbandingan){
+        if ($check_perbandingan) {
             $data_perbandingan = Perbandingan::find($id);
             $data_perbandingan->nama = $check_perbandingan->nama;
             $data_perbandingan->nilai = $check_perbandingan->nilai;
@@ -35,7 +39,7 @@ class PerbandinganController extends Controller
                 'message' => 'Perbandingan Diubah',
                 'data' => $data_perbandingan
             ], 200);
-        } else{
+        } else {
             return response([
                 'status' => 'NOT FOUND',
                 'message' => 'Id Perbandingan tidak ditemukan'
@@ -43,7 +47,8 @@ class PerbandinganController extends Controller
         }
     }
 
-    public function delete_perbandingan($id){
+    public function deletePerbandingan($id)
+    {
         $check_perbandingan = Perbandingan::firstWhere('id', $id);
         if ($check_perbandingan) {
             Perbandingan::destroy($id);
@@ -51,7 +56,7 @@ class PerbandinganController extends Controller
                 'status' => 'OK',
                 'message' => 'Perbandingan Dihapus'
             ], 200);
-        } else{
+        } else {
             return response([
                 'status' => 'NOT FOUND',
                 'message' => 'Perbandingan tidak ditemukan'
