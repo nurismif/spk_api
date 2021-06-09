@@ -10,8 +10,9 @@ use Illuminate\Support\Facades\DB;
 
 class TeacherController extends Controller
 {
-    
-    public function index(){
+
+    public function index()
+    {
         //mengambil data dari tabel user
         $user = DB::table('users')->get()->where('jabatan', '=', 'Guru');
         //mengirim data ke view user
@@ -48,5 +49,12 @@ class TeacherController extends Controller
 
         $user->update($request->all());
         return redirect('admin/guru/index');
+    }
+
+    public function delete($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->back()->with('status', 'User Berhasil Dihapus');
     }
 }

@@ -45,7 +45,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/admin/kriteria/matriks/reset', 'KriteriaAHPController@matriksReset')->name('matriks.reset');
 
     Route::get('/admin/teacher/index', 'TeacherController@index');
-    Route::get('/admin/teacher/{user}/edit', 'TeacherController@edit');
+    Route::get('/admin/teacher/{user}/edit', 'TeacherController@edit')->name('guru.edit');
+    Route::delete('/admin/teacher/{user}/delete', 'TeacherController@delete')->name('guru.delete');
 
     Route::get('/admin/penilaian/index', 'PenilaianController@index')->name('admin.penilaian.index');
     Route::get('/admin/penilaian/import_form', 'PenilaianController@importForm');
