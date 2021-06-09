@@ -56,6 +56,10 @@ Route::post('/nil_perbandingan/tambah_nil_perbandingan', 'Api\ApiNilaiPerbanding
 Route::put('/nil_perbandingan/update/{id}', 'Api\ApiNilaiPerbandinganController@updateNilaiPerbandingan');
 Route::delete('/nil_perbandingan/delete/{id}', 'Api\ApiNilaiPerbandinganController@deleteNilaiPerbandingan');
 
+// Dashboard
+Route::get('/dashboard/ahp', 'Api\ApiDashboardController@showAhpChart')->name('show.ahp');
+Route::get('/dashboard/wp', 'Api\ApiDashboardController@showWpChart')->name('show.wp');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

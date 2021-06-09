@@ -20,12 +20,12 @@ class ApiUserController extends Controller
 
     public function getNilaiUser(Request $request, $user_id)
     {
-        return Penilaian::where('user_id', $user_id)->get();
+        return response()->json(Penilaian::where('user_id', $user_id)->get(), 200);
     }
 
     public function getProfileUser(Request $request, $id)
     {
-        return User::where('id', $id)->get();
+        return response()->json(User::where('id', $id)->get(), 200);
     }
 
     public function storeGuru(Request $request)
