@@ -49,4 +49,11 @@ class TeacherController extends Controller
         $user->update($request->all());
         return redirect('admin/guru/index');
     }
+
+    public function delete($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect('admin/guru/index')->with('status', 'Guru Berhasil Dihapus');
+    }
 }
