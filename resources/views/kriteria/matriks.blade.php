@@ -132,17 +132,17 @@
                         <thead>
                             <tr class="tableHeadRow">
                                 <th>Kode</th>
-                                @foreach ($matriks as $nama => $perbandingan_list)
+                                @foreach ($matriks as $nama => $ratio_list)
                                     <th>{{ $nama }}</th>
                                 @endforeach
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($matriks as $nama => $perbandingan_list)
+                            @foreach ($matriks as $nama => $ratio_list)
                                 <tr>
                                     <th style="width: 10rem">{{ $nama }}</th>
-                                    @foreach ($perbandingan_list as $perbandingan)
-                                        <td style="width: 10rem">{{ $perbandingan }}</td>
+                                    @foreach ($ratio_list as $ratio)
+                                        <td style="width: 10rem">{{ $ratio }}</td>
                                     @endforeach
                                 </tr>
                             @endforeach
