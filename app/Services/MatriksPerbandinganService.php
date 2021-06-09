@@ -13,9 +13,8 @@ class MatriksPerbandinganService
           $groups = NilaiPerbandingan::orderBy('target_kriteria_ahp_id', "asc")
                ->get()
                ->groupBy("kriteria_ahp_id")
+               ->sort()
                ->values();
-
-          dd($groups);
 
           foreach ($groups as $i => $group) {
                $map_group = $group->map(function ($item) {
