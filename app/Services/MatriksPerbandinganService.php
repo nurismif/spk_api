@@ -12,15 +12,15 @@ class MatriksPerbandinganService
           $data = collect();
           $groups = NilaiPerbandingan::orderBy('target_kriteria_ahp_id', "asc")
                ->get()
-               ->groupBy("kriteria_ahp_id")
-               ->sort()
-               ->values();
+               ->groupBy("kriteria_ahp_id");
 
-          foreach ($groups as $i => $group) {
+          $index = 0;
+          foreach ($groups as $key => $group) {
                $map_group = $group->map(function ($item) {
                     return $item->nilai_perbandingan;
                });
-               $data->put($list_kriteria[$i]->nama, $map_group);
+               $data->put($list_kriteria[$index]->nama, $map_group);
+               $index += 1;
           };
 
           return $data;
