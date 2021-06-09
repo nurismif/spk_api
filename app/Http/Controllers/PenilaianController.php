@@ -38,6 +38,9 @@ class PenilaianController extends Controller
 
     public function import(Request $request)
     {
+        if (Penilaian::first() != null) {
+            Penilaian::truncate();
+        }
         FacadesExcel::import(new PenilaianImport, $request->file);
         return redirect()->route('admin.penilaian.index');
     }
