@@ -39,7 +39,8 @@
                                     <td>{{ $data->nip }}</td>
                                     <td>{{ $data->jurusan }}</td>
                                     <td class="centerThingsColumn">
-                                        <form action="{{ url('admin/teacher') }}/{{ $data->id }}" method="POST">
+                                        <form action="{{ url('admin/teacher') }}/{{ $data->id }}" method="POST"
+                                            onsubmit="return confirm('Yakin akan hapus data')">
                                             @csrf @method('DELETE')
                                             <a href="{{ url('admin/teacher') }}/{{ $data->id . '/edit' }}"
                                                 class="btn btn-warning btn-sm mr-1">
