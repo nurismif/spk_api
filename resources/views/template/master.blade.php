@@ -108,7 +108,7 @@
     <!-- datepicker -->
     <script src="{{ asset('adminlte/plugins/moment/moment.min.js') }}"></script>
     <script src="{{ asset('adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}">
-    </script>    <!-- AdminLTE App -->
+    </script> <!-- AdminLTE App -->
     <script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}"></script>
     {{-- Others --}}
     <script src="{{ asset('adminlte/plugins/jszip/jszip.min.js') }}"></script>
@@ -154,10 +154,7 @@
                             exportOptions: {
                                 columns: arr
                             }
-                        }),
-                        $.extend(true, {}, buttonCommon, {
-                            extend: 'colvis'
-                        }),
+                        })
                     ]
                 }
             }
