@@ -11,7 +11,8 @@ class ApiKriteriaController extends Controller
 {
     public function getAllKriteriaAhp()
     {
-        return response()->json(KriteriaAHP::all(), 200);
+        $kriteria_list = KriteriaAHP::get();
+        return response($kriteria_list, 200);
     }
 
     public function detailKriteriaAhp(Request $request, $kriteria_ahp_id)

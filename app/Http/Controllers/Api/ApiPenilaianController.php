@@ -15,12 +15,8 @@ class ApiPenilaianController extends Controller
             ->groupBy('user_id')
             ->sort()
             ->values();
-        $kriteria_list = KriteriaAHP::get();
 
-        return response([
-            'penilaian_list' => $penilaian_list,
-            'kriteria_list' => $kriteria_list
-        ], 200);
+        return response($penilaian_list, 200);
     }
 
     public function insertNilaiAhp(Request $request)
