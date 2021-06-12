@@ -44,12 +44,12 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
         Route::put('/penilaian/update/{id}', 'Api\ApiPenilaianController@updateNilaiAhp');
         Route::delete('/penilaian/delete/{id}', 'Api\ApiPenilaianController@deleteNilaiAhp');
 
-        Route::get('/kri_ahp', 'Api\ApiKriteriaAHPController@getAllKriteriaAhp');
-        Route::post('/kri_ahp/tambah_kri_ahp', 'Api\ApiKriteriaAHPController@storeKriteriaAhp');
-        Route::put('/kri_ahp/update/{id_kr_ahp}', 'Api\ApiKriteriaAHPController@updateKriteriaAhp');
-        Route::delete('/kri_ahp/delete/{id_kr_ahp}', 'Api\ApiKriteriaAHPController@deleteKriteriaAhp');
+        Route::get('/kri_ahp', 'Api\ApiKriteriaController@getAllKriteriaAhp');
+        Route::post('/kri_ahp/tambah_kri_ahp', 'Api\ApiKriteriaController@storeKriteriaAhp');
+        Route::put('/kri_ahp/update/{id_kr_ahp}', 'Api\ApiKriteriaController@updateKriteriaAhp');
+        Route::delete('/kri_ahp/delete/{id_kr_ahp}', 'Api\ApiKriteriaController@deleteKriteriaAhp');
         //Untuk get detail kriteria berdasarkan id kriteria
-        Route::get('/kri_ahp/{id_kr_ahp}/detail', 'Api\ApiKriteriaAHPController@detailKriteriaAhp');
+        Route::get('/kri_ahp/{id_kr_ahp}/detail', 'Api\ApiKriteriaController@detailKriteriaAhp');
 
         Route::get('/detail_kri', 'Api\ApiDetailController@getAllDetailKriteria');
         Route::post('/detail_kri/tambah_detail', 'Api\ApiDetailController@storeDetailKriteria');
