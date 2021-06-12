@@ -38,6 +38,7 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
         //Untuk get data daftar nilai berdasarkan id user
         Route::get('/penilaian/{id}/nilai', 'Api\ApiUserController@getNilaiUser');
 
+        //untuk get data penilaian dan juga daftar kriteria
         Route::get('/penilaian', 'Api\ApiPenilaianController@getAllPenilaian');
         Route::post('/penilaian/insertNilaiAhp', 'Api\ApiPenilaianController@insertNilaiAhp');
         Route::put('/penilaian/update/{id}', 'Api\ApiPenilaianController@updateNilaiAhp');
