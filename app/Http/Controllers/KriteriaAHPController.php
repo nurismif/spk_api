@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Validator;
 class KriteriaAHPController extends Controller
 {
 
-    public function index()
+public function index()
     {
         //mengambil data dari tabel user
         $user = DB::table('kriteria_ahp')->get();

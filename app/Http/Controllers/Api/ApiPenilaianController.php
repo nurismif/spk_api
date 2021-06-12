@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\KriteriaAHP;
 use App\Penilaian;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,16 @@ class ApiPenilaianController extends Controller
 {
     public function getAllPenilaian()
     {
-        return response()->json(Penilaian::with('kriteria_ahp', 'user')->get(), 200);
+        $penilaian_list = Penilaian::orderBy('kriteria_ahp_id')->get()
+            ->groupBy('user_id')
+            ->sort()
+            ->values();
+        $kriteria_list = KriteriaAHP::get();
+
+        return response([
+            'penilaian_list' => $penilaian_list,
+            'kriteria_list' => $kriteria_list
+        ], 200);
     }
 
     public function insertNilaiAhp(Request $request)
