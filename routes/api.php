@@ -66,6 +66,12 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
         Route::put('/nil_perbandingan/update/{id}', 'Api\ApiNilaiPerbandinganController@updateNilaiPerbandingan');
         Route::delete('/nil_perbandingan/delete/{id}', 'Api\ApiNilaiPerbandinganController@deleteNilaiPerbandingan');
 
+        Route::get('/ahp', 'Api\ApiAhpMethodController@index');
+        Route::get('/ahp/generate', 'Api\ApiAhpMethodController@generate');
+
+        Route::get('/wp', 'Api\ApiWpMethodController@index');
+        Route::get('/wp/generate', 'Api\ApiWpMethodController@generate');
+
         // Dashboard
         Route::get('/dashboard/ahp', 'Api\ApiDashboardController@showAhpChart')->name('show.ahp');
         Route::get('/dashboard/wp', 'Api\ApiDashboardController@showWpChart')->name('show.wp');
