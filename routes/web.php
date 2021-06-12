@@ -42,9 +42,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/admin/kriteria/{kriteria}/detail', 'KriteriaAHPController@detail');
     Route::get('/admin/kriteria/matriks', 'KriteriaAHPController@matriks')->name('matriks');
     Route::post('/admin/kriteria/matriks/update', 'KriteriaAHPController@matriksUpdate')->name('matriks.update');
+    Route::post('/admin/kriteria/matriks/reset', 'KriteriaAHPController@matriksReset')->name('matriks.reset');
 
     Route::get('/admin/teacher/index', 'TeacherController@index');
-    Route::get('/admin/teacher/{user}/edit', 'TeacherController@edit');
+    Route::get('/admin/teacher/{user}/edit', 'TeacherController@edit')->name('guru.edit');
+    Route::delete('/admin/teacher/{user}/delete', 'TeacherController@delete')->name('guru.delete');
 
     Route::get('/admin/penilaian/index', 'PenilaianController@index')->name('admin.penilaian.index');
     Route::get('/admin/penilaian/import_form', 'PenilaianController@importForm');
@@ -54,5 +56,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/admin/ahp/generate', 'AhpMethodController@generate')->name('ahp.generate');
 
     Route::get('/admin/wp', 'WpMethodController@index')->name('wp');
-    Route::get('/admin/wp/generate', 'AhpMethodController@generate')->name('wp.generate');
+    Route::get('/admin/wp/generate', 'WpMethodController@generate')->name('wp.generate');
 });

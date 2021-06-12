@@ -9,4 +9,9 @@ class WpMethod extends Model
     protected $fillable = [
         'user_id', 'wp_value', 'rank'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

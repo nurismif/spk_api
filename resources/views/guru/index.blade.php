@@ -39,9 +39,10 @@
                                     <td>{{ $data->nip }}</td>
                                     <td>{{ $data->jurusan }}</td>
                                     <td class="centerThingsColumn">
-                                        <form action="{{ url('admin/teacher') }}/{{ $data->id }}" method="POST">
-                                            @csrf @method('DELETE')
-                                            <a href="{{ url('admin/teacher') }}/{{ $data->id . '/edit' }}"
+                                        <form action="{{ route('guru.delete', $data->id) }}" method="POST"
+                                            onsubmit="return confirm('Yakin akan hapus data')">
+                                            @csrf @method('delete')
+                                            <a href="{{ route('guru.edit', $data->id) }}"
                                                 class="btn btn-warning btn-sm mr-1">
                                                 <i class="fa fa-pencil"></i>
                                             </a>

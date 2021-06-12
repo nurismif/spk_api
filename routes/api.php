@@ -14,48 +14,59 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Users
-Route::get('/users', 'UserController@get_all_user');
-Route::post('/user/guru', 'UserController@insert_guru');
-Route::get('/user/guru/ranking', 'UserController@get_ranking_guru');
-Route::get('/user/guru/ranking/ahp', 'UserController@get_ranking_guru_ahp');
-Route::post('/user/kepsek', 'UserController@insert_kepsek');
-Route::post('/user/tim_pkg', 'UserController@insert_tim_pkg');
-Route::post('/users/postapilogin', 'UserController@postApiLogin');
-Route::put('/user/update/{id}', 'UserController@update_user');
-Route::delete('/user/delete/{id}', 'UserController@delete_user');
-//Untuk get data profile berdasarkan id user
-Route::get('/user/{id}/profile', 'UserController@get_profile_user');
+Route::group(['middleware' => ['cors', 'json.response']], function () {
+    // Public
+    Route::post('/auth/login', 'Api\AuthController@login')->name('login.api');
+    Route::post('/auth/logout', 'Api\AuthController@logout')->name('logout.api');
+    Route::post('/users/postapilogin', 'Api\ApiUserController@postApiLogin');
 
-Route::get('/penilaian', 'PenilaianController@get_all_penilaian');
-Route::post('/penilaian/insert_nilai_ahp', 'PenilaianController@insert_nilai_ahp');
-Route::put('/penilaian/update/{id}', 'PenilaianController@update_nilai_ahp');
-Route::delete('/penilaian/delete/{id}', 'PenilaianController@delete_nilai_ahp');
-//Untuk get data daftar nilai berdasarkan id user
-Route::get('/penilaian/{id}/nilai', 'UserController@get_nilai_user');
+    // auth routes
+    Route::middleware('auth:api')->group(function () {
+        // Users
+        Route::get('/users', 'Api\ApiUserController@getAllUser');
+        //Untuk get data profile sendiri
+        Route::get('/user/profile', 'Api\ApiUserController@getMyProfile');
+        Route::post('/user/guru', 'Api\ApiUserController@storeGuru');
+        Route::get('/user/guru/ranking', 'Api\ApiUserController@getRankGuru');
+        Route::get('/user/guru/ranking/ahp', 'Api\ApiUserController@getRankGuruAhp');
+        Route::post('/user/kepsek', 'Api\ApiUserController@storeKepsek');
+        Route::post('/user/tim_pkg', 'Api\ApiUserController@storeTimKpg');
+        Route::put('/user/update/{id}', 'Api\ApiUserController@updateUser');
+        Route::delete('/user/delete/{id}', 'Api\ApiUserController@deleteUser');
+        //Untuk get data profile berdasarkan id user
+        Route::get('/user/{id}/profile', 'Api\ApiUserController@getProfileUser');
+        //Untuk get data daftar nilai berdasarkan id user
+        Route::get('/penilaian/{id}/nilai', 'Api\ApiUserController@getNilaiUser');
 
-Route::get('/kri_ahp', 'KriteriaAHPController@get_all_kr_ahp');
-Route::post('/kri_ahp/tambah_kri_ahp', 'KriteriaAHPController@insert_kri_ahp');
-Route::put('/kri_ahp/update/{id_kr_ahp}', 'KriteriaAHPController@update_kri_ahp');
-Route::delete('/kri_ahp/delete/{id_kr_ahp}', 'KriteriaAHPController@delete_kri_ahp');
-//Untuk get detail kriteria berdasarkan id kriteria
-Route::get('/kri_ahp/{id_kr_ahp}/detail', 'KriteriaAHPController@get_detail_kriteria_ahp');
+        Route::get('/penilaian', 'Api\ApiPenilaianController@getAllPenilaian');
+        Route::post('/penilaian/insertNilaiAhp', 'Api\ApiPenilaianController@insertNilaiAhp');
+        Route::put('/penilaian/update/{id}', 'Api\ApiPenilaianController@updateNilaiAhp');
+        Route::delete('/penilaian/delete/{id}', 'Api\ApiPenilaianController@deleteNilaiAhp');
 
-Route::get('/detail_kri', 'DetailController@get_all_detailpen');
-Route::post('/detail_kri/tambah_detail', 'DetailController@insert_detail');
-Route::put('/detail_kri/update/{id}', 'DetailController@update_detail');
-Route::delete('/detail_kri/delete/{id}', 'DetailController@delete_detail');
+        Route::get('/kri_ahp', 'Api\ApiKriteriaAHPController@getAllKriteriaAhp');
+        Route::post('/kri_ahp/tambah_kri_ahp', 'Api\ApiKriteriaAHPController@storeKriteriaAhp');
+        Route::put('/kri_ahp/update/{id_kr_ahp}', 'Api\ApiKriteriaAHPController@updateKriteriaAhp');
+        Route::delete('/kri_ahp/delete/{id_kr_ahp}', 'Api\ApiKriteriaAHPController@deleteKriteriaAhp');
+        //Untuk get detail kriteria berdasarkan id kriteria
+        Route::get('/kri_ahp/{id_kr_ahp}/detail', 'Api\ApiKriteriaAHPController@detailKriteriaAhp');
 
-Route::get('/perbandingan', 'PerbandinganController@get_all_perbandingan');
-Route::post('/perbandingan/tambah_perbandingan', 'PerbandinganController@insert_perbandingan');
-Route::put('/perbandingan/update/{id}', 'PerbandinganController@update_perbandingan');
-Route::delete('/perbandingan/delete/{id}', 'PerbandinganController@delete_perbandingan');
+        Route::get('/detail_kri', 'Api\ApiDetailController@getAllDetailKriteria');
+        Route::post('/detail_kri/tambah_detail', 'Api\ApiDetailController@storeDetailKriteria');
+        Route::put('/detail_kri/update/{id}', 'Api\ApiDetailController@updateDetailKriteria');
+        Route::delete('/detail_kri/delete/{id}', 'Api\ApiDetailController@deleteDetailKriteria');
 
-Route::get('/nil_perbandingan', 'NilaiPerbandinganController@get_all_nil_perbandingan');
-Route::post('/nil_perbandingan/tambah_nil_perbandingan', 'NilaiPerbandinganController@insert_nil_perbandingan');
-Route::put('/nil_perbandingan/update/{id}', 'NilaiPerbandinganController@update_perbandingan');
-Route::delete('/nil_perbandingan/delete/{id}', 'NilaiPerbandinganController@delete_perbandingan');
+        Route::get('/perbandingan', 'Api\ApiPerbandinganController@getAllPerbandingan');
+        Route::post('/perbandingan/tambah_perbandingan', 'Api\ApiPerbandinganController@storePerbandingan');
+        Route::put('/perbandingan/update/{id}', 'Api\ApiPerbandinganController@updatePerbandingan');
+        Route::delete('/perbandingan/delete/{id}', 'Api\ApiPerbandinganController@deletePerbandingan');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+        Route::get('/nil_perbandingan', 'Api\ApiNilaiPerbandinganController@getAllNilaiPerbandingan');
+        Route::post('/nil_perbandingan/tambah_nil_perbandingan', 'Api\ApiNilaiPerbandinganController@storeNilaiPerbandingan');
+        Route::put('/nil_perbandingan/update/{id}', 'Api\ApiNilaiPerbandinganController@updateNilaiPerbandingan');
+        Route::delete('/nil_perbandingan/delete/{id}', 'Api\ApiNilaiPerbandinganController@deleteNilaiPerbandingan');
+
+        // Dashboard
+        Route::get('/dashboard/ahp', 'Api\ApiDashboardController@showAhpChart')->name('show.ahp');
+        Route::get('/dashboard/wp', 'Api\ApiDashboardController@showWpChart')->name('show.wp');
+    });
 });

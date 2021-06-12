@@ -17,8 +17,6 @@
         href="{{ asset('adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
-    <!-- fullCalendar -->
-    <link rel="stylesheet" href="{{ asset('adminlte/plugins/daterangepicker/daterangepicker.css') }}">
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
     <link rel="stylesheet"
@@ -76,7 +74,6 @@
 
     <!-- jQuery -->
     <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
-
     <!--===============================================================================================-->
     {{-- <script src="{{ asset('table/vendor/jquery/jquery-3.2.1.min.js') }}"></script> --}}
     <!--===============================================================================================-->
@@ -89,7 +86,6 @@
     <script>
         $('.js-pscroll').each(function() {
             var ps = new PerfectScrollbar(this);
-
             $(window).on('resize', function() {
                 ps.update();
             })
@@ -98,14 +94,6 @@
     </script>
     <!--===============================================================================================-->
     <script src="{{ asset('table/js/main.js') }}"></script>
-
-
-    <!-- Bootstrap 4 -->
-    {{-- <script src="{{asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script> --}}
-    {{-- <!-- DataTables  & Plugins -->
-    <script src="../../plugins/jszip/jszip.min.js"></script>
-    <script src="../../plugins/pdfmake/pdfmake.min.js"></script>
-    <script src="../../plugins/pdfmake/vfs_fonts.js"></script> --}}
 
     <!-- DataTables -->
     <script src="{{ asset('adminlte/plugins/datatables/jquery.dataTables.min.js') }}"></script>
@@ -117,21 +105,18 @@
     <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
-    <!-- daterangepicker -->
+    <!-- datepicker -->
     <script src="{{ asset('adminlte/plugins/moment/moment.min.js') }}"></script>
     <script src="{{ asset('adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}">
-    </script>
-    <!-- AdminLTE App -->
+    </script> <!-- AdminLTE App -->
     <script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}"></script>
     {{-- Others --}}
     <script src="{{ asset('adminlte/plugins/jszip/jszip.min.js') }}"></script>
-    {{-- <script src="{{ asset('adminlte/pdfmake/pdfmake.min.js') }}"></script> --}}
     <!-- Page specific script -->
     <script>
         $(function() {
             $.noConflict();
-
-            var buttonCommon = {
+            const buttonCommon = {
                 init: function(dt, node, config) {
                     var table = dt.table().context[0].nTable;
                     if (table) config.title = $(table).data('export-title')
@@ -139,44 +124,50 @@
                 title: 'default title'
             };
 
-            var numCols = $('#exam1 thead th').length;
-            if($('#exam1').attr('no-action') == undefined){
+            let numCols = $('#exam1 thead th').length;
+            if ($('#exam1').attr('no-action') == undefined) {
                 numCols -= 1;
             }
-            var arr = []
 
-            for (let i=0; i<numCols; i++){
+            const arr = []
+            for (let i = 0; i < numCols; i++) {
                 arr.push(i);
             }
 
-            var tableName = $('#exam1').attr('data-export-title')
-            console.log(tableName)
-            if(tableName == "User" || tableName == "Guru" || tableName == "Matriks Kriteria" || tableName == "Detail Kriteria"){
-                $("#exam1").DataTable({
-                    "responsive": true,
-                    "lengthChange": false,
-                    "autoWidth": false,
-                    "pageResize": true,
-                }).buttons().container().appendTo('#exam1_wrapper .col-md-6:eq(0)');
-            }else{
-                $("#exam1").DataTable({
-                    "responsive": true,
-                    "lengthChange": false,
-                    "autoWidth": false,
-                    "pageResize": true,
+            let datatableConfigs = {
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "pageResize": true,
+            };
+            const tableName = $('#exam1').attr('data-export-title');
+
+            if (tableName != "User" &&
+                tableName != "Guru" &&
+                tableName != "Matriks Kriteria" &&
+                tableName != "Detail Kriteria") {
+                datatableConfigs = {
+                    ...datatableConfigs,
                     "buttons": [
                         $.extend(true, {}, buttonCommon, {
                             extend: 'excelHtml5',
                             exportOptions: {
                                 columns: arr
                             }
-                        }),
-                        $.extend(true, {}, buttonCommon, {
-                            extend: 'colvis'
-                        }),
+                        })
                     ]
-                }).buttons().container().appendTo('#exam1_wrapper .col-md-6:eq(0)');
+                }
             }
+
+            if (tableName == "Matriks Kriteria") {
+                datatableConfigs = {
+                    ...datatableConfigs,
+                    ordering: false
+                }
+            }
+
+            $("#exam1").DataTable(datatableConfigs).buttons().container().appendTo(
+                '#exam1_wrapper .col-md-6:eq(0)');
         });
 
     </script>
