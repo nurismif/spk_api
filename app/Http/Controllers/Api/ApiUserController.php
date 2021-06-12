@@ -33,7 +33,7 @@ class ApiUserController extends Controller
 
     public function getMyProfile(Request $request)
     {
-        $user = User::where('user_id', Auth::id())->firstOrFail();
+        $user = User::where('id', Auth::id())->firstOrFail();
         return new UserResource($user);
     }
 
