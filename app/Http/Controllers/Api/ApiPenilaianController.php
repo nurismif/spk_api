@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\KriteriaAHP;
+use App\Http\Resources\PenilaianCollection;
+use App\Http\Resources\PenilaianResource;
 use App\Penilaian;
 use Illuminate\Http\Request;
 
@@ -14,9 +15,21 @@ class ApiPenilaianController extends Controller
         $penilaian_list = Penilaian::orderBy('kriteria_ahp_id')->get()
             ->groupBy('user_id')
             ->sort()
-            ->values();
+            ->values()
+            ->map(
+                function ($group) {
+                    return (object)[
+                        'nilai' => $group->map(
+                            function ($n) {
+                                return $n->nilai;
+                            }
+                        ),
+                        'user' => $group[0]->user
+                    ];
+                }
+            );
 
-        return response($penilaian_list, 200);
+        return PenilaianResource::collection($penilaian_list);
     }
 
     public function insertNilaiAhp(Request $request)
