@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\KriteriaAHP;
 use App\NilaiPerbandingan;
 use App\Penilaian;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use function DeepCopy\deep_copy;
 
@@ -15,7 +17,7 @@ class ApiUserController extends Controller
 {
     public function getAllUser()
     {
-        return response()->json(User::all(), 200);
+        return UserResource::collection(User::all());
     }
 
     public function getNilaiUser(Request $request, $user_id)
@@ -25,7 +27,14 @@ class ApiUserController extends Controller
 
     public function getProfileUser(Request $request, $id)
     {
-        return response()->json(User::where('id', $id)->get(), 200);
+        $user = User::where('id', $id)->firstOrFail();
+        return new UserResource($user);
+    }
+
+    public function getMyProfile(Request $request)
+    {
+        $user = User::where('user_id', Auth::id())->firstOrFail();
+        return new UserResource($user);
     }
 
     public function storeGuru(Request $request)
@@ -45,11 +54,11 @@ class ApiUserController extends Controller
         $data = $request->input();
         $data['jabatan'] = 'KepSek';
         $data['jurusan'] = null;
-        $insert_user = User::create($data);
+        $user = User::create($data);
         return response([
             'status' => 200,
             'message' => 'Berhasil menginput data kepsek',
-            'data' => $insert_user
+            'data' => new UserResource($user)
         ]);
     }
 
@@ -58,11 +67,11 @@ class ApiUserController extends Controller
         $data = $request->input();
         $data['jabatan'] = 'Tim_PKG';
         $data['jurusan'] = null;
-        $insert_user = User::create($data);
+        $user = User::create($data);
         return response([
             'status' => 200,
             'message' => 'Berhasil menginput data tim pkg',
-            'data' => $insert_user
+            'data' => new UserResource($user)
         ]);
     }
 
@@ -85,7 +94,7 @@ class ApiUserController extends Controller
             return response([
                 'status' => 'OK',
                 'message' => 'Data berhasil diupdate',
-                'data' => $body
+                'data' => new UserResource($data)
             ], 200);
         } else {
             return response([
