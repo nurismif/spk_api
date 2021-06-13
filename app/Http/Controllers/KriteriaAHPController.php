@@ -92,7 +92,6 @@ public function index()
             ->select('detail_kriteria.*', 'kriteria_ahp.nama as nama_kriteria_ahp')
             ->get();
 
-        // dd($detail_kriteria);
         // return "<pre>".print_r($detail_kriteria, true)."</pre>";
         return view('kriteria.detail', ['no' => 1, 'detail_kriteria' => $detail_kriteria], compact('detail_kriteria'));
     }
@@ -104,7 +103,7 @@ public function index()
 
         $matrix_perbandingan_service = new MatriksPerbandinganService();
         $matriks = $matrix_perbandingan_service->getMatrix($list_kriteria);
-        
+
         return view(
             'kriteria.matriks',
             [
