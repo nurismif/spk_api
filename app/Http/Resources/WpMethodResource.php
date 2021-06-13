@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AhpMethodResource extends JsonResource
+class WpMethodResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,7 +16,7 @@ class AhpMethodResource extends JsonResource
     {
         return [
             'user' => new UserResource($this->user),
-            'nilai' => $this->ahp_value,
+            'nilai' => $this->wp_value,
             'rank' => $this->rank
         ];
     }

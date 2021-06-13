@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\WpMethodResource;
 use App\Services\WpMethodService;
 use App\WpMethod;
 use Illuminate\Http\Request;
@@ -17,10 +18,7 @@ class ApiWpMethodController extends Controller
     public function index()
     {
         $wp_methods = WpMethod::get();
-        return response(
-            $wp_methods,
-            200
-        );
+        return WpMethodResource::collection($wp_methods);
     }
 
     /**
@@ -34,9 +32,6 @@ class ApiWpMethodController extends Controller
         $wp_method_service->recalculateWpValues();
 
         $wp_methods = WpMethod::get();
-        return response(
-            $wp_methods,
-            200
-        );
+        return WpMethodResource::collection($wp_methods);
     }
 }
