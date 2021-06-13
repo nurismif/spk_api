@@ -101,6 +101,9 @@ class UserController extends Controller
         }
 
         $user = User::create($data);
+        if (!empty($request->input('password'))) {
+            $user->password = bcrypt($request->input('password'));
+        }
         $user->save();
         return redirect('admin/user/index');
     }
