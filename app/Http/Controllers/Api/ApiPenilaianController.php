@@ -18,14 +18,12 @@ class ApiPenilaianController extends Controller
             ->values()
             ->map(
                 function ($group) {
+                    $nilai = collect();
+                    foreach ($group as $key => $value) {
+                        $nilai->put($value->kriteriaAhp->nama, $value->nilai);
+                    }
                     return (object)[
-                        'nilai' => $group->map(
-                            function ($n) {
-                                return (object)[
-                                    $n->kriteriaAhp->nama => $n->nilai
-                                ];
-                            }
-                        ),
+                        'nilai' => $nilai,
                         'user' => $group[0]->user
                     ];
                 }

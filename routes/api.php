@@ -20,6 +20,9 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
     Route::post('/auth/logout', 'Api\AuthController@logout')->name('logout.api');
     Route::post('/users/postapilogin', 'Api\ApiUserController@postApiLogin');
 
+    Route::get('/penilaian', 'Api\ApiPenilaianController@getAllPenilaian');
+
+
     // auth routes
     Route::middleware('auth:api')->group(function () {
         // Users
@@ -39,7 +42,6 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
         Route::get('/penilaian/{id}/nilai', 'Api\ApiUserController@getNilaiUser');
 
         //untuk get data penilaian dan juga daftar kriteria
-        Route::get('/penilaian', 'Api\ApiPenilaianController@getAllPenilaian');
         Route::post('/penilaian/insertNilaiAhp', 'Api\ApiPenilaianController@insertNilaiAhp');
         Route::put('/penilaian/update/{id}', 'Api\ApiPenilaianController@updateNilaiAhp');
         Route::delete('/penilaian/delete/{id}', 'Api\ApiPenilaianController@deleteNilaiAhp');
