@@ -23,6 +23,7 @@ class PenilaianController extends Controller
             ->groupBy('user_id')
             ->sort()
             ->values();
+        dd($penilaian_list);
         $kriteria_list = KriteriaAHP::get();
 
         return view('penilaian/index', [

@@ -104,7 +104,7 @@ public function index()
 
         $matrix_perbandingan_service = new MatriksPerbandinganService();
         $matriks = $matrix_perbandingan_service->getMatrix($list_kriteria);
-
+        
         return view(
             'kriteria.matriks',
             [

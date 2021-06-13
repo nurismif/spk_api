@@ -10,17 +10,17 @@ class MatriksPerbandinganService
      public function getMatrix(Collection $list_kriteria)
      {
           $data = collect();
-          $groups = NilaiPerbandingan::orderBy('target_kriteria_ahp_id', "asc")
+          $groups = NilaiPerbandingan::orderBy('target_kriteria_ahp_id')
                ->get()
-               ->groupBy("kriteria_ahp_id");
-
-          $index = 0;
-          foreach ($groups as $key => $group) {
+               ->groupBy("kriteria_ahp_id")
+               ->sort()
+               ->values();
+               
+          foreach ($groups as $i => $group) {
                $map_group = $group->map(function ($item) {
                     return $item->nilai_perbandingan;
                });
-               $data->put($list_kriteria[$index]->nama, $map_group);
-               $index += 1;
+               $data->put($list_kriteria[$i]->nama, $map_group);
           };
 
           return $data;
