@@ -21,7 +21,9 @@ class ApiPenilaianController extends Controller
                     return (object)[
                         'nilai' => $group->map(
                             function ($n) {
-                                return $n->nilai;
+                                return (object)[
+                                    $n->kriteriaAhp->nama => $n->nilai
+                                ];
                             }
                         ),
                         'user' => $group[0]->user
