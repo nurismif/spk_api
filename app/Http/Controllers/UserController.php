@@ -91,7 +91,6 @@ class UserController extends Controller
             'password'   =>  'required|string|max:20|confirmed',
             'jabatan'   =>  'required|string|max:100',
             'jenis_kelamin'   =>  'required|string|max:10',
-            'jurusan'   =>  'required|string|max:20',
         ]);
 
         if ($validator->fails()) {
@@ -130,7 +129,6 @@ class UserController extends Controller
             'nama'   =>  'required|string|max:255',
             'username'   =>  'required|string|max:50',
             'password'   =>  'sometimes|max:20|confirmed',
-            'jurusan'   =>  'required|string|max:100',
             'jabatan'   =>  'required|string|max:100'
         ]);
 
