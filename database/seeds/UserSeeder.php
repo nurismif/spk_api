@@ -66,7 +66,7 @@ class UserSeeder extends Seeder
                 'nip' => "2" . $i,
                 'nama' => "KEPSEK" . $i,
                 'username' => "KEPSEK" . $i,
-                'password' => bcrypt('123123123'),
+                'password' => bcrypt('123'),
                 'jabatan' =>  User::KEPSEK_ROLE,
                 'jenis_kelamin' => User::FEMALE_TYPE,
                 'jurusan' => "Akuntansi"
@@ -74,6 +74,17 @@ class UserSeeder extends Seeder
         }
 
         // GURU
+        for ($i = 0; $i < 2; $i++) {
+            User::create([
+                'nip' => "3" . $i,
+                'nama' => "GURU" . $i,
+                'username' => "GURU" . $i,
+                'password' => bcrypt('123'),
+                'jabatan' =>  User::GURU_ROLE,
+                'jenis_kelamin' => User::FEMALE_TYPE,
+                'jurusan' => "Akuntansi"
+            ]);
+        }
         User::create([
             'nip' => "1005239",
             'nama' => "Yuwono, S.E.",
