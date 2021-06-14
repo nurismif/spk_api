@@ -53,17 +53,14 @@ function drawWpChart(data) {
     //     WP Chart
     x_values = Object.keys(data);
     y_values = Object.values(data);
+    colors = y_values.map((v) => getRandomColor());
     const $wpChart = $("#wp-method-canvas");
     const wpChartData = {
         labels: x_values,
         datasets: [
             {
                 data: y_values,
-                backgroundColor: [
-                    getRandomColor(),
-                    getRandomColor(),
-                    getRandomColor(),
-                ],
+                backgroundColor: colors,
             },
         ],
     };
