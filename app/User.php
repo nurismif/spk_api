@@ -54,4 +54,20 @@ class User extends Authenticatable
     //     'nip', 'username',
     // ];
 
+    public static function formatJabatan($jabatan)
+    {
+        $jabatan_name = '';
+        switch ($jabatan) {
+            case self::KEPSEK_ROLE:
+                $jabatan_name = 'Kepala Sekolah';
+                break;
+            case self::TIM_KPG_ROLE:
+                $jabatan_name = 'Tim PKG';
+                break;
+            default:
+                $jabatan_name = $jabatan;
+                break;
+        }
+        return $jabatan_name;
+    }
 }

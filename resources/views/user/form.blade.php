@@ -76,18 +76,19 @@
                         <label for="inputJabatan" class="col-sm-2 col-form-label">Jabatan</label>
                         <div class="col-sm-10">
                             {!! Form::select(
-    'jabatan',
-    [
-        User::TIM_KPG_ROLE => 'Tim_PKG',
-        User::KEPSEK_ROLE => 'Kepala Sekolah',
-        User::GURU_ROLE => 'Guru',
-    ],
-    isset($users) ? $users->jabatan : old('jabatan'),
-    [
-        'class' => $errors->has('jabatan') ? 'form-control is-invalid' : 'form-control',
-        'placeholder' => $errors->has('jabatan') ? $errors->first('jabatan') : 'Pilih Jabatan',
-    ],
-) !!}
+                                'jabatan',
+                                [
+                                    User::TIM_KPG_ROLE => 'Tim PKG',
+                                    User::KEPSEK_ROLE => 'Kepala Sekolah',
+                                    User::GURU_ROLE => 'Guru',
+                                ],
+                                isset($users) ? $users->jabatan : old('jabatan'),
+                                [
+                                    'class' => $errors->has('jabatan') ? 'form-control is-invalid' : 'form-control',
+                                    'placeholder' => $errors->has('jabatan') ? $errors->first('jabatan') : 'Pilih Jabatan',
+                                ],
+                            ) 
+                            !!}
                         </div>
                     </div>
 

@@ -58,12 +58,13 @@
                                     <td>{{ $data->nip }}</td>
                                     <td>{{ $data->nama }}</td>
                                     <td>{{ $data->username }}</td>
-                                    <td>{{ $data->jabatan }}</td>
+                                    <td>{{ User::formatJabatan($data->jabatan) }}</td>
                                     <td class="centerThingsColumn">
                                         <form action="{{ url('admin/user') }}/{{ $data->id }}" method="POST"
                                             onsubmit="return confirm('Yakin akan hapus data')">
                                             @csrf @method('DELETE')
-                                            <a href="{{ url('admin/user') }}/{{ $data->id . '/edit' }}" class="btn btn-warning btn-sm mr-1">
+                                            <a href="{{ url('admin/user') }}/{{ $data->id . '/edit' }}"
+                                                class="btn btn-warning btn-sm mr-1">
                                                 <i class="fa fa-pencil"></i>
                                             </a>
                                             <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
