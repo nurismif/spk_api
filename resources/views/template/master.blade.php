@@ -145,7 +145,8 @@
             if (tableName != "User" &&
                 tableName != "Guru" &&
                 tableName != "Matriks Kriteria" &&
-                tableName != "Penilaian") {
+                tableName != "Penilaian" &&
+                tableName != "Detail Kriteria") {
                 datatableConfigs = {
                     ...datatableConfigs,
                     "buttons": [
