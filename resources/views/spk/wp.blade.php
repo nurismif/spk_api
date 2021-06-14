@@ -69,7 +69,7 @@
                                         {{ $wp_method->user->jurusan }}
                                     </td>
                                     <td class="cell100 column5">
-                                        {{ number_format($wp_method->wp_value, 3) }}
+                                        {{ number_format($wp_method->wp_value, 7) }}
                                     </td>
                                     <td class="cell100 column6">
                                         {{ $wp_method->rank }}
