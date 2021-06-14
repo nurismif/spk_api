@@ -131,7 +131,7 @@ class UserSeeder extends Seeder
         User::create([
             'nip' => "1005235",
             'nama' => "Sandi, S.Ikom.",
-            'username' => "purhadiset",
+            'username' => "sandi",
             'password' => bcrypt('123'),
             'jabatan' =>  User::GURU_ROLE,
             'jenis_kelamin' => User::MALE_TYPE,
