@@ -183,7 +183,7 @@ class UserSeeder extends Seeder
             'jurusan' => "BDP"
         ]);
         User::create([
-            'nip' => "1049149",
+            'nip' => "1049148",
             'nama' => "Ridho A'zima, S.Pd.",
             'username' => "ridhoa",
             'password' => bcrypt('123'),
