@@ -31,17 +31,14 @@ function drawAhpChart(data) {
     //     AHP chart
     x_values = Object.keys(data);
     y_values = Object.values(data);
+    colors = y_values.map((v) => getRandomColor());
     const $ahpChart = $("#ahp-method-canvas");
     const ahpChartData = {
         labels: x_values,
         datasets: [
             {
                 data: y_values,
-                backgroundColor: [
-                    getRandomColor(),
-                    getRandomColor(),
-                    getRandomColor(),
-                ],
+                backgroundColor: colors,
             },
         ],
     };
