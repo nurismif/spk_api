@@ -114,7 +114,7 @@
     <script src="{{ asset('adminlte/plugins/jszip/jszip.min.js') }}"></script>
     <!-- Page specific script -->
     <script>
-        $(function() {
+        $(function a() {
             $.noConflict();
             const buttonCommon = {
                 init: function(dt, node, config) {
@@ -134,7 +134,7 @@
                 arr.push(i);
             }
 
-            let datatableConfigs = {
+            var datatableConfigs = {
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
@@ -142,21 +142,24 @@
             };
             const tableName = $('#exam1').attr('data-export-title');
 
-            if (tableName != "User" &&
-                tableName != "Guru" &&
-                tableName != "Matriks Kriteria" &&
-                tableName != "Penilaian" &&
-                tableName != "Detail Kriteria") {
-                datatableConfigs = {
-                    ...datatableConfigs,
-                    "buttons": [
-                        $.extend(true, {}, buttonCommon, {
-                            extend: 'excelHtml5',
-                            exportOptions: {
-                                columns: arr
-                            }
-                        })
-                    ]
+            if (tableName == "AHP Method" ||
+                tableName == "WP Method") {
+
+                const currentJabatan = {!! json_encode(Auth::user()->jabatan) !!};
+                const allowedJabatan = {!! json_encode(User::TIM_KPG_ROLE) !!};
+
+                if (currentJabatan == allowedJabatan) {
+                    datatableConfigs = {
+                        ...datatableConfigs,
+                        "buttons": [
+                            $.extend(true, {}, buttonCommon, {
+                                extend: 'excelHtml5',
+                                exportOptions: {
+                                    columns: arr
+                                }
+                            })
+                        ]
+                    }
                 }
             }
 
