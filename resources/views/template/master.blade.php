@@ -148,7 +148,7 @@
                 const currentJabatan = {!! json_encode(Auth::user()->jabatan) !!};
                 const allowedJabatan = {!! json_encode(User::TIM_KPG_ROLE) !!};
 
-                if (currentJabatan == allowedJabatan) {
+                if (currentJabatan != allowedJabatan) {
                     datatableConfigs = {
                         ...datatableConfigs,
                         "buttons": [
