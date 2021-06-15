@@ -83,48 +83,20 @@ class ApiUserController extends Controller
 
     public function updateUser(Request $request, $id)
     {
-        $body = $request->input();
-        if ($request->exists('id')) {
-            return response([
-                'status' => 'Not Allowed',
-                'message' => 'ID tidak boleh diganti'
-            ]);
-        }
-
-        $data = User::find($id);
-        if ($data) {
-            if ($data->jabatan === 'kepsek' || $data->jabatan === 'tim_pkg') {
-                $body['jurusan'] = null;
-            }
-            $data = User::where('id', $id)->update($body);
-            return response([
-                'status' => 'OK',
-                'message' => 'Data berhasil diupdate',
-                'data' => new UserResource($data)
-            ], 200);
-        } else {
-            return response([
-                'status' => 'NOT FOUND',
-                'message' => 'Data tidak ditemukan'
-            ], 404);
-        }
+        $data = $request->all();
+        $user = User::findOrFail($id);
+        $user->update($data);
+        return new UserResource($user);
     }
 
     public function deleteUser(Request $request, $id)
     {
-        $data = User::firstWhere('id', $id);
-        if ($data) {
-            User::destroy($id);
-            return response([
-                'status' => 'OK',
-                'message' => 'Data User Dihapus'
-            ], 200);
-        } else {
-            return response([
-                'status' => 'NOT FOUND',
-                'message' => 'Id User tidak ditemukan'
-            ], 404);
-        }
+        $user = User::findOrFail('id', $id);
+        User::destroy($id);
+        return response([
+            'status' => 'OK',
+            'message' => 'Data User Dihapus'
+        ], 200);
     }
 
 
