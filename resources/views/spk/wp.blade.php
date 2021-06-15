@@ -22,24 +22,26 @@
 
         <section class="content">
             <div class="card w-100">
-                <div class="card-header">
-                    <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="dt-buttons btn-group flex-wrap">
-                                    <div class="box p-0" style="padding-bottom: 10px;">
-                                        <div class="pull-right">
-                                            <a href="{{ route('wp.generate') }}" class="btn btn-primary btn-flat"
-                                                style="border-radius: 5px;">
-                                                <i class="fa fa-cog"></i> Generate
-                                            </a>
+                @if (Auth::user()->jabatan != User::KEPSEK_ROLE)
+                    <div class="card-header">
+                        <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="dt-buttons btn-group flex-wrap">
+                                        <div class="box p-0" style="padding-bottom: 10px;">
+                                            <div class="pull-right">
+                                                <a href="{{ route('wp.generate') }}" class="btn btn-primary btn-flat"
+                                                    style="border-radius: 5px;">
+                                                    <i class="fa fa-cog"></i> Generate
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endif
                 <div class="card-body tableIndex">
                     <table id="exam1" class="table table-hover table-bordered table-striped mt-8"
                         data-export-title="WP Method" no-action="true">
