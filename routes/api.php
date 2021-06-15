@@ -26,9 +26,10 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
     Route::middleware('auth:api')->group(function () {
         // Users
         Route::get('/users', 'Api\ApiUserController@getAllUser');
+        Route::get('/users/guru', 'Api\ApiUserController@getAllGuru');
         //Untuk get data profile sendiri
         Route::get('/user/profile', 'Api\ApiUserController@getMyProfile');
-        Route::post('/user/guru', 'Api\ApiUserController@storeGuru');
+        Route::post('/users/guru', 'Api\ApiUserController@storeGuru');
         Route::get('/user/guru/ranking', 'Api\ApiUserController@getRankGuru');
         Route::get('/user/guru/ranking/ahp', 'Api\ApiUserController@getRankGuruAhp');
         Route::post('/user/kepsek', 'Api\ApiUserController@storeKepsek');

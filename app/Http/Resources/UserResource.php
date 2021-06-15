@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
@@ -19,7 +20,7 @@ class UserResource extends JsonResource
             'nip' => $this->nip,
             'nama' => $this->nama,
             'username' => $this->username,
-            'jabatan' => $this->jabatan,
+            'jabatan' => User::formatJabatan($this->jabatan),
             'jenis_kelamin' => $this->jenis_kelamin,
             'jurusan' => $this->jurusan
         ];

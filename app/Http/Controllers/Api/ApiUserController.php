@@ -20,6 +20,12 @@ class ApiUserController extends Controller
         return UserResource::collection(User::all());
     }
 
+    public function  getAllGuru()
+    {
+        $users = User::where('jabatan', User::GURU_ROLE)->get();
+        return UserResource::collection($users);
+    }
+
     public function getNilaiUser(Request $request, $user_id)
     {
         return response()->json(Penilaian::where('user_id', $user_id)->get(), 200);
