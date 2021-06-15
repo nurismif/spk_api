@@ -68,6 +68,8 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'json.response' => \App\Http\Middleware\ForceJsonResponse::class,
         'cors' => \App\Http\Middleware\Cors::class,
-        // 'user.type' => \App\Http\Middleware\CheckUserType::class,
+        'guru' => \App\Http\Middleware\IsGuru::class,
+        'kepsek' => \App\Http\Middleware\IsKepsek::class,
+        'kpg' => \App\Http\Middleware\IsTimKPG::class,
     ];
 }
