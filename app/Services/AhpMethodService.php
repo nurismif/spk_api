@@ -72,9 +72,9 @@ class AhpMethodService
 
           // Find total bobot akhir
           $total_bobot_akhir_list = collect()->pad($jumlah_kriteria, 0);
-          for ($i = 0; $i < $jumlah_kriteria; $i++) {
+          foreach ($groups_by_row->values() as $i => $group) {
                foreach ($bobot_list as $key => $value) {
-                    $cell = $groups_by_row[$i + 1][$key]->nilai_perbandingan;
+                    $cell = $group[$key]->nilai_perbandingan;
                     $total_bobot_akhir_list[$i] += $cell * $value;
                }
           }
@@ -140,10 +140,6 @@ class AhpMethodService
                ],
                'kriteria' => $kriteria_list,
                'jumlah_kriteria' => $jumlah_kriteria,
-               // 'matriks_penilaian' => $matriks_penilaian3,
-               // 'nilai_maxmin' => $nilai_maxmin,
-               // 'bobot_alternatif' => $bobot_alternatif,
-               // 'rank' => $rank,
           ];
 
           return collect([
