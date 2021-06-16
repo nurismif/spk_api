@@ -17,13 +17,14 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['cors', 'json.response']], function () {
     // Public
     Route::post('/auth/login', 'Api\AuthController@login')->name('login.api');
-    Route::post('/auth/logout', 'Api\AuthController@logout')->name('logout.api');
     Route::post('/users/postapilogin', 'Api\ApiUserController@postApiLogin');
     // Dashboard
     Route::get('/dashboard/ahp', 'Api\ApiDashboardController@showAhpChart')->name('show.ahp');
     Route::get('/dashboard/wp', 'Api\ApiDashboardController@showWpChart')->name('show.wp');
     // auth routes
     Route::middleware('auth:api')->group(function () {
+        // Logout
+        Route::post('/auth/logout', 'Api\AuthController@logout')->name('logout.api');
         // Users
         Route::get('/users', 'Api\ApiUserController@getAllUser');
         Route::get('/users/guru', 'Api\ApiUserController@getAllGuru');
