@@ -29,16 +29,17 @@ class WpMethodService
           // Get penilaian guru and group by the user uid
           $penilaian_guru_groups = Penilaian::orderBy('kriteria_ahp_id')
                ->get()
-               ->groupBy('user_id');
+               ->groupBy('user_id')
+               ->sort();
 
           // Create the matriks penilaian
 
           // Get Vector S
           $vector_s = collect();
           foreach ($penilaian_guru_groups as $group) {
-               $vector_val = 0;
+               $vector_val = 1;
                foreach ($group as $i => $penilaian) {
-                    $vector_val += pow($penilaian->nilai, $kriteria->bobot_ratio);
+                    $vector_val *= pow($penilaian->nilai, $kriteria_list[$i]->bobot_ratio);
                }
                $vector_s->push($vector_val);
           }

@@ -19,35 +19,23 @@ class AhpMethodService
           // Initialization
           $kriteria_list = KriteriaAHP::get();
           $jumlah_kriteria = $kriteria_list->count();
-          $total_cm = 0;
+
+          $t = 0;
           $ci = 0;
           $RI = [0, 0, 0.58, 0.9, 1.12, 1.24, 1.32, 1.41, 1.45, 1.49, 1.51, 1.48, 1.56, 1.57, 1.59];
-          $keterangan = "";
           $data = NilaiPerbandingan::orderBy('kriteria_ahp_id', "asc")
                ->get();
 
-          if ($jumlah_kriteria > count($RI)) {
-               return collect([
-                    'status' => 400,
-                    'message' => "Jumlah kriteria melebihi jumlah RI"
-               ]);
-          }
-
-          if (Penilaian::first() == null) {
-               return collect([
-                    'status' => 400,
-                    'message' => "Tidak ada data penilaian guru"
-               ]);
-          }
-
           // Normalisasi
 
-          // Group by col
+          // Group by columns
           $groups_by_col = $data->groupBy("target_kriteria_ahp_id");
           // Total the group cols
           $total_col_list = $groups_by_col->map(function ($group) {
                return $group->sum('nilai_perbandingan');
           });
+          dd($total_col_list);
+
           // Get the nilai perbandingan normal and store it to $data
           foreach ($groups_by_col as $key_group => $group) {
                foreach ($group as $key => $item) {
@@ -60,7 +48,7 @@ class AhpMethodService
                return $group->target_kriteria_ahp_id;
           })->groupBy("kriteria_ahp_id")->sort();
 
-          // Find total normalized row
+          // Find bobot
           $total_normalized_row = $groups_by_row->map(function ($group) {
                return $group->sum('nilai_perbandingan_normal');
           });
@@ -69,6 +57,7 @@ class AhpMethodService
           $bobot_list = $total_normalized_row->map(function ($value) use ($jumlah_kriteria) {
                return $value / $jumlah_kriteria;
           })->values();
+
 
           // Find total bobot akhir
           $total_bobot_akhir_list = collect()->pad($jumlah_kriteria, 0);
@@ -79,17 +68,18 @@ class AhpMethodService
                }
           }
 
-          // Find total_cm by totaling the division of total_botot_akir_list with total_bobot_list
+          // Find t by totaling the division of total_botot_akir_list with total_bobot_list
           for ($i = 0; $i < $jumlah_kriteria; $i++) {
-               $total_cm += $total_bobot_akhir_list[$i] / $bobot_list[$i];
+               $t += $total_bobot_akhir_list[$i] / $bobot_list[$i];
           }
           // Divide the total cm with jumlah kriteria
-          $total_cm = $total_cm / $jumlah_kriteria;
+          $t = $t / $jumlah_kriteria;
           // Find ci value
-          $ci = ($total_cm - $jumlah_kriteria) / ($jumlah_kriteria - 1);
+          $ci = ($t - $jumlah_kriteria) / ($jumlah_kriteria - 1);
 
           // Get status and keterangan value
           $status = $ci / $RI[$jumlah_kriteria - 1];
+          $keterangan = "";
           if ($status <= 0.1) {
                $keterangan = self::CONSISTENT_TYPE;
           } else {
@@ -129,24 +119,6 @@ class AhpMethodService
                     ]
                );
           }
-
-          $data = [
-               'T' => $total_cm,
-               'CI' => $ci,
-               'RI' => $RI[$jumlah_kriteria - 1],
-               'status' => [
-                    'nilai' => $status,
-                    'keterangan' => $keterangan
-               ],
-               'kriteria' => $kriteria_list,
-               'jumlah_kriteria' => $jumlah_kriteria,
-          ];
-
-          return collect([
-               'status' => 200,
-               'message' => "Sukses",
-               "data" => $data
-          ]);
      }
 
      private function processMatrixPerCriteria(KriteriaAHP $kriteria)

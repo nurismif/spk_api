@@ -17,7 +17,7 @@ class CreateWpMethodsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('RESTRICT')->onDelete('CASCADE');
-            $table->float('wp_value')->nullable();
+            $table->float('wp_value',12,8)->nullable();
             $table->integer('rank')->nullable();
             $table->timestamps();
         });
