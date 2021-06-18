@@ -20,7 +20,7 @@ class UserResource extends JsonResource
             'nip' => $this->nip,
             'nama' => $this->nama,
             'username' => $this->username,
-            'jabatan' => User::formatJabatan($this->jabatan),
+            'jabatan' => $this->jabatan,
             'jenis_kelamin' => $this->jenis_kelamin,
             'jurusan' => $this->jurusan
         ];
