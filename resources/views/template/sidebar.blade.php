@@ -2,7 +2,7 @@
     <!-- Brand Logo  -->
     <a href="/admin/template/dashboard" class="brand-link">
         <img src="{{ asset('adminlte/img/kemendikbud.png') }}" class="brand-image img-circle" style="opacity: .8">
-        <span class="brand-text font-weight-light">SMK XYZ Jakarta Selatan</span>
+        <span class="brand-text font-weight-light">SMK XYZ JAKSEL</span>
     </a>
     <nav class="mt-2">
 
