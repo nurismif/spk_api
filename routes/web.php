@@ -34,7 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/admin/wp', 'WpMethodController@index')->name('wp');
     Route::get('/admin/wp/generate', 'WpMethodController@generate')->name('wp.generate');
 
-    Route::middleware(['kpg'])->group(function () {
+    Route::middleware(['pkg'])->group(function () {
         Route::get('/admin/user/index', 'UserController@index');
         Route::get('/admin/user/create', 'UserController@create');
         Route::post('/admin/user', 'UserController@store')->name('user.store');

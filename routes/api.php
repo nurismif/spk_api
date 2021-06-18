@@ -34,7 +34,7 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
         Route::get('/user/guru/ranking', 'Api\ApiUserController@getRankGuru');
         Route::get('/user/guru/ranking/ahp', 'Api\ApiUserController@getRankGuruAhp');
         Route::post('/user/kepsek', 'Api\ApiUserController@storeKepsek');
-        Route::post('/user/tim_pkg', 'Api\ApiUserController@storeTimKpg');
+        Route::post('/user/tim_pkg', 'Api\ApiUserController@storeTimPkg');
         Route::put('/user/update/{id}', 'Api\ApiUserController@updateUser');
         Route::delete('/user/delete/{id}', 'Api\ApiUserController@deleteUser');
         //Untuk get data profile berdasarkan id user

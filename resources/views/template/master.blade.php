@@ -146,7 +146,7 @@
                 tableName == "WP Method") {
 
                 const currentJabatan = {!! json_encode(Auth::user()->jabatan) !!};
-                const allowedJabatan = {!! json_encode(User::TIM_KPG_ROLE) !!};
+                const allowedJabatan = {!! json_encode(User::TIM_PKG_ROLE) !!};
 
                 if (currentJabatan != allowedJabatan) {
                     datatableConfigs = {

@@ -70,6 +70,6 @@ class Kernel extends HttpKernel
         'cors' => \App\Http\Middleware\Cors::class,
         'guru' => \App\Http\Middleware\IsGuru::class,
         'kepsek' => \App\Http\Middleware\IsKepsek::class,
-        'kpg' => \App\Http\Middleware\IsTimKPG::class,
+        'pkg' => \App\Http\Middleware\IsTimPKG::class,
     ];
 }

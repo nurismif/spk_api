@@ -78,7 +78,7 @@
                             {!! Form::select(
                                 'jabatan',
                                 [
-                                    User::TIM_KPG_ROLE => 'Tim PKG',
+                                    User::TIM_PKG_ROLE => 'Tim PKG',
                                     User::KEPSEK_ROLE => 'Kepala Sekolah',
                                     User::GURU_ROLE => 'Guru',
                                 ],

@@ -11,7 +11,7 @@ class User extends Authenticatable
     use HasApiTokens, Notifiable;
 
     // JABATAN
-    const TIM_KPG_ROLE = 'Tim_PKG';
+    const TIM_PKG_ROLE = 'Tim_PKG';
     const KEPSEK_ROLE = 'Kepsek';
     const GURU_ROLE = 'Guru';
 
@@ -61,7 +61,7 @@ class User extends Authenticatable
             case self::KEPSEK_ROLE:
                 $jabatan_name = 'Kepala Sekolah';
                 break;
-            case self::TIM_KPG_ROLE:
+            case self::TIM_PKG_ROLE:
                 $jabatan_name = 'Tim PKG';
                 break;
             default:

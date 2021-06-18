@@ -12,13 +12,13 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        // KPG ROLE
+        // PKG ROLE
         User::create([
             'nip' => "19680806200121",
             'nama' => "Lilik Setyoharyanti, M.Pd.",
             'username' => "lilik",
             'password' => bcrypt('123'),
-            'jabatan' =>  User::TIM_KPG_ROLE,
+            'jabatan' =>  User::TIM_PKG_ROLE,
             'jenis_kelamin' => User::FEMALE_TYPE,
             'jurusan' => "NULL"
         ]);
@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
             'nama' => "Nurvi Asiati, M.Pd.",
             'username' => "nurviasi",
             'password' => bcrypt('123'),
-            'jabatan' =>  User::TIM_KPG_ROLE,
+            'jabatan' =>  User::TIM_PKG_ROLE,
             'jenis_kelamin' => User::FEMALE_TYPE,
             'jurusan' => "NULL"
         ]);
@@ -37,7 +37,7 @@ class UserSeeder extends Seeder
             'nama' => "Drs. Agus",
             'username' => "agus",
             'password' => bcrypt('123'),
-            'jabatan' =>  User::TIM_KPG_ROLE,
+            'jabatan' =>  User::TIM_PKG_ROLE,
             'jenis_kelamin' => User::MALE_TYPE,
             'jurusan' => "NULL"
         ]);
@@ -46,7 +46,7 @@ class UserSeeder extends Seeder
             'nama' => "Pramudiyono, S.Pd.",
             'username' => "pramudiyono",
             'password' => bcrypt('123'),
-            'jabatan' =>  User::TIM_KPG_ROLE,
+            'jabatan' =>  User::TIM_PKG_ROLE,
             'jenis_kelamin' => User::MALE_TYPE,
             'jurusan' => "NULL"
         ]);
@@ -55,7 +55,7 @@ class UserSeeder extends Seeder
             'nama' => "Hj. Suyetty, S.Pd.",
             'username' => "suyetty",
             'password' => bcrypt('123'),
-            'jabatan' =>  User::TIM_KPG_ROLE,
+            'jabatan' =>  User::TIM_PKG_ROLE,
             'jenis_kelamin' => User::FEMALE_TYPE,
             'jurusan' => "NULL"
         ]);

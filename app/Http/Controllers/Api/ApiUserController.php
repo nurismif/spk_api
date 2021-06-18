@@ -68,7 +68,7 @@ class ApiUserController extends Controller
         ]);
     }
 
-    public function storeTimKpg(Request $request)
+    public function storeTimPkg(Request $request)
     {
         $data = $request->input();
         $data['jabatan'] = 'Tim_PKG';

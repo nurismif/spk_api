@@ -6,7 +6,7 @@ use App\User;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class IsTimKPG
+class IsTimPKG
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,7 @@ class IsTimKPG
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user() && Auth::user()->jabatan == User::TIM_KPG_ROLE) {
+        if (Auth::user() && Auth::user()->jabatan == User::TIM_PKG_ROLE) {
             return $next($request);
         }
         return redirect()->route('dashboard');
