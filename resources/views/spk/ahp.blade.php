@@ -22,7 +22,7 @@
 
         <section class="content">
             <div class="card w-100">
-                @if (Auth::user()->jabatan != User::KEPSEK_ROLE)
+                @if (Auth::user()->jabatan == User::TIM_PKG_ROLE)
                     <div class="card-header">
                         <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
                             <div class="row">

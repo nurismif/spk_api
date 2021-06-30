@@ -90,7 +90,6 @@
                 ps.update();
             })
         });
-
     </script>
     <!--===============================================================================================-->
     <script src="{{ asset('table/js/main.js') }}"></script>
@@ -108,7 +107,8 @@
     <!-- datepicker -->
     <script src="{{ asset('adminlte/plugins/moment/moment.min.js') }}"></script>
     <script src="{{ asset('adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}">
-    </script> <!-- AdminLTE App -->
+    </script>
+    <!-- AdminLTE App -->
     <script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}"></script>
     {{-- Others --}}
     <script src="{{ asset('adminlte/plugins/jszip/jszip.min.js') }}"></script>
@@ -146,9 +146,9 @@
                 tableName == "WP Method") {
 
                 const currentJabatan = {!! json_encode(Auth::user()->jabatan) !!};
-                const allowedJabatan = {!! json_encode(User::TIM_PKG_ROLE) !!};
+                const allowedJabatan = {!! json_encode(User::KEPSEK_ROLE) !!};
 
-                if (currentJabatan != allowedJabatan) {
+                if (currentJabatan == allowedJabatan) {
                     datatableConfigs = {
                         ...datatableConfigs,
                         "buttons": [
@@ -173,7 +173,6 @@
             $("#exam1").DataTable(datatableConfigs).buttons().container().appendTo(
                 '#exam1_wrapper .col-md-6:eq(0)');
         });
-
     </script>
     <!-- Append -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -197,7 +196,6 @@
                 });
             });
         });
-
     </script>
     @stack('scripts')
 </body>
