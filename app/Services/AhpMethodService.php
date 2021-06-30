@@ -35,8 +35,6 @@ class AhpMethodService
                return $group->sum('nilai_perbandingan');
           });
 
-          dd($total_col_list);
-
           // Get the nilai perbandingan normal and store it to $data
           foreach ($groups_by_col as $key_group => $group) {
                foreach ($group as $key => $item) {
