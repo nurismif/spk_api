@@ -56,7 +56,9 @@
                                                 @foreach ($kriteria_list as $kriteria)
                                                     <th>{{ $kriteria->nama }}</th>
                                                 @endforeach
-                                                <th style="width: 6rem">Action</th>
+                                                @if (Auth::user()->jabatan == User::KEPSEK_ROLE)
+                                                    <th style="width: 6rem">Action</th>
+                                                @endif
                                             </tr>
                                         </thead>
                                         <tbody>
