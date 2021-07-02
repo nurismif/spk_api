@@ -24,25 +24,27 @@
                     <div class="col-12">
                         <section class="content">
                             <div class="card w-100">
-                                <div class="card-header">
-                                    <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="dt-buttons btn-group flex-wrap">
-                                                    <div class="box p-0" style="padding-bottom: 10px;">
-                                                        <div class="pull-right">
-                                                            <a href="{{ route('penilaian.create') }}"
-                                                                class="btn btn-primary btn-flat"
-                                                                style="border-radius: 5px;">
-                                                                <i class="fa fa-user-plus"></i> Create
-                                                            </a>
+                                @if (Auth::user()->jabatan == User::TIM_PKG_ROLE)
+                                    <div class="card-header">
+                                        <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="dt-buttons btn-group flex-wrap">
+                                                        <div class="box p-0" style="padding-bottom: 10px;">
+                                                            <div class="pull-right">
+                                                                <a href="{{ route('penilaian.create') }}"
+                                                                    class="btn btn-primary btn-flat"
+                                                                    style="border-radius: 5px;">
+                                                                    <i class="fa fa-user-plus"></i> Create
+                                                                </a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
 
                                 <div class="card-body tableIndex">
                                     <table id="exam1" class="table table-hover table-bordered table-striped mt-8"
@@ -71,13 +73,15 @@
                                                             class="btn btn-warning btn-sm mr-1">
                                                             <i class="fa fa-pencil"></i>
                                                         </a>
-                                                        <form
-                                                            action="{{ route('penilaian.destroy', $penilaian[0]->user->id) }}"
-                                                            method="POST">
-                                                            @csrf @method('DELETE')
-                                                            <button class="btn btn-danger btn-sm"><i
-                                                                    class="fa fa-trash"></i></button>
-                                                        </form>
+                                                        @if (Auth::user()->jabatan == User::TIM_PKG_ROLE)
+                                                            <form
+                                                                action="{{ route('penilaian.destroy', $penilaian[0]->user->id) }}"
+                                                                method="POST">
+                                                                @csrf @method('DELETE')
+                                                                <button class="btn btn-danger btn-sm"><i
+                                                                        class="fa fa-trash"></i></button>
+                                                            </form>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach
