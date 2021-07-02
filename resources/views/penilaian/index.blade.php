@@ -68,19 +68,21 @@
                                                         <td>{{ $item->nilai }}</td>
                                                     @endforeach
 
-                                                    <td class="centerThingsColumn">
-                                                        <a href="{{ route('penilaian.edit', $penilaian[0]->user->id) }}"
-                                                            class="btn btn-warning btn-sm mr-1">
-                                                            <i class="fa fa-pencil"></i>
-                                                        </a>
-                                                        <form
-                                                            action="{{ route('penilaian.destroy', $penilaian[0]->user->id) }}"
-                                                            method="POST">
-                                                            @csrf @method('DELETE')
-                                                            <button class="btn btn-danger btn-sm"><i
-                                                                    class="fa fa-trash"></i></button>
-                                                        </form>
-                                                    </td>
+                                                    @if (Auth::user()->jabatan == User::TIM_PKG_ROLE)
+                                                        <td class="centerThingsColumn">
+                                                            <a href="{{ route('penilaian.edit', $penilaian[0]->user->id) }}"
+                                                                class="btn btn-warning btn-sm mr-1">
+                                                                <i class="fa fa-pencil"></i>
+                                                            </a>
+                                                            <form
+                                                                action="{{ route('penilaian.destroy', $penilaian[0]->user->id) }}"
+                                                                method="POST">
+                                                                @csrf @method('DELETE')
+                                                                <button class="btn btn-danger btn-sm"><i
+                                                                        class="fa fa-trash"></i></button>
+                                                            </form>
+                                                        </td>
+                                                    @endif
                                                 </tr>
                                             @endforeach
                                         </tbody>
