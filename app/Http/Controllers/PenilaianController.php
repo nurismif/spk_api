@@ -74,7 +74,6 @@ class PenilaianController extends Controller
         $kriteria_list = KriteriaAHP::get();
         $users = User::where('jabatan', User::GURU_ROLE)->get();
         $penilaian_list = Penilaian::where('user_id', $user_id)->orderBy('kriteria_ahp_id')->get();
-        dd($penilaian_list);
 
         return view('penilaian.edit', [
             'penilaian_list' => $penilaian_list,
