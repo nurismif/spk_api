@@ -68,7 +68,7 @@
                                                         <td>{{ $item->nilai }}</td>
                                                     @endforeach
 
-                                                    @if (Auth::user()->jabatan == User::TIM_PKG_ROLE)
+                                                    @if (Auth::user()->jabatan == User::KEPSEK_ROLE)
                                                         <td class="centerThingsColumn">
                                                             <a href="{{ route('penilaian.edit', $penilaian[0]->user->id) }}"
                                                                 class="btn btn-warning btn-sm mr-1">
