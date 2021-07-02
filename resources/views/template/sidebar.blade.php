@@ -56,7 +56,7 @@
             @endif
             @if (Auth::user()->jabatan == User::KEPSEK_ROLE)
             <li class="nav-item">
-                <a href="/admin/penilaian/index" class="nav-link">
+                <a href="{{ route('penilaian.index' )}}" class="nav-link">
                     <i class="nav-icon fas fa-chart-line"></i>
                     <p>Penilaian </p>
                 </a>

@@ -65,7 +65,7 @@
                             <div class="icon">
                                 <i class="nav-icon fas fa-chart-line"></i>
                             </div>
-                            <a href="/admin/penilaian/index" class="small-box-footer">More info <i
+                            <a href="{{ route('penilaian.index' )}}" class="small-box-footer">More info <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>

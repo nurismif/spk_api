@@ -22,38 +22,6 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">Import Penilaian</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <form method="POST" action="{{ route('import') }}" enctype="multipart/form-data">
-                                        @csrf
-                                        <div class="modal-body">
-                                            <div class="form-group">
-                                                <label for="file"> Choose File </label>
-                                                <table>
-                                                    <td><input type="file" name="file" class="form-control"
-                                                            style="padding-bottom: 20px;" /></td>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
                         <section class="content">
                             <div class="card w-100">
                                 <div class="card-header">
@@ -63,10 +31,11 @@
                                                 <div class="dt-buttons btn-group flex-wrap">
                                                     <div class="box p-0" style="padding-bottom: 10px;">
                                                         <div class="pull-right">
-                                                            <button type="button" class="btn btn-primary btn-flat rounded"
-                                                                data-toggle="modal" data-target="#exampleModalCenter">
-                                                                <i class="fa fa-upload mr-2"></i>Import
-                                                            </button>
+                                                            <a href="{{ route('penilaian.create') }}"
+                                                                class="btn btn-primary btn-flat"
+                                                                style="border-radius: 5px;">
+                                                                <i class="fa fa-user-plus"></i> Create
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -85,6 +54,7 @@
                                                 @foreach ($kriteria_list as $kriteria)
                                                     <th>{{ $kriteria->nama }}</th>
                                                 @endforeach
+                                                <th style="width: 6rem">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -95,6 +65,20 @@
                                                     @foreach ($penilaian as $item)
                                                         <td>{{ $item->nilai }}</td>
                                                     @endforeach
+
+                                                    <td class="centerThingsColumn">
+                                                        <a href="{{ route('penilaian.edit', $penilaian[0]->user->id) }}"
+                                                            class="btn btn-warning btn-sm mr-1">
+                                                            <i class="fa fa-pencil"></i>
+                                                        </a>
+                                                        <form
+                                                            action="{{ route('penilaian.destroy', $penilaian[0]->user->id) }}"
+                                                            method="POST">
+                                                            @csrf @method('DELETE')
+                                                            <button class="btn btn-danger btn-sm"><i
+                                                                    class="fa fa-trash"></i></button>
+                                                        </form>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -117,7 +101,6 @@
         $(function() {
             $('#datatable').DataTable();
         })
-
     </script>
 
 @endsection

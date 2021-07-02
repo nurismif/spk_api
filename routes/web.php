@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Middleware\CheckRole;
-use App\User;
+use App\Http\Controllers\PenilaianController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -59,8 +58,8 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::middleware(['kepsek'])->group(function () {
-        Route::get('/admin/penilaian/index', 'PenilaianController@index')->name('admin.penilaian.index');
-        Route::get('/admin/penilaian/import_form', 'PenilaianController@importForm');
-        Route::post('/admin/penilaian/import', 'PenilaianController@import')->name('import');
+        Route::resource('/admin/penilaian', 'PenilaianController')->except([
+            'show'
+        ])->parameters(['penilaian' => 'user_id']);
     });
 });
