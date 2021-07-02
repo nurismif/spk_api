@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PenilaianController;
+use App\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,7 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/admin/wp', 'WpMethodController@index')->name('wp');
     Route::get('/admin/wp/generate', 'WpMethodController@generate')->name('wp.generate');
 
-    Route::middleware(['pkg'])->group(function () {
+    Route::middleware(['role:' . User::TIM_PKG_ROLE])->group(function () {
         Route::get('/admin/user/index', 'UserController@index');
         Route::get('/admin/user/create', 'UserController@create');
         Route::post('/admin/user', 'UserController@store')->name('user.store');
@@ -57,7 +58,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::delete('/admin/teacher/{user}/delete', 'TeacherController@delete')->name('guru.delete');
     });
 
-    Route::middleware(['kepsek'])->group(function () {
+    Route::middleware(['role:' . User::KEPSEK_ROLE . ',' . User::TIM_PKG_ROLE])->group(function () {
         Route::resource('/admin/penilaian', 'PenilaianController')->except([
             'show'
         ])->parameters(['penilaian' => 'user_id']);

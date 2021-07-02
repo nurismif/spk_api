@@ -10,57 +10,57 @@
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
-            @if (Auth::user()->jabatan == User::TIM_PKG_ROLE ||  Auth::user()->jabatan == User::KEPSEK_ROLE)
-            <li class="nav-item">
-                <a href="/admin/template/dashboard" class="nav-link">
-                    <i class="nav-icon fas fa-home"></i>
-                    <p>Dashboard</p>
-                </a>
-            </li>
+            @if (Auth::user()->jabatan == User::TIM_PKG_ROLE || Auth::user()->jabatan == User::KEPSEK_ROLE)
+                <li class="nav-item">
+                    <a href="/admin/template/dashboard" class="nav-link">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
             @endif
             @if (Auth::user()->jabatan == User::TIM_PKG_ROLE)
-            <li class="nav-item">
-                <a href="/admin/user/index" class="nav-link">
-                    <i class="nav-icon fas fa-users"></i>
-                    <p>Users</p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="/admin/teacher/index" class="nav-link">
-                    <i class="nav-icon fas fa-chalkboard-teacher"></i>
-                    <p>Guru</p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-puzzle-piece"></i>
-                    <p>Kriteria
-                        <i class="right fas fa-angle-left"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="/admin/kriteria/index" class="nav-link">
-                            <i class="fas nav-icon"></i>
-                            <p><i class="fas nav-icon fa-angle-right"></i>Detail Kriteria</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/admin/kriteria/matriks" class="nav-link">
-                            <i class="fas nav-icon"></i>
-                            <p><i class="fas nav-icon fa-angle-right"></i>Matriks Kriteria</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+                <li class="nav-item">
+                    <a href="/admin/user/index" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Users</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/admin/teacher/index" class="nav-link">
+                        <i class="nav-icon fas fa-chalkboard-teacher"></i>
+                        <p>Guru</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-puzzle-piece"></i>
+                        <p>Kriteria
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/admin/kriteria/index" class="nav-link">
+                                <i class="fas nav-icon"></i>
+                                <p><i class="fas nav-icon fa-angle-right"></i>Detail Kriteria</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/kriteria/matriks" class="nav-link">
+                                <i class="fas nav-icon"></i>
+                                <p><i class="fas nav-icon fa-angle-right"></i>Matriks Kriteria</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             @endif
-            @if (Auth::user()->jabatan == User::KEPSEK_ROLE)
-            <li class="nav-item">
-                <a href="{{ route('penilaian.index' )}}" class="nav-link">
-                    <i class="nav-icon fas fa-chart-line"></i>
-                    <p>Penilaian </p>
-                </a>
-            </li>
+            @if (Auth::user()->jabatan == User::KEPSEK_ROLE || Auth::user()->jabatan == User::TIM_PKG_ROLE)
+                <li class="nav-item">
+                    <a href="{{ route('penilaian.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-chart-line"></i>
+                        <p>Penilaian </p>
+                    </a>
+                </li>
             @endif
             <li class="nav-item">
                 <a href="#" class="nav-link">

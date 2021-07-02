@@ -73,15 +73,13 @@
                                                             class="btn btn-warning btn-sm mr-1">
                                                             <i class="fa fa-pencil"></i>
                                                         </a>
-                                                        @if (Auth::user()->jabatan == User::TIM_PKG_ROLE)
-                                                            <form
-                                                                action="{{ route('penilaian.destroy', $penilaian[0]->user->id) }}"
-                                                                method="POST">
-                                                                @csrf @method('DELETE')
-                                                                <button class="btn btn-danger btn-sm"><i
-                                                                        class="fa fa-trash"></i></button>
-                                                            </form>
-                                                        @endif
+                                                        <form
+                                                            action="{{ route('penilaian.destroy', $penilaian[0]->user->id) }}"
+                                                            method="POST">
+                                                            @csrf @method('DELETE')
+                                                            <button class="btn btn-danger btn-sm"><i
+                                                                    class="fa fa-trash"></i></button>
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             @endforeach

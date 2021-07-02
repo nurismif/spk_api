@@ -2,11 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use App\User;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class IsGuru
+class CheckRole
 {
     /**
      * Handle an incoming request.
@@ -15,9 +14,9 @@ class IsGuru
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, ...$roles)
     {
-        if (Auth::user() && Auth::user()->jabatan == User::GURU_ROLE) {
+        if ((in_array(Auth::user()->jabatan, $roles))) {
             return $next($request);
         }
         return redirect()->route('dashboard');
