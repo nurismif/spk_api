@@ -122,6 +122,6 @@ class PenilaianController extends Controller
             Penilaian::truncate();
         }
         FacadesExcel::import(new PenilaianImport, $request->file);
-        return redirect()->route('penilaian');
+        return redirect()->route('penilaian.index');
     }
 }

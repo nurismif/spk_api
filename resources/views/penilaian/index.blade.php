@@ -17,7 +17,36 @@
                 </div>
         </section>
 
-
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Import Penilaian</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form method="POST" action="{{ route('import') }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="file"> Choose File </label>
+                                <table>
+                                    <td><input type="file" name="file" class="form-control" style="padding-bottom: 20px;" />
+                                    </td>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -37,6 +66,11 @@
                                                                     style="border-radius: 5px;">
                                                                     <i class="fa fa-user-plus"></i> Create
                                                                 </a>
+                                                                <button type="button"
+                                                                    class="btn btn-primary btn-flat rounded"
+                                                                    data-toggle="modal" data-target="#exampleModalCenter">
+                                                                    <i class="fa fa-upload mr-2"></i>Import
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     </div>

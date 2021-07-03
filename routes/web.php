@@ -27,12 +27,8 @@ Route::get('/admin/login', 'UserController@login')->name(('admin.login'));
 Route::group(['middleware' => 'auth'], function () {
     // Route for all roles
     Route::get('/admin/template/dashboard', 'HomeController@index')->name('dashboard');
-
-    Route::get('/admin/ahp', 'AhpMethodController@index')->name('ahp');
-    Route::get('/admin/ahp/generate', 'AhpMethodController@generate')->name('ahp.generate');
-
-    Route::get('/admin/wp', 'WpMethodController@index')->name('wp');
-    Route::get('/admin/wp/generate', 'WpMethodController@generate')->name('wp.generate');
+    Route::get('/admin/hasil-akhir', 'HasilAkhirController@index')->name('hasil.akhir');
+    Route::get('/admin/hasil-akhir/generate', 'HasilAkhirController@generate')->name('hasil.akhir.generate');
 
     Route::middleware(['role:' . User::TIM_PKG_ROLE])->group(function () {
         Route::get('/admin/user/index', 'UserController@index');
@@ -56,11 +52,18 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/admin/teacher/index', 'TeacherController@index');
         Route::get('/admin/teacher/{user}/edit', 'TeacherController@edit')->name('guru.edit');
         Route::delete('/admin/teacher/{user}/delete', 'TeacherController@delete')->name('guru.delete');
+
+        Route::get('/admin/ahp', 'AhpMethodController@index')->name('ahp');
+        Route::get('/admin/ahp/generate', 'AhpMethodController@generate')->name('ahp.generate');
+
+        Route::get('/admin/wp', 'WpMethodController@index')->name('wp');
+        Route::get('/admin/wp/generate', 'WpMethodController@generate')->name('wp.generate');
     });
 
     Route::middleware(['role:' . User::KEPSEK_ROLE . ',' . User::TIM_PKG_ROLE])->group(function () {
         Route::resource('/admin/penilaian', 'PenilaianController')->except([
             'show'
         ])->parameters(['penilaian' => 'user_id']);
+        Route::post('/admin/penilaian/import', 'PenilaianController@import')->name('import');
     });
 });

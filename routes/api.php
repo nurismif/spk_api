@@ -74,5 +74,7 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
 
         Route::get('/wp', 'Api\ApiWpMethodController@index');
         Route::get('/wp/generate', 'Api\ApiWpMethodController@generate');
+
+        Route::get('/hasil-akhir', 'Api\ApiHasilAkhirController@index');
     });
 });

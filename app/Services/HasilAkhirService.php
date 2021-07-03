@@ -1,0 +1,82 @@
+<?php
+
+namespace App\Services;
+
+use App\AhpMethod;
+use App\WpMethod;
+use App\Services\AhpMethodService;
+use App\Services\WpMethodService;
+
+class HasilAkhirService
+{
+     public function compareMethodSensitivities()
+     {
+          // AHP
+          // Generate ahp method values
+          $ahp_method_service = new AhpMethodService();
+          $ahp_method_service->recalculateAhpValues();
+
+          $rank1_ahp = AhpMethod::where('rank', 1)->first()->ahp_value;
+          $rank2_ahp = AhpMethod::where('rank', 2)->first()->ahp_value;
+          $ahp_values_sum = AhpMethod::sum('ahp_value');
+
+          // WP
+          if (WpMethod::first() == null) {
+               // Generate wp method values
+               $wp_method_service = new WpMethodService();
+               $wp_method_service->recalculateWpValues();
+          }
+          $rank1_wp = WpMethod::where('rank', 1)->first()->wp_value;
+          $rank2_wp = WpMethod::where('rank', 2)->first()->wp_value;
+          $wp_values_sum = WpMethod::sum('wp_value');
+
+          $method_values = collect(
+               [
+                    'ahp' => collect([$rank1_ahp, $rank2_ahp, $ahp_values_sum]),
+                    'wp' => collect([$rank1_wp, $rank2_wp, $wp_values_sum])
+               ]
+          );
+
+          $sensitivities = collect();
+          foreach ($method_values as $key => $method) {
+               $sensitivity_each_methods = collect();
+               $rank1 = $method[0];
+               $rank2 = $method[1];
+               $total = $method[2];
+
+               $sensitivity_each_methods->push($this->getSensitivity1($rank1, $rank2))
+                    ->push($this->getSensitivity2($rank1, $total))
+                    ->push($this->getSensitivity3($rank1, $rank2));
+
+               $sensitivities->put($key, $sensitivity_each_methods->min());
+          }
+
+          return $sensitivities->sort()->keys()->first();
+     }
+
+     public function generateEachMethodValues()
+     {
+          // Generate ahp method values
+          $ahp_method_service = new AhpMethodService();
+          $ahp_method_service->recalculateAhpValues();
+
+          // Generate wp method values
+          $wp_method_service = new WpMethodService();
+          $wp_method_service->recalculateWpValues();
+     }
+
+     private function getSensitivity1($rank1, $rank2)
+     {
+          return $rank1 / $rank2;
+     }
+
+     private function getSensitivity2($rank1, $total)
+     {
+          return $rank1 / $total;;
+     }
+
+     private function getSensitivity3($rank1, $rank2)
+     {
+          return ($rank1 + $rank2) / 2;
+     }
+}
