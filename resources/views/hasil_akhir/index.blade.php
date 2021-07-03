@@ -48,7 +48,49 @@
                             SPK Method: <span class="text-uppercase text-bold">{{ $method }}</span>
                         </div>
                     </div>
-                    <table id="exam1" class="table table-hover table-bordered table-striped mt-8"
+                    @if (Auth::user()->jabatan == User::TIM_PKG_ROLE)
+                        <table class="table table-hover table-bordered table-striped my-4" data-export-title="Sentivitas"
+                            no-action="true">
+                            <thead>
+                                <tr class="tableHeadRow">
+                                    <th style="width: 1rem">No</th>
+                                    <th>SPK Methods</th>
+                                    <th>Sensitivity 1</th>
+                                    <th>Sensitivity 2</th>
+                                    <th>Sensitivity 3</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php
+                                    $i = 0;
+                                @endphp
+                                @foreach ($sensitivities as $method => $sensitivity)
+                                    @php
+                                        $i += 1;
+                                    @endphp
+                                    <tr>
+                                        <td class="cell100 column1">
+                                            {{ $i }}
+                                        </td>
+                                        <td class="cell100 column2 text-uppercase">
+                                            {{ $method }}
+                                        </td>
+                                        <td class="cell100 column3">
+                                            {{ $sensitivity[0] }}
+                                        </td>
+                                        <td class="cell100 column4">
+                                            {{ $sensitivity[1] }}
+                                        </td>
+                                        <td class="cell100 column5">
+                                            {{ $sensitivity[2] }}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        <hr>
+                    @endif
+                    <table id="exam1" class="table table-hover table-bordered table-striped mt-4"
                         data-export-title="Hasil Akhir Method" no-action="true">
                         <thead>
                             <tr class="tableHeadRow">

@@ -9,23 +9,32 @@ use App\Services\WpMethodService;
 
 class HasilAkhirService
 {
+     public $sensitivities;
+     public $smallest_values_method;
+
+     function __construct()
+     {
+          // Generate ahp method values
+          if (AhpMethod::first() == null) {
+               $ahp_method_service = new AhpMethodService();
+               $ahp_method_service->recalculateAhpValues();
+          }
+
+          // Generate wp method values
+          if (WpMethod::first() == null) {
+               $wp_method_service = new WpMethodService();
+               $wp_method_service->recalculateWpValues();
+          }
+     }
+
      public function compareMethodSensitivities()
      {
           // AHP
-          // Generate ahp method values
-          $ahp_method_service = new AhpMethodService();
-          $ahp_method_service->recalculateAhpValues();
-
           $rank1_ahp = AhpMethod::where('rank', 1)->first()->ahp_value;
           $rank2_ahp = AhpMethod::where('rank', 2)->first()->ahp_value;
           $ahp_values_sum = AhpMethod::sum('ahp_value');
 
           // WP
-          if (WpMethod::first() == null) {
-               // Generate wp method values
-               $wp_method_service = new WpMethodService();
-               $wp_method_service->recalculateWpValues();
-          }
           $rank1_wp = WpMethod::where('rank', 1)->first()->wp_value;
           $rank2_wp = WpMethod::where('rank', 2)->first()->wp_value;
           $wp_values_sum = WpMethod::sum('wp_value');
@@ -37,6 +46,7 @@ class HasilAkhirService
                ]
           );
 
+          $min_sensitivities = collect();
           $sensitivities = collect();
           foreach ($method_values as $key => $method) {
                $sensitivity_each_methods = collect();
@@ -48,10 +58,12 @@ class HasilAkhirService
                     ->push($this->getSensitivity2($rank1, $total))
                     ->push($this->getSensitivity3($rank1, $rank2));
 
-               $sensitivities->put($key, $sensitivity_each_methods->min());
+               $sensitivities->put($key, $sensitivity_each_methods);
+               $min_sensitivities->put($key, $sensitivity_each_methods->min());
           }
 
-          return $sensitivities->sort()->keys()->first();
+          $this->smallest_values_method = $min_sensitivities->sort()->keys()->first();
+          $this->sensitivities = $sensitivities;
      }
 
      public function generateEachMethodValues()
@@ -63,6 +75,16 @@ class HasilAkhirService
           // Generate wp method values
           $wp_method_service = new WpMethodService();
           $wp_method_service->recalculateWpValues();
+     }
+
+     public function getSensitivities()
+     {
+          return $this->sensitivities;
+     }
+
+     public function getSmallestValuesMethod()
+     {
+          return $this->smallest_values_method;
      }
 
      private function getSensitivity1($rank1, $rank2)

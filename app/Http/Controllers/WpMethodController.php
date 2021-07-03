@@ -14,7 +14,7 @@ class WpMethodController extends Controller
      */
     public function index()
     {
-        $wp_methods = WpMethod::get();
+        $wp_methods = WpMethod::orderBy('rank')->get();
         return view('spk.wp', compact('wp_methods'));
     }
 

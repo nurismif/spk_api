@@ -17,7 +17,7 @@ class ApiWpMethodController extends Controller
      */
     public function index()
     {
-        $wp_methods = WpMethod::get();
+        $wp_methods = WpMethod::orderBy('rank')->get();
         return WpMethodResource::collection($wp_methods);
     }
 
@@ -31,7 +31,7 @@ class ApiWpMethodController extends Controller
         $wp_method_service = new WpMethodService();
         $wp_method_service->recalculateWpValues();
 
-        $wp_methods = WpMethod::get();
+        $wp_methods = WpMethod::orderBy('rank')->get();
         return WpMethodResource::collection($wp_methods);
     }
 }

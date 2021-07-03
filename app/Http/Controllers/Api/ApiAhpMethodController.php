@@ -16,7 +16,7 @@ class ApiAhpMethodController extends Controller
      */
     public function index()
     {
-        $ahp_methods = AhpMethod::get();
+        $ahp_methods = AhpMethod::orderBy('rank')->get();
         return AhpMethodResource::collection($ahp_methods);
     }
 
@@ -30,7 +30,7 @@ class ApiAhpMethodController extends Controller
         $ahp_method_service = new AhpMethodService();
         $ahp_method_service->recalculateAhpValues();
 
-        $ahp_methods = AhpMethod::get();
+        $ahp_methods = AhpMethod::orderBy('rank')->get();
         return AhpMethodResource::collection($ahp_methods);
     }
 }

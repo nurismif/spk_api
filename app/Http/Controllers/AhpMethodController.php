@@ -15,7 +15,7 @@ class AhpMethodController extends Controller
      */
     public function index()
     {
-        $ahp_methods = AhpMethod::get();
+        $ahp_methods = AhpMethod::orderBy('rank')->get();
         return view('spk.ahp', compact('ahp_methods'));
     }
 
