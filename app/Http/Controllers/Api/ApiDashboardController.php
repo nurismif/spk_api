@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\AhpMethod;
 use App\Http\Controllers\Controller;
+use App\Services\HasilAkhirService;
 use App\WpMethod;
 
 class ApiDashboardController extends Controller
@@ -28,6 +29,28 @@ class ApiDashboardController extends Controller
         foreach ($wpMethods as  $wpMethod) {
             $data[$wpMethod->user->nama] = $wpMethod->wp_value;
         }
+        return response([
+            'status' => 200,
+            'data' => $data
+        ]);
+    }
+
+    public function showHasilAkhirChart()
+    {
+        $hasil_akhir_service = new HasilAkhirService();
+        $hasil_akhir_service->compareMethodSensitivities();
+        $hasil_akhir_method = $hasil_akhir_service->getSmallestValuesMethod();
+        $method_values = $hasil_akhir_service->getMethodValues();
+
+        $values = collect();
+        foreach ($method_values as  $method) {
+            $values[$method->user->nama] = $method->wp_value;
+        }
+
+        $data = collect();
+        $data->put('values', $values);
+        $data->put('method', $hasil_akhir_method);
+
         return response([
             'status' => 200,
             'data' => $data

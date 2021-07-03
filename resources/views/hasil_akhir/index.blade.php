@@ -118,7 +118,7 @@
                                         {{ $method_value->user->jurusan }}
                                     </td>
                                     <td class="cell100 column5">
-                                        {{ number_format($method_value->ahp_value, 7) }}
+                                        {{ $method == 'ahp' ? number_format($method_value->ahp_value, 7) : number_format($method_value->wp_value, 7) }}
                                     </td>
                                     <td class="cell100 column6">
                                         {{ $method_value->rank }}

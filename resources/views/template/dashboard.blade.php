@@ -65,7 +65,7 @@
                             <div class="icon">
                                 <i class="nav-icon fas fa-chart-line"></i>
                             </div>
-                            <a href="{{ route('penilaian.index' )}}" class="small-box-footer">More info <i
+                            <a href="{{ route('penilaian.index') }}" class="small-box-footer">More info <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
@@ -85,11 +85,8 @@
                                 </h3>
                                 <div class="card-tools">
                                     <ul class="nav nav-pills ml-auto">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" href="#ahp-method" data-toggle="tab">AHP Method</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#wp-method" data-toggle="tab">Wp Method</a>
+                                        <li class="nav-item d-none" id="hasil-akhir-button">
+                                            <a class="nav-link active" href="#hasil-akhir" data-toggle="tab"></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -98,7 +95,7 @@
                                 <div class="tab-content p-0">
                                     <!-- SPK chart -->
                                     <div class="tab-content p-0">
-                                        <div class="chart tab-pane active" id="ahp-method"
+                                        <div class="chart tab-pane active" id="hasil-akhir"
                                             style="position: relative; height: 300px;">
                                             <div class="chartjs-size-monitor">
                                                 <div class="chartjs-size-monitor-expand">
@@ -108,7 +105,7 @@
                                                     <div class=""></div>
                                                 </div>
                                             </div>
-                                            <canvas id="ahp-method-canvas" height="300"
+                                            <canvas id="hasil-akhir-canvas" height="300"
                                                 style="height: 300px; display: block; width: 723px;" width="723"
                                                 class="chartjs-render-monitor"></canvas>
                                         </div>

@@ -71,6 +71,28 @@ function drawWpChart(data) {
     });
 }
 
+function drawHasilAkhirChart(data) {
+    //     Hasil Akhir Chart
+    x_values = Object.keys(data.values);
+    y_values = Object.values(data.values);
+    colors = y_values.map((v) => getRandomColor());
+    const $hasilAkhirChart = $("#hasil-akhir-canvas");
+    const hasilAkhirChartData = {
+        labels: x_values,
+        datasets: [
+            {
+                data: y_values,
+                backgroundColor: colors,
+            },
+        ],
+    };
+    const hasilAkhirChart = new Chart($hasilAkhirChart, {
+        type: "doughnut",
+        data: hasilAkhirChartData,
+        options: chartOptions,
+    });
+}
+
 $(function () {
     "use strict";
 
@@ -82,24 +104,19 @@ $(function () {
 
     //  Charts
     $.ajax({
-        url: "../../api/dashboard/ahp",
+        url: "../../api/dashboard/hasil-akhir",
         method: "GET",
         dataType: "json",
     })
         .done(function (result) {
-            drawAhpChart(result.data);
-        })
-        .fail(function (er) {
-            console.log(er);
-        });
-
-    $.ajax({
-        url: "../../api/dashboard/wp",
-        method: "GET",
-        dataType: "json",
-    })
-        .done(function (result) {
-            drawWpChart(result.data);
+            drawHasilAkhirChart(result.data);
+            const hasilAkhirButtonEl = $("#hasil-akhir-button");
+            hasilAkhirButtonEl.removeClass("d-none");
+            if (result.data.method == "ahp") {
+                hasilAkhirButtonEl.children()[0].innerHTML = "AHP Method";
+            } else {
+                hasilAkhirButtonEl.children()[0].innerHTML = "WP Method";
+            }
         })
         .fail(function (er) {
             console.log(er);
