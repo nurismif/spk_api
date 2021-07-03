@@ -21,13 +21,7 @@ class HasilAkhirController extends Controller
         $hasil_akhir_service = new HasilAkhirService();
         $hasil_akhir_service->compareMethodSensitivities();
         $hasil_akhir_method = $hasil_akhir_service->getSmallestValuesMethod();
-
-        $method_values = [];
-        if ($hasil_akhir_method == 'ahp') {
-            $method_values = AhpMethod::orderBy('rank')->get();
-        } else {
-            $method_values = WpMethod::orderBy('rank')->get();
-        }
+        $method_values = $hasil_akhir_service->getMethodValues();
 
         if (Auth::user()->jabatan == User::TIM_PKG_ROLE) {
             $sensitivities = $hasil_akhir_service->getSensitivities();

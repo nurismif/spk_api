@@ -87,6 +87,17 @@ class HasilAkhirService
           return $this->smallest_values_method;
      }
 
+     public function getMethodValues()
+     {
+          $method_values = [];
+          if ($this->smallest_values_method == 'ahp') {
+               $method_values = AhpMethod::orderBy('rank')->get();
+          } else {
+               $method_values = WpMethod::orderBy('rank')->get();
+          }
+          return $method_values;
+     }
+
      private function getSensitivity1($rank1, $rank2)
      {
           return $rank1 / $rank2;

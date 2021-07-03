@@ -19,8 +19,9 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
     Route::post('/auth/login', 'Api\AuthController@login')->name('login.api');
     Route::post('/users/postapilogin', 'Api\ApiUserController@postApiLogin');
     // Dashboard
-    Route::get('/dashboard/ahp', 'Api\ApiDashboardController@showAhpChart')->name('show.ahp');
-    Route::get('/dashboard/wp', 'Api\ApiDashboardController@showWpChart')->name('show.wp');
+    Route::get('/dashboard/ahp', 'Api\ApiDashboardController@showAhpChart');
+    Route::get('/dashboard/wp', 'Api\ApiDashboardController@showWpChart');
+    Route::get('/dashboard/hasil-akhir', 'Api\ApiDashboardController@showHasilAkhirChart');
     // auth routes
     Route::middleware('auth:api')->group(function () {
         // Logout
@@ -77,6 +78,5 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
 
         Route::get('/hasil-akhir', 'Api\ApiHasilAkhirController@index');
         Route::get('/hasil-akhir/generate', 'Api\ApiHasilAkhirController@generate');
-
     });
 });

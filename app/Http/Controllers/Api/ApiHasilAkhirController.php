@@ -15,15 +15,10 @@ class ApiHasilAkhirController extends Controller
     public function index()
     {
         $hasil_akhir_service = new HasilAkhirService();
-        $hasil_akhir_method = $hasil_akhir_service->compareMethodSensitivities();
+        $hasil_akhir_service->compareMethodSensitivities();
+        $hasil_akhir_method = $hasil_akhir_service->getSmallestValuesMethod();
+        $method_values = $hasil_akhir_service->getMethodValues();
 
-        $method_values = [];
-        if ($hasil_akhir_method == 'ahp') {
-            $method_values = AhpMethod::orderBy('rank');
-            return AhpMethodResource::collection($method_values);
-        }
-
-        $method_values = WpMethod::orderBy('rank');
         return WpMethodResource::collection($method_values);
     }
 
@@ -32,14 +27,6 @@ class ApiHasilAkhirController extends Controller
         $hasil_akhir_service = new HasilAkhirService();
         $hasil_akhir_service->generateEachMethodValues();
 
-        $hasil_akhir_method = $hasil_akhir_service->compareMethodSensitivities();
-        $method_values = [];
-        if ($hasil_akhir_method == 'ahp') {
-            $method_values = AhpMethod::orderBy('rank');
-            return AhpMethodResource::collection($method_values);
-        }
-
-        $method_values = WpMethod::orderBy('rank');
-        return WpMethodResource::collection($method_values);
+        return $this->index();
     }
 }
