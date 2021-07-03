@@ -40,8 +40,9 @@ class NilaiPerbandinganSeeder extends Seeder
             [5, 3, 3]
         ];
 
-        foreach ($records as $rec) {
-            NilaiPerbandingan::create([
+        foreach ($records as $i => $rec) {
+            $nilai = NilaiPerbandingan::find($i+1);
+            $nilai->update([
                 'kriteria_ahp_id' => $rec[0],
                 'target_kriteria_ahp_id' => $rec[1],
                 'nilai_perbandingan' => $rec[2]
