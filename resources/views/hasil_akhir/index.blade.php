@@ -64,7 +64,7 @@
                                 @php
                                     $i = 0;
                                 @endphp
-                                @foreach ($sensitivities as $method => $sensitivity)
+                                @foreach ($sensitivities as $key => $sensitivity)
                                     @php
                                         $i += 1;
                                     @endphp
@@ -73,7 +73,7 @@
                                             {{ $i }}
                                         </td>
                                         <td class="cell100 column2 text-uppercase">
-                                            {{ $method }}
+                                            {{ $key }}
                                         </td>
                                         <td class="cell100 column3">
                                             {{ $sensitivity[0] }}
