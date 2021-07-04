@@ -47,10 +47,16 @@ class PenilaianController extends Controller
 
     public function store(Request $request)
     {
+        $kriteria_list = KriteriaAHP::get();
+        $custom_field_names = collect(['user_id' => "teacher name"]);
+        foreach ($kriteria_list as $i => $value) {
+            $custom_field_names->put('kriteria_values.' . ($i + 1), $value->nama);
+        }
+
         $validator  = Validator::make($request->all(), [
             'user_id'   =>  'required|unique:penilaian,user_id',
             'kriteria_values.*'   =>  'required|numeric',
-        ]);
+        ], [], $custom_field_names->toArray());
 
         if ($validator->fails()) {
             return redirect()->route('penilaian.create')

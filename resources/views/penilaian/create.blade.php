@@ -64,18 +64,24 @@
                                                                 </div>
                                                             </div>
 
-                                                            @foreach ($kriteria_list as $kriteria)
+                                                            @foreach ($kriteria_list as $i => $kriteria)
+                                                                @php
+                                                                    $krit[$i] = 'kriteria_values.' . $kriteria->id;
+                                                                @endphp
                                                                 <div style="margin: 1rem;" class="form-group row">
                                                                     <label for="inputBobot"
                                                                         class="col-sm-2 col-form-label">Kriteria
                                                                         {{ $kriteria->nama }}</label>
                                                                     <div class="col-sm-10">
-                                                                        <div
-                                                                            class="form-control @error('kriteria_values[{{ $kriteria->id }}]') is-invalid @enderror">
-                                                                            <input class="w-100" type="text"
-                                                                                placeholder="Masukan Nilai Kriteria {{ $kriteria->nama }}"
-                                                                                name="kriteria_values[{{ $kriteria->id }}]">
-                                                                        </div>
+                                                                        <input type="text"
+                                                                            class="w-100 form-control @error($krit[$i]) is-invalid @enderror"
+                                                                            placeholder="Masukan Nilai Kriteria {{ $kriteria->nama }}"
+                                                                            name="kriteria_values[{{ $kriteria->id }}]">
+                                                                        @error($krit[$i])
+                                                                            <span class="invalid-feedback">
+                                                                                <strong>{{ $message }}</strong>
+                                                                            </span>
+                                                                        @enderror
                                                                     </div>
                                                                 </div>
                                                             @endforeach

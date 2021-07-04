@@ -44,6 +44,7 @@
     <!-- Custom Style -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
 
+    @yield('css-extra')
 </head>
 
 <body class="hold-transition sidebar-mini">
