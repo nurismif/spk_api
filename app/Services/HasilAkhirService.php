@@ -31,13 +31,13 @@ class HasilAkhirService
      public function compareMethodSensitivities()
      {
           // AHP
-          $rank1_ahp = AhpMethod::where('rank', 1)->first()->ahp_value;
-          $rank2_ahp = AhpMethod::where('rank', 2)->first()->ahp_value;
+          $rank1_ahp = AhpMethod::orderBy('rank')->first()->ahp_value;
+          $rank2_ahp = AhpMethod::orderBy('rank')->first()->ahp_value;
           $ahp_values_sum = AhpMethod::sum('ahp_value');
 
           // WP
-          $rank1_wp = WpMethod::where('rank', 1)->first()->wp_value;
-          $rank2_wp = WpMethod::where('rank', 2)->first()->wp_value;
+          $rank1_wp = WpMethod::orderBy('rank')->first()->wp_value;
+          $rank2_wp = WpMethod::orderBy('rank')->first()->wp_value;
           $wp_values_sum = WpMethod::sum('wp_value');
 
           $method_values = collect(

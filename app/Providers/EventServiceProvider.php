@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\KriteriaAHP;
 use App\Observers\KriteriaAHPObserver;
+use App\Observers\UserObserver;
+use App\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -32,6 +34,7 @@ class EventServiceProvider extends ServiceProvider
         parent::boot();
 
         //Custom Event
+        User::observe(UserObserver::class);
         KriteriaAHP::observe(KriteriaAHPObserver::class);
     }
 }
