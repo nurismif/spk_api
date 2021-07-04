@@ -41,7 +41,8 @@
                     </div>
                 </div>
                 <div class="card-body tableIndex">
-                    <table id="exam1" class="table table-hover table-bordered table-striped mt-8" data-export-title="Detail Kriteria">
+                    <table id="exam1" class="table table-hover table-bordered table-striped mt-8"
+                        data-export-title="Detail Kriteria">
                         <thead>
                             <tr class="tableHeadRow">
                                 <th style="width: 1rem">No</th>
@@ -59,7 +60,8 @@
                                     <td>{{ $data->bobot }}</td>
                                     <td>{{ $data->tipe }}</td>
                                     <td class="centerThingsColumn">
-                                        <form action="{{ url('admin/kriteria') }}/{{ $data->id }}" method="POST">
+                                        <form action="{{ url('admin/kriteria') }}/{{ $data->id }}" method="POST"
+                                            onsubmit="return confirm('Yakin akan hapus data')">
                                             @csrf @method('DELETE')
                                             <a href="{{ url('admin/kriteria') }}/{{ $data->id . '/detail' }}"
                                                 class="btn btn-primary btn-sm mr-1">
