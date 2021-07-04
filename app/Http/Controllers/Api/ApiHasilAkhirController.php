@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\AhpMethod;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AhpMethodResource;
+use App\Http\Resources\HasilAkhirResource;
 use App\Http\Resources\WpMethodResource;
 use App\Services\HasilAkhirService;
 use App\WpMethod;
@@ -18,8 +19,14 @@ class ApiHasilAkhirController extends Controller
         $hasil_akhir_service->compareMethodSensitivities();
         $hasil_akhir_method = $hasil_akhir_service->getSmallestValuesMethod();
         $method_values = $hasil_akhir_service->getMethodValues();
+        $sensitivities = $hasil_akhir_service->getSensitivities();
 
-        return WpMethodResource::collection($method_values);
+        $data = collect();
+        $data->method = $hasil_akhir_method;
+        $data->sensitivities = $sensitivities;
+        $data->method_values = $method_values;
+
+        return new HasilAkhirResource($data);
     }
 
     public function generate()

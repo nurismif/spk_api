@@ -14,6 +14,12 @@ class HasilAkhirResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'method' => $this->method,
+            'sensitivities' => $this->sensitivities,
+            'values' => $this->method == 'ahp'
+                ? AhpMethodResource::collection($this->method_values)
+                : WpMethodResource::collection($this->method_values),
+        ];
     }
 }
