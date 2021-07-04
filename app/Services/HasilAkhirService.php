@@ -9,8 +9,9 @@ use App\Services\WpMethodService;
 
 class HasilAkhirService
 {
-     public $sensitivities;
-     public $smallest_values_method;
+     private $sensitivities;
+     private $smallest_values_method;
+     private $currentSensitivity;
 
      function __construct()
      {
@@ -63,6 +64,7 @@ class HasilAkhirService
           }
 
           $this->smallest_values_method = $min_sensitivities->sort()->keys()->first();
+          $this->currentSensitivity = $min_sensitivities->sort()->values()->first();
           $this->sensitivities = $sensitivities;
      }
 
@@ -85,6 +87,11 @@ class HasilAkhirService
      public function getSmallestValuesMethod()
      {
           return $this->smallest_values_method;
+     }
+
+     public function getCurrentSensitivity()
+     {
+          return $this->currentSensitivity;
      }
 
      public function getMethodValues()

@@ -19,11 +19,11 @@ class ApiHasilAkhirController extends Controller
         $hasil_akhir_service->compareMethodSensitivities();
         $hasil_akhir_method = $hasil_akhir_service->getSmallestValuesMethod();
         $method_values = $hasil_akhir_service->getMethodValues();
-        $sensitivities = $hasil_akhir_service->getSensitivities();
+        $sensitivity = $hasil_akhir_service->getCurrentSensitivity();
 
         $data = collect();
         $data->method = $hasil_akhir_method;
-        $data->sensitivities = $sensitivities;
+        $data->sensitivity = $sensitivity;
         $data->method_values = $method_values;
 
         return new HasilAkhirResource($data);

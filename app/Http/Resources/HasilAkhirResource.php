@@ -16,7 +16,7 @@ class HasilAkhirResource extends JsonResource
     {
         return [
             'method' => $this->method,
-            'sensitivities' => $this->sensitivities,
+            'sensitivity' => $this->sensitivity,
             'values' => $this->method == 'ahp'
                 ? AhpMethodResource::collection($this->method_values)
                 : WpMethodResource::collection($this->method_values),

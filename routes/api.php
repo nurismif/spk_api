@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['middleware' => ['cors', 'json.response']], function () {
+
+    Route::get('/hasil-akhir', 'Api\ApiHasilAkhirController@index');
+    Route::get('/hasil-akhir/generate', 'Api\ApiHasilAkhirController@generate');
     // Public
     Route::post('/auth/login', 'Api\AuthController@login')->name('login.api');
     Route::post('/users/postapilogin', 'Api\ApiUserController@postApiLogin');
@@ -76,7 +79,5 @@ Route::group(['middleware' => ['cors', 'json.response']], function () {
         Route::get('/wp', 'Api\ApiWpMethodController@index');
         Route::get('/wp/generate', 'Api\ApiWpMethodController@generate');
 
-        Route::get('/hasil-akhir', 'Api\ApiHasilAkhirController@index');
-        Route::get('/hasil-akhir/generate', 'Api\ApiHasilAkhirController@generate');
     });
 });
