@@ -109,12 +109,6 @@
                                                 style="height: 300px; display: block; width: 723px;" width="723"
                                                 class="chartjs-render-monitor"></canvas>
                                         </div>
-                                        <div class="chart tab-pane" id="wp-method"
-                                            style="position: relative; height: 300px;">
-                                            <canvas id="wp-method-canvas" height="0"
-                                                style="height: 0px; display: block; width: 0px;"
-                                                class="chartjs-render-monitor" width="0"></canvas>
-                                        </div>
                                     </div>
                                 </div>
                             </div><!-- /.card-body -->

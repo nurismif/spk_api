@@ -43,8 +43,8 @@ class ApiDashboardController extends Controller
         $method_values = $hasil_akhir_service->getMethodValues();
 
         $values = collect();
-        foreach ($method_values as  $method) {
-            $values[$method->user->nama] = $method->wp_value;
+        foreach ($method_values as $method) {
+            $values[$method->user->nama] = $hasil_akhir_method == 'ahp' ? $method->ahp_value : $method->wp_value;
         }
 
         $data = collect();
