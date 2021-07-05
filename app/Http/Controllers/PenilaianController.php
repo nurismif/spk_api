@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\AhpMethod;
 use Illuminate\Http\Request;
 use App\Penilaian;
 use App\Imports\PenilaianImport;
 use App\KriteriaAHP;
 use App\User;
+use App\WpMethod;
 use Maatwebsite\Excel\Facades\Excel as FacadesExcel;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -119,6 +121,18 @@ class PenilaianController extends Controller
     {
         $penilaian_list = Penilaian::where('user_id', $user_id);
         $penilaian_list->delete();
+
+        $ahp = AhpMethod::where('user_id', $user_id);
+        $wp = WpMethod::where('user_id', $user_id);
+
+        if ($ahp->first() != null) {
+            $ahp->delete();
+        }
+
+        if ($wp->first() != null) {
+            $wp->delete();
+        }
+
         return redirect()->route('penilaian.index')->with('status', 'User Berhasil Dihapus');
     }
 
