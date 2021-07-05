@@ -44,7 +44,7 @@
                 @endif
                 <div class="card-body tableIndex">
                     <div class="row">
-                        <div class="col">
+                        <div class="col" style="margin-bottom:10px">
                             SPK Method: <span class="text-uppercase text-bold">{{ $method }}</span>
                         </div>
                     </div>

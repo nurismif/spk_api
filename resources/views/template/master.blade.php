@@ -143,6 +143,7 @@
             };
             const tableName = $('#exam1').attr('data-export-title');
 
+            
             if (tableName == "Hasil Akhir Method") {
 
                 const currentJabatan = {!! json_encode(Auth::user()->jabatan) !!};
