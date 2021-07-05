@@ -143,8 +143,7 @@
             };
             const tableName = $('#exam1').attr('data-export-title');
 
-            if (tableName == "AHP Method" ||
-                tableName == "WP Method") {
+            if (tableName == "Hasil Akhir Method") {
 
                 const currentJabatan = {!! json_encode(Auth::user()->jabatan) !!};
                 const allowedJabatan = {!! json_encode(User::KEPSEK_ROLE) !!};
