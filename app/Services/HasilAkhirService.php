@@ -107,16 +107,16 @@ class HasilAkhirService
 
      private function getSensitivity1($rank1, $rank2)
      {
-          return $rank1 - $rank2;
+          return number_format($rank1 - $rank2, 7);
      }
 
      private function getSensitivity2($rank1, $total)
      {
-          return $rank1 / $total;
+          return number_format($rank1 / $total, 7);
      }
 
      private function getSensitivity3($rank1, $rank2)
      {
-          return ($rank1 + $rank2) / 2;
+          return number_format(($rank1 + $rank2) / 2,  7);
      }
 }
