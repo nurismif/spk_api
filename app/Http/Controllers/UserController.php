@@ -85,7 +85,7 @@ class UserController extends Controller
 
 
         $validator  = Validator::make($data, [
-            'nip'   =>  'required|string|max:30|unique:users',
+            'nip'   =>  'required|string|max:18|unique:users',
             'nama'   =>  'required|string|max:255',
             'username'   =>  'required|string|max:50|unique:users',
             'password'   =>  'required|string|max:20|confirmed',
@@ -125,7 +125,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         $validator  = Validator::make($data, [
-            'nip'   =>  'required|string|max:30',
+            'nip'   =>  'required|string|max:18',
             'nama'   =>  'required|string|max:255',
             'username'   =>  'required|string|max:50',
             'password'   =>  'sometimes|max:20|confirmed',
