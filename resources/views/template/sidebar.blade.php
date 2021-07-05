@@ -89,7 +89,7 @@
             <li class="nav-item">
                 <a href="{{ route('hasil.akhir') }}" class="nav-link">
                     <i class="nav-icon fas fa-poll-h"></i>
-                    <p>Hasil Ahkir </p>
+                    <p>Hasil Akhir </p>
                 </a>
             </li>
         </ul>
