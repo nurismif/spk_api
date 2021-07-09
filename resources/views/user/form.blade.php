@@ -7,33 +7,42 @@
                     <div style="margin: 1rem;" class="form-group row">
                         <label for="inputNIP" class="col-sm-2 col-form-label">NIP</label>
                         <div class="col-sm-10">
-                            <div class="form-control {{ $errors->has('nip') ? 'is-invalid' : '' }}">
-                                <input class="w-100" type="text"
-                                    placeholder="{{ $errors->has('nip') ? $errors->first('nip') : 'Masukkan NIP' }}"
-                                    name="nip" value="{{ isset($users) ? $users->nip : old('nip') }}">
-                            </div>
+                            <input class="w-100 form-control @error('nip') is-invalid @enderror" type="text"
+                                placeholder="Masukkan NIP" name="nip"
+                                value="{{ isset($users) ? $users->nip : old('nip') }}">
+                            @error('nip')
+                                <span class="invalid-feedback">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
 
                     <div style="margin: 1rem;" class="form-group row">
                         <label for="inputNama" class="col-sm-2 col-form-label">Nama User</label>
                         <div class="col-sm-10">
-                            <div class="form-control {{ $errors->has('nama') ? 'is-invalid' : '' }}">
-                                <input class="w-100" type="text"
-                                    placeholder="{{ $errors->has('nama') ? $errors->first('nama') : 'Masukkan Nama User' }}"
-                                    name="nama" value="{{ isset($users) ? $users->nama : old('nama') }}">
-                            </div>
+                            <input class="w-100 form-control @error('nama') is-invalid @enderror" type="text"
+                                placeholder="Masukkan Nama User" name="nama"
+                                value="{{ isset($users) ? $users->nama : old('nama') }}">
+                            @error('nama')
+                                <span class="invalid-feedback">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
 
                     <div style="margin: 1rem;" class="form-group row">
                         <label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
                         <div class="col-sm-10">
-                            <div class="form-control {{ $errors->has('username') ? 'is-invalid' : '' }}">
-                                <input class="w-100" type="text"
-                                    placeholder="{{ $errors->has('username') ? $errors->first('username') : 'Masukkan Username' }}"
-                                    name="username" value="{{ isset($users) ? $users->username : old('username') }}">
-                            </div>
+                            <input class="w-100 form-control @error('nama') is-invalid @enderror" type="text"
+                                placeholder="Masukkan Username" name="username"
+                                value="{{ isset($users) ? $users->username : old('username') }}">
+                            @error('username')
+                                <span class="invalid-feedback">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
 
@@ -76,19 +85,18 @@
                         <label for="inputJabatan" class="col-sm-2 col-form-label">Jabatan</label>
                         <div class="col-sm-10">
                             {!! Form::select(
-                                'jabatan',
-                                [
-                                    User::TIM_PKG_ROLE => 'Tim PKG',
-                                    User::KEPSEK_ROLE => 'Kepala Sekolah',
-                                    User::GURU_ROLE => 'Guru',
-                                ],
-                                isset($users) ? $users->jabatan : old('jabatan'),
-                                [
-                                    'class' => $errors->has('jabatan') ? 'form-control is-invalid' : 'form-control',
-                                    'placeholder' => $errors->has('jabatan') ? $errors->first('jabatan') : 'Pilih Jabatan',
-                                ],
-                            ) 
-                            !!}
+    'jabatan',
+    [
+        User::TIM_PKG_ROLE => 'Tim PKG',
+        User::KEPSEK_ROLE => 'Kepala Sekolah',
+        User::GURU_ROLE => 'Guru',
+    ],
+    isset($users) ? $users->jabatan : old('jabatan'),
+    [
+        'class' => $errors->has('jabatan') ? 'form-control is-invalid' : 'form-control',
+        'placeholder' => $errors->has('jabatan') ? $errors->first('jabatan') : 'Pilih Jabatan',
+    ],
+) !!}
                         </div>
                     </div>
 

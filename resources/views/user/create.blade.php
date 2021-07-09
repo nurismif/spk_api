@@ -1,5 +1,19 @@
 @extends('template.master')
 
+@section('css-extra')
+    <style>
+        input {
+            border: 1px solid rgba(0, 0, 0, .15) !important;
+        }
+
+        textarea:focus,
+        input:focus {
+            border-color: #80bdff !important;
+        }
+
+    </style>
+@endsection
+
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -45,9 +59,7 @@
                 </div>
             </div>
         </section>
-
     </div>
-
 @endsection
 
 @push('scripts')
@@ -62,6 +74,7 @@
                 x.type = "password";
             }
         }
+
         function togglePasswordConfirm() {
             var x = document.getElementById("inputPasswordconfirm");
             if (x.type === "password") {
@@ -72,6 +85,5 @@
                 x.type = "password";
             }
         }
-
     </script>
 @endpush
