@@ -23,12 +23,14 @@ class HasilAkhirController extends Controller
                 'method_values' => [],
                 'method' => "-",
                 'sensitivities' => [],
+                'sensitivity'  => null,
             ]);
         }
 
         return view('hasil_akhir.index', [
             'method_values' => [],
-            'method' => "-"
+            'method' => "-",
+            'sensitivity'  => null
         ]);
     }
 
@@ -38,6 +40,7 @@ class HasilAkhirController extends Controller
         $hasil_akhir_service->compareMethodSensitivities();
         $hasil_akhir_method = $hasil_akhir_service->getSmallestValuesMethod();
         $method_values = $hasil_akhir_service->getMethodValues();
+        $sensitivity = $hasil_akhir_service->getCurrentSensitivity();
 
         if (Auth::user()->jabatan == User::TIM_PKG_ROLE) {
             $sensitivities = $hasil_akhir_service->getSensitivities();
@@ -45,12 +48,14 @@ class HasilAkhirController extends Controller
                 'method_values' => $method_values,
                 'method' => $hasil_akhir_method,
                 'sensitivities' => $sensitivities,
+                'sensitivity'  => $sensitivity,
             ]);
         }
 
         return view('hasil_akhir.index', [
             'method_values' => $method_values,
-            'method' => $hasil_akhir_method
+            'method' => $hasil_akhir_method,
+            'sensitivity'  => $sensitivity,
         ]);
     }
 

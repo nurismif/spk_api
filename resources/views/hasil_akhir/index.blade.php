@@ -48,6 +48,20 @@
                             SPK Method: <span class="text-uppercase text-bold">{{ $method }}</span>
                         </div>
                     </div>
+
+                    @if ($method != '-')
+                        <div class="row">
+                            <div class="col" style="margin-bottom:10px">
+                                Pengujian analisis sensivitas dengan menggunakan tiga proses menunjukkan metode
+                                <span class="text-uppercase text-bold">{{ $method }}</span>
+                                memiliki sentivitas dengan nilai terkecil yaitu <span
+                                    class="text-uppercase text-bold">{{ $sensitivity }}</span>,
+                                sehingga metode <span class="text-uppercase text-bold">{{ $method }}</span>
+                                lebih sesuai untuk kasus yang diselesaikan.
+                            </div>
+                        </div>
+                    @endif
+
                     @if (Auth::user()->jabatan == User::TIM_PKG_ROLE)
                         <table class="table table-hover table-bordered table-striped my-4" data-export-title="Sentivitas"
                             no-action="true" id="table-sensitivity">
