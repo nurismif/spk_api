@@ -18,6 +18,22 @@ class HasilAkhirController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->jabatan == User::TIM_PKG_ROLE) {
+            return view('hasil_akhir.index', [
+                'method_values' => [],
+                'method' => "-",
+                'sensitivities' => [],
+            ]);
+        }
+
+        return view('hasil_akhir.index', [
+            'method_values' => [],
+            'method' => "-"
+        ]);
+    }
+
+    public function generatedView()
+    {
         $hasil_akhir_service = new HasilAkhirService();
         $hasil_akhir_service->compareMethodSensitivities();
         $hasil_akhir_method = $hasil_akhir_service->getSmallestValuesMethod();
@@ -43,6 +59,6 @@ class HasilAkhirController extends Controller
         $hasil_akhir_service = new HasilAkhirService();
         $hasil_akhir_service->generateEachMethodValues();
 
-        return redirect()->route('hasil.akhir');
+        return redirect()->route('hasil.akhir.generated.view');
     }
 }

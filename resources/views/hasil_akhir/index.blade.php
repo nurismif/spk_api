@@ -50,7 +50,7 @@
                     </div>
                     @if (Auth::user()->jabatan == User::TIM_PKG_ROLE)
                         <table class="table table-hover table-bordered table-striped my-4" data-export-title="Sentivitas"
-                            no-action="true">
+                            no-action="true" id="table-sensitivity">
                             <thead>
                                 <tr class="tableHeadRow">
                                     <th style="width: 1rem">No</th>
@@ -132,3 +132,11 @@
         </section>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(function() {
+            $("#table-sensitivity").DataTable(datatableConfigsGlobal);
+        });
+    </script>
+@endpush

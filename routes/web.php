@@ -29,6 +29,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/admin/template/dashboard', 'HomeController@index')->name('dashboard');
     Route::get('/admin/hasil-akhir', 'HasilAkhirController@index')->name('hasil.akhir');
     Route::get('/admin/hasil-akhir/generate', 'HasilAkhirController@generate')->name('hasil.akhir.generate');
+    Route::get('/admin/hasil-akhir/generated-view', 'HasilAkhirController@generatedView')->name('hasil.akhir.generated.view');
+
 
     Route::middleware(['role:' . User::TIM_PKG_ROLE])->group(function () {
         Route::get('/admin/user/index', 'UserController@index');

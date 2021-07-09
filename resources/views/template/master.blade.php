@@ -115,8 +115,17 @@
     <script src="{{ asset('adminlte/plugins/jszip/jszip.min.js') }}"></script>
     <!-- Page specific script -->
     <script>
-        $(function a() {
+        var datatableConfigsGlobal = {
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "pageResize": true,
+        };
+        $(function() {
             $.noConflict();
+
+            let datatableConfigs = datatableConfigsGlobal;
+            
             const buttonCommon = {
                 init: function(dt, node, config) {
                     var table = dt.table().context[0].nTable;
@@ -135,15 +144,7 @@
                 arr.push(i);
             }
 
-            var datatableConfigs = {
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "pageResize": true,
-            };
             const tableName = $('#exam1').attr('data-export-title');
-
-            
             if (tableName == "Hasil Akhir Method") {
 
                 const currentJabatan = {!! json_encode(Auth::user()->jabatan) !!};
