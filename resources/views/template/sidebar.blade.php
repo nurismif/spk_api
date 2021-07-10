@@ -87,7 +87,8 @@
                 </li>
             @endif
             <li class="nav-item">
-                <a href="{{ route('hasil.akhir') }}" class="nav-link">
+                <a href="{{ Auth::user()->jabatan == User::TIM_PKG_ROLE ? route('hasil.akhir') : route('hasil.akhir.generated.view') }}"
+                    class="nav-link">
                     <i class="nav-icon fas fa-poll-h"></i>
                     <p>Hasil Akhir </p>
                 </a>
